@@ -1,15 +1,16 @@
 import { ColorModeScript } from '@chakra-ui/react';
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { SharedStateProvider } from './context/store';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <StrictMode>
+  <SharedStateProvider>
     <ColorModeScript />
     <App />
-  </StrictMode>,
+  </SharedStateProvider>,
   document.getElementById('root')
 );
 

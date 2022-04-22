@@ -1,5 +1,4 @@
 import { useToast } from '@chakra-ui/react';
-import { useEthers } from '@usedapp/core';
 
 import { login as loginCall } from '../api/authentication/login';
 import { logout as logoutCall } from '../api/authentication/logout';

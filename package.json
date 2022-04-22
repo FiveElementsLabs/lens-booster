@@ -19,9 +19,11 @@
     "omit-deep": "^0.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hot-toast": "^2.2.0",
     "react-icons": "^3.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-tracked": "^1.7.9",
     "web-vitals": "^0.2.2"
   },
   "scripts": {
