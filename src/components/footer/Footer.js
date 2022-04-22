@@ -48,7 +48,6 @@ export default function Footer() {
         align={{ base: 'center', md: 'center' }}
       >
         <Logo darkLogo={darkIcon} lightLogo={lightIcon} width="50rem"/>
-        <Text>© 2022 Five Elements Labs. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />

@@ -10,14 +10,15 @@ export default function Layout() {
   useEthersNotifications();
 
   return (
-    <Box position='relative' w='full' minH='100vh'>
-      <Navbar />
+    <>
+      <Box position="relative" w="full" minH="100vh" m={4}>
+        <Navbar />
 
-      <Container maxW='container.xl' pb={{ base: 48, md: 28 }}>
-        <Outlet />
-      </Container>
-
+        <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
+          <Outlet />
+        </Container>
+      </Box>
       <Footer />
-    </Box>
+    </>
   );
 }
