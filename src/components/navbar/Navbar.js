@@ -56,9 +56,11 @@ export default function Navbar() {
               <LinkRouter to={'/'}>
                 {isLargerThan640 ? (
                   <Logo lightLogo={lightLogo} darkLogo={darkLogo} width='60rem' />
-                ) : (
-                  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
-                )}
+                ) : 
+                ( <p></p>
+                //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
+                )
+              }
               </LinkRouter>
               <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                 <DesktopNav />
