@@ -20,12 +20,12 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { Link as LinkRouter } from 'react-router-dom';
 
 import Logo from '../footer/Logo';
-import darkIcon from '../footer/icon_dark.svg';
-import lightIcon from '../footer/icon_light.svg';
+import darkIcon from '../../windmill.png';
+import lightIcon from '../../windmill.png';
 import darkLogo from '../../windmill.png';
 import lightLogo from '../../windmill.png';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Connect from './Connect';
+import Connect from './Connect.js';
 
 const NAV_ITEMS = [
   {

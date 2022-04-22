@@ -1,4 +1,3 @@
-import { Mumbai } from '@usedapp/core';
 import { MUMBAI_RPC_URL } from './ConfigVars';
 
 const DAppConfig = {

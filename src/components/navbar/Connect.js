@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import { useEthers, shortenAddress, useLookupAddress, Mumbai } from '@usedapp/core';
 import { Link as ReachLink } from 'react-router-dom';
 import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { RiPlantLine } from 'react-icons/ri';
 import { useToast, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { useSharedState } from '../../context/store.js';
+import { useWallet } from '../../hooks/useWallet.js';
+import { shortenAddress } from '../../utils/utils.js';
 import {
   Box,
   Text,
@@ -20,31 +22,21 @@ import {
 } from '@chakra-ui/react';
 
 export default function Connect(props) {
-  const toast = useToast();
+  const [{ account }] = useSharedState();
+  console.log(account)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { activateBrowserWallet, account, error, deactivate } = useEthers();
   const { hasCopied, onCopy } = useClipboard(account || '');
-  const ens = useLookupAddress();
-
-  useEffect(() => {
-    if (error)
-      toast({
-        id: 'conn_err',
-        title: 'Connection Error',
-        status: 'error',
-        position: 'bottom-right',
-      });
-  }, [error, toast]);
+  const { loginWallet, logoutWallet, changeNetwork } = useWallet();
 
   return (
     <>
       {!account ? (
-        <Button onClick={() => activateBrowserWallet()} {...props}>
+        <Button onClick={loginWallet} >
           Connect Wallet
         </Button>
       ) : (
-        <Button onClick={onOpen} {...props}>
-          {ens ?? shortenAddress(account)}
+        <Button>
+          {shortenAddress(account)}
         </Button>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -68,11 +60,6 @@ export default function Connect(props) {
                 <Button variant='link' mr={6} size='sm' rightIcon={<CopyIcon />} onClick={onCopy}>
                   {hasCopied ? 'Copied' : 'Copy'}
                 </Button>
-                <Link href={Mumbai.getExplorerAddressLink(account || '')} target='_blank' rel='noopener noreferrer'>
-                  <Button variant='link' size='sm' rightIcon={<ExternalLinkIcon />}>
-                    See on Explorer
-                  </Button>
-                </Link>
               </Flex>
             </Box>
 
@@ -83,7 +70,6 @@ export default function Connect(props) {
               <Button
                 variant='outline'
                 onClick={() => {
-                  deactivate();
                   onClose();
                 }}
               >
