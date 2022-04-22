@@ -20,8 +20,8 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { Link as LinkRouter } from 'react-router-dom';
 
 import Logo from '../footer/Logo';
-import darkIcon from '../footer/icon_dark.svg';
-import lightIcon from '../footer/icon_light.svg';
+//import darkIcon from '../footer/icon_dark.svg';
+//import lightIcon from '../footer/icon_light.svg';
 import darkLogo from '../../windmill.png';
 import lightLogo from '../../windmill.png';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -56,9 +56,11 @@ export default function Navbar() {
               <LinkRouter to={'/'}>
                 {isLargerThan640 ? (
                   <Logo lightLogo={lightLogo} darkLogo={darkLogo} width='60rem' />
-                ) : (
-                  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
-                )}
+                ) : 
+                ( <p></p>
+                //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
+                )
+              }
               </LinkRouter>
               <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                 <DesktopNav />
