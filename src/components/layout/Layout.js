@@ -5,6 +5,7 @@ import { useWallet } from '../../hooks/useWallet';
 
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
+import Feed from './Feed.js'
 
 export default function Layout() {
   const { autoLoginWallet } = useWallet();
@@ -17,14 +18,14 @@ export default function Layout() {
   }, []);
   return (
     <>
-      <Box position="relative" w="full" minH="100vh" m={4}>
-        <Navbar />
+    <Box position="relative" w="full" minH="100vh">
+      <Navbar />
 
-        <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
-          <Outlet />
-        </Container>
+      <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
+        <Feed />
+      </Container>
+
       </Box>
-      <Footer />
     </>
   );
 }
