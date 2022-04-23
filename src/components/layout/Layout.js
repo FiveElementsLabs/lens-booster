@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { Box, Container } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import { useWallet } from '../../hooks/useWallet';
 
 import Navbar from "../navbar/Navbar";
 
