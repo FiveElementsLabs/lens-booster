@@ -16,7 +16,7 @@ import {
   Select,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import { useProfile } from "../hooks/useProfile";
 import { createProfile } from "../api/profile/create-profile";
@@ -25,8 +25,11 @@ import { useSharedState } from "../context/store";
 import { createPost } from "../api/publications/post";
 import { getPublications } from "../api/publications/get-publications";
 import PostPreview from "../components/layout/PostPreview";
+import TopProfiles from "../components/layout/TopProfiles";
+import { getAvatar } from "../lib/GetAvatar";
 
 export default function Settings() {
+  const { profileId } = useParams();
   const [{ account, provider }] = useSharedState();
   const { profiles, currentProfile } = useProfile();
   const [selectedProfile, setSelectedProfile] = useState({});
@@ -39,8 +42,6 @@ export default function Settings() {
   const [profileMetaData, setProfileMetaData] = useState({});
   const toast = useToast();
   const location = useLocation();
-
-  const profileId = location.pathname.substring(1);
 
   console.log(currentProfile);
   useEffect(() => {
@@ -128,18 +129,15 @@ export default function Settings() {
 
   return (
     <>
-      <Box
-        mx="auto"
-        maxW="container.md"
-        rounded="xl"
-        mt={5}
-        p={4}
-        bg={useColorModeValue("#ECF1FE", "")}
+      <Grid
+        h="200px"
+        templateRows="repeat(2, 1fr)"
+        templateColumns="repeat(5, 1fr)"
+        mt={4}
       >
-        <Text marginBottom={5}>Posts</Text>
         <GridItem colSpan={{ base: "5", md: "3" }} m={2}>
           {publications?.map((post, index) => {
-              console.log(post)
+            console.log(post);
             return (
               <Box mb={4} width="100%" key={index}>
                 <Stack boxShadow="lg" borderRadius="sm">
@@ -149,16 +147,13 @@ export default function Settings() {
                       desc={post.metadata.description}
                       author={post.profile.handle}
                       /*role="BTC master"*/
-                      // avatar={
-                      //   element.avatar
-                      //     ? element.avatar
-                      //     : getAvatar(
-                      //         element.name,
-                      //         element.color1,
-                      //         element.color2
-                      //       )
-                      // }
+                      avatar={
+                        post.profile.picture.original.url
+                          ? post.profile.picture.original.url
+                            : getAvatar('')
+                      }
                       date="17-03-2022 12:00 AM"
+                      image={post.metadata.media[0].original.url}
                     />
                   </Stack>
                 </Stack>
@@ -166,7 +161,16 @@ export default function Settings() {
             );
           })}
         </GridItem>
-      </Box>
+        <GridItem colSpan={{ base: "5", md: "2" }} m={2}>
+          <Box
+            h="100%"
+            borderColor={useColorModeValue("black", "white")}
+            mb={4}
+          >
+            <TopProfiles></TopProfiles>
+          </Box>
+        </GridItem>
+      </Grid>
 
       <Container maxW="container.md" mt={10}>
         <Code maxW="container.md">

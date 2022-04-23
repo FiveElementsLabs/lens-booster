@@ -25,6 +25,7 @@ export default function PostPreview({
   role,
   avatar,
   date,
+  image,
   ...rest
 }) {
   const [{ account, provider }] = useSharedState();
@@ -61,6 +62,9 @@ export default function PostPreview({
         </Box>
       </Flex>
       <Text mt={4}>{desc}</Text>
+      <Box my={3}>
+        <img src={image} alt="post" width="auto" height="auto" />
+      </Box>
       <Stack direction="row" alignItems="center" mt={2}>
         <Button
           onClick={onCreateMirror}
