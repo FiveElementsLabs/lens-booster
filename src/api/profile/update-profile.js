@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client/core';
 import ApolloClient from '../../lib/ApolloClient';
-import { login } from '../authentication/login';
+import { login } from '../authentication/login.js';
 
 const UPDATE_PROFILE = `
   mutation($request: UpdateProfileRequest!) { 

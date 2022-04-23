@@ -20,7 +20,7 @@ import { updateProfile } from "../api/profile/update-profile";
 import { useSharedState } from "../context/store";
 
 export default function Profile() {
-  const [{ account }] = useSharedState();
+  const [{ account, provider }] = useSharedState();
   const { profiles, currentProfile } = useProfile();
   const [selectedProfile, setSelectedProfile] = useState({});
 
@@ -39,7 +39,8 @@ export default function Profile() {
     e.preventDefault();
     console.log("onCreateProfile: ", account + " " + handle);
     try {
-      const res = await createProfile(account, handle);
+      const signer = await provider.getSigner();
+      const res = await createProfile(account, handle, signer);
       setMessage(res);
       toast({
         title: "New profile created",

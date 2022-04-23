@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 import { BigNumber, utils } from 'ethers';
 import ApolloClient from '../../lib/ApolloClient';
-import { login } from '../authentication/login';
-import { prettyJSON } from '../../lib/Helpers';
+import { login } from '../authentication/login.js';
+import { prettyJSON } from '../../lib/Helpers.js';
 import { pollUntilIndexed } from '../indexer/has-tx-been-indexed.js';
 
 const CREATE_PROFILE = `
@@ -28,10 +28,10 @@ const createProfileRequest = createProfileRequest => {
   });
 };
 
-export const createProfile = async (address, handle) => {
+export const createProfile = async (address, handle, signer) => {
   console.log('create profile: address', address);
-
-  await login(address);
+  console.log('create profile: signer', signer);
+  await login(address, signer);
 
   const createProfileResult = await createProfileRequest({ handle });
   prettyJSON('create profile: result', createProfileResult.data);

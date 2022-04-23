@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import ApolloClient from '../../lib/ApolloClient';
-import { checkJwtExpiration, prettyJSON } from '../../lib/Helpers';
-import { getAuthenticationToken, setAuthenticationToken } from '../../lib/State';
+import { checkJwtExpiration, prettyJSON } from '../../lib/Helpers.js';
+import { getAuthenticationToken, setAuthenticationToken } from '../../lib/State.js';
 
 const GET_CHALLENGE = `
   query($request: ChallengeRequest!) {
@@ -48,6 +48,8 @@ export const login = async (address, signer) => {
       token: getAuthenticationToken(),
     };
   }
+
+  console.log('inside login')
 
   try {
     // We request a challenge from the server.
