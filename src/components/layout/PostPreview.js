@@ -10,7 +10,7 @@ import {
   Container,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
@@ -33,9 +33,8 @@ export default function PostPreview({
   ...rest
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef();
   const [{ account, provider }] = useSharedState();
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
   const toast = useToast();
 
   const onCreateMirror = async (e) => {
@@ -44,6 +43,8 @@ export default function PostPreview({
       // See api/publications/post for full metadata types.
       const signer = await provider.getSigner();
       const res = await createMirror(signer, account, profileId, publicationId, {});
+
+      console.log(res.toString());
 
       toast({
         title: 'Congrats: your sharing is earning!',

@@ -17,7 +17,7 @@ import {
 import createIndex from '../superfluid/createIndex';
 
 export default function BoostModal(props) {
-  const { isOpen, onClose, onOpen } = props;
+  const { isOpen, onClose } = props;
 
   function HookUsage() {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =

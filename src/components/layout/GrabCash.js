@@ -26,7 +26,14 @@ const grabCash = [
     url: '/0x05f9',
     totalpaid: '$4,230.00',
     avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
-  }
+  },
+  {
+    name: 'rAAVE',
+    handle: '@raave',
+    url: '/0x07',
+    totalpaid: '$20,634.00',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmZSHkjgbxt4K3eEAYBoWhN5bGCbSgAugXgWGCHaTWExPE',
+  },
 ];
 
 export default function GrabCash({

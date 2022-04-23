@@ -3,7 +3,6 @@ import { gql } from "@apollo/client/core";
 import { login } from "../authentication/login";
 import ApolloClient from "../../lib/ApolloClient";
 import { omit } from "../../lib/Helpers";
-import { uploadIpfs } from "../../lib/ipfs";
 import { LENS_HUB_CONTRACT } from "../../lib/ConfigVars";
 import { LENS_HUB_ABI } from "../../lib/ABIs";
 
@@ -72,15 +71,18 @@ export const createMirror = async (signer, account, profileId, publicationId, po
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
   // And see the docs: https://docs.lens.dev/docs/create-post-typed-data
 
+  //const ipfsResult = await uploadIpfs(mirrorMetaData);
   //console.log("create post: ipfs result", ipfsResult);
 
   // hard coded to make the code example clear
   console.log(profileId)
-  console.log(publicationId)
+  console.log(publicationId);
+  console.log("0x05e0-0x01");
 
   const createMirrorRequest = {
-    profileId: "0x05de",
-    publicationId: publicationId,
+    profileId: "0x05e0",
+    //publicationId: publicationId,
+    publicationId: "0x05ee-0x01",
     referenceModule: {
       followerOnlyReferenceModule: true,
     },

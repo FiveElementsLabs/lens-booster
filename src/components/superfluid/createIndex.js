@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { customHttpProvider } from "./config";
 import { Framework } from "@superfluid-finance/sdk-core";
-import { Button, Spinner } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
 //id is a number randomly generated between 1 and a billion
 const id = Math.floor(Math.random() * 1000000000);
@@ -46,15 +46,8 @@ export default async function createIndex(indexId) {
 }
 
 export const CreateIndex = () => {
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [setIsButtonLoading] = useState(false);
 
-  function CreateButton({ isLoading, children, ...props }) {
-    return (
-      <Button variant="success" className="button" {...props}>
-        {isButtonLoading ? <Spinner animation="border" /> : children}
-      </Button>
-    );
-  }
 
   return (
     <div>
