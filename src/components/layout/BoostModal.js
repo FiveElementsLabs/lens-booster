@@ -49,7 +49,7 @@ export default function BoostModal(props) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>xDai</FormLabel>
+              <FormLabel>DAIx</FormLabel>
               <HookUsage/>
             </FormControl>
           </ModalBody>

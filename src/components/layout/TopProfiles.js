@@ -9,21 +9,15 @@ const topProfiles = [
   {
     name: 'Inter FC',
     handle: '@fcinter',
-    url: '/fcinter',
+    url: '/0x05ef',
     avatar: 'https://pbs.twimg.com/profile_images/1501851471993786372/e__2kcIx_400x400.jpg',
   },
   {
-    name: 'luduvigo',
-    handle: '@luduvigo',
-    url: '/luduvigo',
-    avatar: 'https://avatars2.githubusercontent.com/u/1709898?s=460&v=4',
-  },
-  {
-    name: 'Vincenzo Manzon',
-    handle: '@vmanzon',
-    url: '/vmanzon',
-    avatar: 'https://avatars2.githubusercontent.com/u/1709898?s=460&v=4',
-  },
+    name: 'Boost DAO',
+    handle: '@boostdao',
+    url: '/0x05ee',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmSghYdm87zoMzpCX5i3fidWLdREMKuP1tk9dGXXcxRyPc',
+  }
 ];
 
 export default function TopProfiles({

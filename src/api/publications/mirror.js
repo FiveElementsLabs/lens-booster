@@ -48,10 +48,11 @@ const createMirrorTypedData = (createMirrorTypedDataRequest) => {
   });
 };
 
-export const createMirror = async (signer, account, postMetaData) => {
+export const createMirror = async (signer, account, profileId, publicationId, postMetaData) => {
 //   if (!postMetaData.profileId) {
 //     throw new Error("No Profile ID");
 //   }
+
 
   console.log("createMirror signer: ", signer);
   const signedTypeData = async (domain, types, value) => {
@@ -79,9 +80,12 @@ export const createMirror = async (signer, account, postMetaData) => {
   //console.log("create post: ipfs result", ipfsResult);
 
   // hard coded to make the code example clear
+  console.log(profileId)
+  console.log(publicationId)
+
   const createMirrorRequest = {
     profileId: "0x05de",
-    publicationId: "0x05de-0x01",
+    publicationId: publicationId,
     referenceModule: {
       followerOnlyReferenceModule: true,
     },
@@ -115,8 +119,9 @@ export const createMirror = async (signer, account, postMetaData) => {
   console.log("before tx");
 
   console.log('typedData: ', typedData);
+
   const tx = await lensHub.mirrorWithSig({
-    profileId: typedData.value.profileId,
+    profileId: '0x05de',
     profileIdPointed: typedData.value.profileId,
     pubIdPointed: typedData.value.pubIdPointed,
     collectModule: typedData.value.collectModule,

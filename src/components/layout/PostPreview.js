@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 
-import { withEmotionCache } from "@emotion/react";
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
 import BoostModal from "./BoostModal";
@@ -28,6 +27,8 @@ export default function PostPreview({
   avatar,
   date,
   image,
+  profileId,
+  publicationId,
   ...rest
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,7 +41,7 @@ export default function PostPreview({
     try {
       // See api/publications/post for full metadata types.
       const signer = await provider.getSigner();
-      const res = await createMirror(signer, account, {});
+      const res = await createMirror(signer, account, profileId, publicationId, {});
 
       setMessage(res);
     } catch (err) {
@@ -67,7 +68,7 @@ export default function PostPreview({
       </Flex>
       <Text mt={4}>{desc}</Text>
       <Box my={3}>
-        <img src={image} alt="post" width="auto" height="auto" />
+        { image ? <img src={image} alt="post" width="auto" height="auto" /> : <></> }
       </Box>
       <Stack direction="row" alignItems="center" mt={2}>
         <Button
@@ -84,7 +85,7 @@ export default function PostPreview({
           {emoji.get("rocket")}
         </Button>
       </Stack>
-      <Container maxW="container.md" mt={10}>
+      <Container maxW="container.md" mt={1}>
         <Code maxW="container.md">
           {message ? JSON.stringify(message) : ""}
         </Code>
