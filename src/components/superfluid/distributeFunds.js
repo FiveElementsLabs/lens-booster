@@ -67,7 +67,7 @@ export const DistributeFunds = () => {
   return (
     <div>
       <h2>Distribute Funds</h2>
-      <Form>
+      <form onSubmit={distribute}>
         <FormGroup className="mb-3">
           <FormControl mt={5}>
             <FormLabel htmlFor="name">Enter your index ID</FormLabel>
@@ -75,7 +75,6 @@ export const DistributeFunds = () => {
               name="id"
               value={id}
               onChange={handleIdChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
@@ -86,22 +85,13 @@ export const DistributeFunds = () => {
               name="amount"
               value={amount}
               onChange={handleAmountChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
-        <Button mt={5} type="submit" colorScheme="teal" variant="outline"
-          onClick={() => {
-            setIsButtonLoading(true);
-            distribute(id, amount);
-            setTimeout(() => {
-              setIsButtonLoading(false);
-            }, 1000);
-          }}
-        >
+        <Button mt={5} type="submit" colorScheme="teal" variant="outline">
           Click to Distribute Funds to Your Index
         </Button>
-      </Form>
+      </form>
     </div>
   );
 };
