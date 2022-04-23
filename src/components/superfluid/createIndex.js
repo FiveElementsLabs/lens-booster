@@ -8,7 +8,7 @@ const id = Math.floor(Math.random() * 1000000000);
 
 //where the Superfluid logic takes place
 
-async function createIndex(indexId) {
+export default async function createIndex(indexId) {
   const sf = await Framework.create({
     networkName: "kovan",
     provider: customHttpProvider

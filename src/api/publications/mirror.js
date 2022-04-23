@@ -72,11 +72,6 @@ export const createMirror = async (signer, account, profileId, publicationId, po
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
   // And see the docs: https://docs.lens.dev/docs/create-post-typed-data
 
-  const mirrorMetaData = {
-    profileId: "0x05de",
-    publicationId: "0x05de-0x01",
-  };
-  //const ipfsResult = await uploadIpfs(mirrorMetaData);
   //console.log("create post: ipfs result", ipfsResult);
 
   // hard coded to make the code example clear

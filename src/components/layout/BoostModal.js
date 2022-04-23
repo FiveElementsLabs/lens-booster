@@ -14,6 +14,8 @@ import {
   HStack
 } from "@chakra-ui/react";
 
+import createIndex from '../superfluid/createIndex';
+
 export default function BoostModal(props) {
   const { isOpen, onClose, onOpen } = props;
 
@@ -55,7 +57,7 @@ export default function BoostModal(props) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="green">Confirm Boost</Button>
+            <Button colorScheme="green" onClick={createIndex}>Confirm Boost</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

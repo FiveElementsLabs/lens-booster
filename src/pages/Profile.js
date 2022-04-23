@@ -18,7 +18,7 @@ import { getAvatar } from "../lib/GetAvatar";
 
 export default function Settings() {
   const { profileId } = useParams();
-  
+
   const { profiles, currentProfile } = useProfile();
   const [publications, setPublications] = useState([]);
 
@@ -63,12 +63,12 @@ export default function Settings() {
                       publicationId={post.id}
                       /*role="BTC master"*/
                       avatar={
-                        post.profile.picture.original.url
-                          ? post.profile.picture.original.url
+                        post?.profile?.picture?.original?.url
+                          ? post?.profile?.picture?.original?.url
                             : getAvatar('')
                       }
                       date="17-03-2022 12:00 AM"
-                      image={post.metadata.media[0].original.url}
+                      image={(post?.metadata.media.length > 0) ? post?.metadata?.media[0].original.url : ''}
                     />
                   </Stack>
                 </Stack>
