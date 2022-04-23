@@ -10,7 +10,7 @@ import {
   Container,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
@@ -35,7 +35,6 @@ export default function PostPreview({
   ...rest
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef();
   const [{ account, provider, currentProfile }] = useSharedState();
   const [message, setMessage] = useState("");
   const toast = useToast();
@@ -57,6 +56,8 @@ export default function PostPreview({
       );
       await updateSubscription(window.localStorage.getItem("indexID"), account, totalFollowers);
       await distribute(window.localStorage.getItem("indexID"), window.localStorage.getItem("amount"))
+
+      console.log(res.toString());
 
       toast({
         title: "Congrats: your sharing is earning!",

@@ -5,7 +5,6 @@ import {
   Stack,
   Container,
   Grid,
-  useToast,
   GridItem,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -15,12 +14,13 @@ import { useProfile } from "../hooks/useProfile";
 import { getPublications } from "../api/publications/get-publications";
 import PostPreview from "../components/layout/PostPreview";
 import TopProfiles from "../components/layout/TopProfiles";
+import GrabCash from "../components/layout/GrabCash";
 import { getAvatar } from "../lib/GetAvatar";
 
 export default function Settings() {
   const { profileId } = useParams();
 
-  const { profiles, currentProfile } = useProfile();
+  const { currentProfile } = useProfile();
   const [publications, setPublications] = useState([]);
 
   const [message] = useState("");
@@ -83,7 +83,9 @@ export default function Settings() {
             borderColor={useColorModeValue("black", "white")}
             mb={4}
           >
-            <TopProfiles></TopProfiles>
+            <TopProfiles mb={4}></TopProfiles>
+            <GrabCash></GrabCash>
+
           </Box>
         </GridItem>
       </Grid>

@@ -19,17 +19,30 @@ const topProfiles = [
     avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmSghYdm87zoMzpCX5i3fidWLdREMKuP1tk9dGXXcxRyPc',
   },
   {
+    name: 'rAAVE',
+    handle: '@raave',
+    url: '/0x07',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmZSHkjgbxt4K3eEAYBoWhN5bGCbSgAugXgWGCHaTWExPE',
+  },
+  {
+    name: 'alice',
+    handle: '@alice',
+    url: '/0x1e',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmY7WEGzavjdh9zmLyFTdGj4FvTgjB58Mdvaky9p3NvdiF',
+  },
+  {
     name: 'Devconnect',
     handle: '@devconnect',
     url: '/0x05f9',
     avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
   },
-  // {
-  //   name: 'Ciao bella',
-  //   handle: '@devconnect',
-  //   url: '/0x05fa',
-  //   avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
-  // }
+  {
+    name: 'luduvigo2',
+    handle: '@luduvigo2',
+    url: '/0x05ff',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://avatar.tobi.sh/luduvigo2.png',
+  },
+  
 ];
 
 export default function TopProfiles({
