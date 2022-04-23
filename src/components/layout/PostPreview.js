@@ -32,9 +32,6 @@ import {
         <Text mt={4}>{desc}</Text>
         <Stack direction="row" alignItems="center"  mt={2}>
           <Button colorScheme="teal" size="sm" variant="outline">
-            Like
-          </Button>
-          <Button colorScheme="teal" size="sm" variant="outline">
             Mirror
           </Button>
           <Button colorScheme="red" size="sm" variant="outline">

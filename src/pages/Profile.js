@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
   Code,
   useToast,
+  Stack,
   Container,
   FormControl,
   FormLabel,
@@ -33,8 +34,8 @@ export default function Settings() {
   const [posts, setPosts] = useState([]);
   const [publications, setPublications] = useState([]);
 
-  const [message, setMessage] = useState('');
-  const [handle, setHandle] = useState('');
+  const [message, setMessage] = useState("");
+  const [handle, setHandle] = useState("");
   const [profileMetaData, setProfileMetaData] = useState({});
   const toast = useToast();
   const location = useLocation();
@@ -65,16 +66,16 @@ export default function Settings() {
 
   const onCreateProfile = async (e) => {
     e.preventDefault();
-    console.log('onCreateProfile: ', account + ' ' + handle);
+    console.log("onCreateProfile: ", account + " " + handle);
     try {
       const signer = await provider.getSigner();
       const res = await createProfile(account, handle, signer);
       setMessage(res);
       toast({
-        title: 'New profile created',
-        status: 'success',
-        position: 'bottom-right',
-        variant: 'subtle',
+        title: "New profile created",
+        status: "success",
+        position: "bottom-right",
+        variant: "subtle",
       });
     } catch (err) {
       console.error(err?.message);
@@ -101,10 +102,10 @@ export default function Settings() {
       // See api/profile/update-profile for full metadata types.
       await updateProfile(account, profileMetaData);
       toast({
-        title: 'Profile updated',
-        status: 'success',
-        position: 'bottom-right',
-        variant: 'subtle',
+        title: "Profile updated",
+        status: "success",
+        position: "bottom-right",
+        variant: "subtle",
       });
     } catch (err) {
       console.error(err?.message);
@@ -133,17 +134,44 @@ export default function Settings() {
         rounded="xl"
         mt={5}
         p={4}
-        bg={useColorModeValue("#ECF1FE", "#2c5410")}
+        bg={useColorModeValue("#ECF1FE", "")}
       >
-        <Text marginBottom={5}>My posts</Text>
-        {publications?.map((post, index) => {
-          console.log(post)
-          return <p key={index}>{post.metadata.name}</p>;
-        })}
+        <Text marginBottom={5}>Posts</Text>
+        <GridItem colSpan={{ base: "5", md: "3" }} m={2}>
+          {publications?.map((post, index) => {
+              console.log(post)
+            return (
+              <Box mb={4} width="100%" key={index}>
+                <Stack boxShadow="lg" borderRadius="sm">
+                  <Stack direction="row" width="100%" alignItems="center">
+                    <PostPreview
+                      /*title={'My first post'}*/
+                      desc={post.metadata.description}
+                      author={post.profile.handle}
+                      /*role="BTC master"*/
+                      // avatar={
+                      //   element.avatar
+                      //     ? element.avatar
+                      //     : getAvatar(
+                      //         element.name,
+                      //         element.color1,
+                      //         element.color2
+                      //       )
+                      // }
+                      date="17-03-2022 12:00 AM"
+                    />
+                  </Stack>
+                </Stack>
+              </Box>
+            );
+          })}
+        </GridItem>
       </Box>
 
       <Container maxW="container.md" mt={10}>
-        <Code maxW="container.md">{message ? JSON.stringify(message) : ''}</Code>
+        <Code maxW="container.md">
+          {message ? JSON.stringify(message) : ""}
+        </Code>
       </Container>
     </>
   );

@@ -293,6 +293,8 @@ const GET_PUBLICATIONS = `
 
 `;
 
+
+
 const getPublicationsRequest = getPublicationQuery => {
   return ApolloClient.query({
     query: gql(GET_PUBLICATIONS),
@@ -313,3 +315,5 @@ export const getPublications = async profileId => {
 
   return result.data.publications.items;
 };
+
+//publicationIds: ['0x05de-0x02', '0x05de-0x01']
