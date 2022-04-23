@@ -72,6 +72,8 @@ export const createPost = async (signer, account, postMetaData) => {
   // See lib/ipfs on this repo,
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
   // And see the docs: https://docs.lens.dev/docs/create-post-typed-data
+
+  console.log(postMetaData);
   const ipfsResult = await uploadIpfs(postMetaData);
   console.log("create post: ipfs result", ipfsResult);
 
