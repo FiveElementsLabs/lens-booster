@@ -18,17 +18,11 @@ import { getAvatar } from "../lib/GetAvatar";
 
 export default function Settings() {
   const { profileId } = useParams();
+  
   const { profiles, currentProfile } = useProfile();
-  const [setSelectedProfile] = useState({});
   const [publications, setPublications] = useState([]);
 
   const [message] = useState("");
-
-  useEffect(() => {
-    if (profiles) {
-      setSelectedProfile(currentProfile);
-    }
-  }, [profiles, currentProfile, setSelectedProfile]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -65,6 +59,8 @@ export default function Settings() {
                       /*title={'My first post'}*/
                       desc={post.metadata.description}
                       author={post.profile.handle}
+                      profileId={profileId}
+                      publicationId={post.id}
                       /*role="BTC master"*/
                       avatar={
                         post.profile.picture.original.url

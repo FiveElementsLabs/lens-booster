@@ -7,11 +7,13 @@ import {
   Avatar,
   Code,
   Container,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
+import BoostModal from "./BoostModal";
 
 var moment = require("moment");
 var emoji = require("node-emoji");
@@ -25,8 +27,12 @@ export default function PostPreview({
   avatar,
   date,
   image,
+  profileId,
+  publicationId,
   ...rest
 }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = React.useRef();
   const [{ account, provider }] = useSharedState();
   const [message, setMessage] = useState("");
 
@@ -35,7 +41,7 @@ export default function PostPreview({
     try {
       // See api/publications/post for full metadata types.
       const signer = await provider.getSigner();
-      const res = await createMirror(signer, account, {});
+      const res = await createMirror(signer, account, profileId, publicationId, {});
 
       setMessage(res);
     } catch (err) {
@@ -71,10 +77,10 @@ export default function PostPreview({
           size="sm"
           variant="outline"
         >
-          {"Mirror \t\t"}
+          {"Share & Earn \t\t"}
           {emoji.get("repeat")}
         </Button>
-        <Button colorScheme="red" size="sm" variant="outline">
+        <Button colorScheme="red" size="sm" variant="outline" onClick={onOpen}>
           {"Boost \t\t"}
           {emoji.get("rocket")}
         </Button>
@@ -84,6 +90,7 @@ export default function PostPreview({
           {message ? JSON.stringify(message) : ""}
         </Code>
       </Container>
+      <BoostModal onClose={onClose} onOpen={onOpen} isOpen={isOpen}/>
     </Box>
   );
 }
