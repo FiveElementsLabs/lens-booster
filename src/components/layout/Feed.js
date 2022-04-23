@@ -36,7 +36,7 @@ const elements = [
 export default function Feed() {
   return (
     <>
-      <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" mt={4}>
+      <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" mt={16}>
         <GridItem colSpan={{ base: '5', md: '3' }} m={2}>
           {elements.map((element, index) => (
             <Box mb={4} width="100%" key={index}>
