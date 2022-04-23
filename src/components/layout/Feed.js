@@ -30,7 +30,7 @@ export default function Feed() {
 <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={4} mt={4}>
 <GridItem colSpan={3} m={2}>
   {elements.map((element, index) => (
-    <Box mb={4} width="100%">
+    <Box mb={4} width="100%" key={index}>
       <Stack p="4" boxShadow="lg" borderRadius="sm">
         <Stack direction="row" width="100%" alignItems="center">
 
