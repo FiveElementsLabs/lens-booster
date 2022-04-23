@@ -1,21 +1,13 @@
-import { useState, useEffect } from "react";
-import {
-  Box,
-  Code,
-  Stack,
-  Container,
-  Grid,
-  GridItem,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Box, Code, Stack, Container, Grid, GridItem, useColorModeValue } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
 
-import { useProfile } from "../hooks/useProfile";
-import { getPublications } from "../api/publications/get-publications";
-import PostPreview from "../components/layout/PostPreview";
-import TopProfiles from "../components/layout/TopProfiles";
-import GrabCash from "../components/layout/GrabCash";
-import { getAvatar } from "../lib/GetAvatar";
+import { useProfile } from '../hooks/useProfile';
+import { getPublications } from '../api/publications/get-publications';
+import PostPreview from '../components/layout/PostPreview';
+import TopProfiles from '../components/layout/TopProfiles';
+import GrabCash from '../components/layout/GrabCash';
+import { getAvatar } from '../lib/GetAvatar';
 
 export default function Settings() {
   const { profileId } = useParams();
@@ -23,7 +15,7 @@ export default function Settings() {
   const { currentProfile } = useProfile();
   const [publications, setPublications] = useState([]);
 
-  const [message] = useState("");
+  const [message] = useState('');
 
   useEffect(() => {
     const loadData = async () => {
@@ -35,7 +27,7 @@ export default function Settings() {
 
         console.log(publications);
       } catch (err) {
-        console.error("LOADING ERROR in ProfilePage: ", err?.message);
+        console.error('LOADING ERROR in ProfilePage: ', err?.message);
       }
     };
     loadData();
@@ -43,13 +35,8 @@ export default function Settings() {
 
   return (
     <>
-      <Grid
-        h="200px"
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(5, 1fr)"
-        mt={4}
-      >
-        <GridItem colSpan={{ base: "5", md: "3" }} m={2}>
+      <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" mt={4}>
+        <GridItem colSpan={{ base: '5', md: '3' }} m={2}>
           {publications?.map((post, index) => {
             console.log(post);
             return (
@@ -66,10 +53,12 @@ export default function Settings() {
                       avatar={
                         post?.profile?.picture?.original?.url
                           ? post?.profile?.picture?.original?.url
-                            : getAvatar('')
+                          : getAvatar('')
                       }
                       date="17-03-2022 12:00 AM"
-                      image={(post?.metadata.media.length > 0) ? post?.metadata?.media[0].original.url : ''}
+                      image={
+                        post?.metadata.media.length > 0 ? post?.metadata?.media[0].original.url : ''
+                      }
                     />
                   </Stack>
                 </Stack>
@@ -77,23 +66,16 @@ export default function Settings() {
             );
           })}
         </GridItem>
-        <GridItem colSpan={{ base: "5", md: "2" }} m={2}>
-          <Box
-            h="100%"
-            borderColor={useColorModeValue("black", "white")}
-            mb={4}
-          >
-            <TopProfiles mb={4}></TopProfiles>
-            <GrabCash></GrabCash>
-
+        <GridItem colSpan={{ base: '5', md: '2' }} m={2}>
+          <Box h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}>
+            <GrabCash mb={4}></GrabCash>
+            <TopProfiles></TopProfiles>
           </Box>
         </GridItem>
       </Grid>
 
       <Container maxW="container.md" mt={10}>
-        <Code maxW="container.md">
-          {message ? "Congrats: your sharing is earning!" : ""}
-        </Code>
+        <Code maxW="container.md">{message ? 'Congrats: your sharing is earning!' : ''}</Code>
       </Container>
     </>
   );
