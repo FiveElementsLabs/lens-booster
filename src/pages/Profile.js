@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Button,
   Code,
   useToast,
   Stack,
   Container,
-  FormControl,
-  FormLabel,
   Grid,
   GridItem,
-  Input,
-  Textarea,
-  Text,
-  Select,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useLocation, useParams } from "react-router-dom";
