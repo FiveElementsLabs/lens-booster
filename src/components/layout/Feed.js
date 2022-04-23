@@ -1,28 +1,44 @@
 import { Box, Grid, GridItem, Stack, useColorModeValue } from '@chakra-ui/react';
 import PostPreview from './PostPreview';
+var randomHex = require('random-hex');
+
 
 const elements = [
   {
-    icon: '🐱',
-    text: 'I am a cat',
+    text: 'Fresh from the derby win, Tommy’s Tales returns to preview Inter v Roma! ',
+    name: 'Inter FC',
+    color1: '#00B4D6',
+    color2: '#00B4D6',
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'Imagine how happy our Inter Club members were after meeting @A10imperador at Inter headquarters',
+    name: 'Inter FC',
+    color1: '#00B4D6',
+    color2: '#00B4D6',
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'I am a dog', 
+    name: 'Dog',
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'I am luduvigo',
+    name: 'luduvigo',
   },
   {
-    icon: '🐶',
     text: 'I am a dog',
+    name: 'Dog',
   },
 ];
+
+const getAvatar = (name, color1, color2) => {
+  if(!color1 || !color2) {
+    const color1 = randomHex.generate().substring(3, 6);
+    const color2 = randomHex.generate().substring(1, 4);
+    return `https://ui-avatars.com/api/?name=${name}&size=256&rounded=true&bold=true&color=${color1}&background=${color2}`;
+  } else {
+    return `https://ui-avatars.com/api/?name=${name}&size=256&rounded=true&bold=true&color=${color1}&background=${color2}`;
+  }
+}
 
 export default function Feed() {
   return (
@@ -34,11 +50,11 @@ export default function Feed() {
             <Stack p="4" boxShadow="lg" borderRadius="sm">
               <Stack direction="row" width="100%" alignItems="center">
                 <PostPreview
-                  title={'My first post'}
+                  /*title={'My first post'}*/
                   desc={element.text}
-                  author="Satoshi Nakamoto"
-                  role="BTC master"
-                  avatar="https://bit.ly/sage-adebayo"
+                  author={element.name}
+                  /*role="BTC master"*/
+                  avatar={getAvatar(element.name, element.color1, element.color2)}
                   date="17-03-2022 12:00 AM"
                 />
               </Stack>
@@ -52,49 +68,3 @@ export default function Feed() {
     </Grid>
   );
 }
-
-/*   <GridItem rowSpan={1} colSpan={1}>
-        <Heading as="h3" size="lg" align="left">
-          Latest posts
-        </Heading>
-      </GridItem>
-      <GridItem rowSpan={10} colSpan={1} bg="papayawhip"></GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My first post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="general"
-          author="Satoshi Nakamoto"
-          role="BTC master"
-          avatar="https://bit.ly/sage-adebayo"
-          date="17-03-2022 12:00 AM"
-        />
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My second post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="finance"
-          author="Martin Odersky"
-          role="Computer scientist"
-          avatar="https://bit.ly/sage-adebayo"
-          date="16-03-2022 11:00 PM"
-        />
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My third post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="ideas"
-          author="Sir Isaac Newton"
-          role="Inventor"
-          avatar="https://bit.ly/sage-adebayo"
-          date="15-03-2022 2:00 PM"
-        />
-      </GridItem>
-    </Grid>
-
-    
-  );
-}
-*/
