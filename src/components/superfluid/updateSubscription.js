@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { customHttpProvider } from "./config";
 import { Framework } from "@superfluid-finance/sdk-core";
-import { FormGroup, Spinner } from "react-bootstrap";
+import { FormGroup } from "react-bootstrap";
 import {
   Button,
   FormControl,
   FormLabel,
   Input,
-  useColorModeValue,
 } from "@chakra-ui/react";
 
 //where the Superfluid logic takes place
@@ -57,15 +56,6 @@ export const UpdateSubscription = () => {
   const [id, setId] = useState("");
   const [subscriber, setSubscriber] = useState("");
   const [units, setUnits] = useState("");
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
-  function UpdateSubButton({ isLoading, children, ...props }) {
-    return (
-      <Button variant="success" className="button" {...props}>
-        {isButtonLoading ? <Spinner animation="border" /> : children}
-      </Button>
-    );
-  }
 
   const onUpdateSubscription = async (e) => {
 

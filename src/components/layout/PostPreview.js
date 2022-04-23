@@ -8,9 +8,8 @@ import {
   Code,
   Container,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { withEmotionCache } from "@emotion/react";
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
 
@@ -63,7 +62,7 @@ export default function PostPreview({
       </Flex>
       <Text mt={4}>{desc}</Text>
       <Box my={3}>
-        <img src={image} alt="post" width="auto" height="auto" />
+        { image ? <img src={image} alt="post" width="auto" height="auto" /> : <></> }
       </Box>
       <Stack direction="row" alignItems="center" mt={2}>
         <Button
@@ -80,7 +79,7 @@ export default function PostPreview({
           {emoji.get("rocket")}
         </Button>
       </Stack>
-      <Container maxW="container.md" mt={10}>
+      <Container maxW="container.md" mt={1}>
         <Code maxW="container.md">
           {message ? JSON.stringify(message) : ""}
         </Code>
