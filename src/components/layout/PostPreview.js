@@ -17,10 +17,11 @@ import { createMirror } from "../../api/publications/mirror";
 import updateSubscription from "../superfluid/updateSubscription";
 import distribute from "../superfluid/distributeFunds";
 import BoostModal from "./BoostModal";
-import { isNullableType } from "graphql";
 
 var moment = require("moment");
 var emoji = require("node-emoji");
+
+console.log();
 
 export default function PostPreview({
   title,
@@ -43,13 +44,6 @@ export default function PostPreview({
   );
   const [message] = useState("");
   const toast = useToast();
-
-  useEffect(() => {
-    console.log(window.localStorage.getItem("currentFollowers"));
-    const followers = window.localStorage.getItem("currentFollowers");
-    setCurrentFollowers(followers);
-    console.log(currentFollowers);
-  }, [window.localStorage.getItem("currentFollowers")]);
 
   const totalFollowers = currentProfile?.stats?.totalFollowers;
   console.log(totalFollowers);
@@ -89,8 +83,9 @@ export default function PostPreview({
       );
 
       console.log(window.localStorage.getItem("currentFollowers"));
-      setCurrentFollowers(window.localStorage.getItem("currentFollowers"));
-
+      if (window.localStorage.getItem("currentFollowers")) {
+        setCurrentFollowers(window.localStorage.getItem("currentFollowers"));
+      }
       console.log(res.toString());
 
       toast({
@@ -145,6 +140,7 @@ export default function PostPreview({
         </Button>
         {index === 0 &&
         window.localStorage.getItem("amount") > 0 &&
+        window.localStorage.getItem("currentFollowers") &&
         window.localStorage.getItem("currentFollowers") >= 0 ? (
           <Button
             colorScheme="yellow"
@@ -156,7 +152,7 @@ export default function PostPreview({
             {emoji.get("moneybag")}
             {index === 0
               ? "(" +
-                currentFollowers +
+                (currentFollowers === "undefined" ? 0 : currentFollowers) +
                 "/" +
                 window.localStorage.getItem("amount") * 100 +
                 ")"
