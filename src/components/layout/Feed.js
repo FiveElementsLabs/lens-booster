@@ -43,11 +43,11 @@ const getAvatar = (name, color1, color2) => {
 export default function Feed() {
   return (
     <Grid h="200px" templateRows="repeat(2, 1fr)" 
-    templateColumns="repeat(5, 1fr)" gap={4} mt={4}>
+    templateColumns="repeat(5, 1fr)" mt={4}>
       <GridItem colSpan={{ base: '5', md: '3'}} m={2}>
         {elements.map((element, index) => (
           <Box mb={4} width="100%" key={index}>
-            <Stack p="4" boxShadow="lg" borderRadius="sm">
+            <Stack boxShadow="lg" borderRadius="sm">
               <Stack direction="row" width="100%" alignItems="center">
                 <PostPreview
                   /*title={'My first post'}*/
