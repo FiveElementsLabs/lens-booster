@@ -52,8 +52,16 @@ export default function PostPreview({
     e.preventDefault();
     await distribute(
       window.localStorage.getItem("indexID"),
-      window.localStorage.getItem("amount") * 0.01
+      window.localStorage.getItem("amount")
     );
+    
+    toast({
+      title: "Funds distributed",
+      status: "success",
+      position: "bottom-right",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   const onCreateMirror = async (e) => {
@@ -79,7 +87,7 @@ export default function PostPreview({
       );
       window.localStorage.setItem(
         "currentFollowers",
-        parseInt(window.localStorage.getItem("currentFollowers")) + 10
+        parseInt(window.localStorage.getItem("currentFollowers")) + 100
       );
 
       console.log(window.localStorage.getItem("currentFollowers"));
