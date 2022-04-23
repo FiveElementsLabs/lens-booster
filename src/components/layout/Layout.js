@@ -23,7 +23,6 @@ export default function Layout() {
 
       <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
         <Outlet/>
-        <Feed />
       </Container>
 
       </Box>

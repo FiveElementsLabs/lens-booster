@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useEthers } from "@usedapp/core";
 import { getProfiles } from "../api/profile/get-profiles";
 import { useSharedState } from "../context/store";
 
