@@ -2,6 +2,7 @@ import { Box, Grid, GridItem, Stack, useColorModeValue } from '@chakra-ui/react'
 import PostPreview from './PostPreview';
 import TopProfiles from './TopProfiles';
 import { getAvatar } from '../../lib/GetAvatar';
+import GrabCash from './GrabCash';
 
 const elements = [
   {
@@ -57,10 +58,15 @@ export default function Feed() {
       </GridItem>
       <GridItem colSpan={{ base: '5', md: '2'}} m={2}>
         <Box h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}>
-          <TopProfiles></TopProfiles>
+          <TopProfiles mb={4}></TopProfiles>
+
+          <GrabCash></GrabCash>
+
         </Box>
 
       </GridItem>
+
+
     </Grid>
   );
 }
