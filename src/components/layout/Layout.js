@@ -22,6 +22,7 @@ export default function Layout() {
       <Navbar />
 
       <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
+        <Outlet />
         <Feed />
       </Container>
 
