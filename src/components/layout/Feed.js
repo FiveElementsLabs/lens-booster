@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Stack, Text, Button, useColorModeValue } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Stack, useColorModeValue } from '@chakra-ui/react';
 import PostPreview from './PostPreview';
 
 const elements = [

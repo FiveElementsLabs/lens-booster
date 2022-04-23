@@ -4,7 +4,6 @@ import {
     Heading,
     Stack,
     Button,
-    Badge,
     Flex,
     Avatar,
     HStack,
@@ -47,9 +46,3 @@ import {
       </Box>
     );
   }
-  
-  const categories = {
-    general: 'green',
-    finance: 'red',
-    ideas: 'yellow',
-  };

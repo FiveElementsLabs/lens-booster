@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { Link as ReachLink } from 'react-router-dom';
-import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
-import { RiPlantLine } from 'react-icons/ri';
-import { useToast, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
+import { useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import { useSharedState } from '../../context/store.js';
 import { useWallet } from '../../hooks/useWallet.js';
 import { shortenAddress } from '../../utils/utils.js';
@@ -10,7 +7,6 @@ import {
   Box,
   Text,
   Flex,
-  Link,
   Modal,
   Button,
   ModalBody,
@@ -24,9 +20,14 @@ import {
 export default function Connect(props) {
   const [{ account }] = useSharedState();
   console.log(account)
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, 
+    //onOpen, 
+    onClose } = useDisclosure();
   const { hasCopied, onCopy } = useClipboard(account || '');
-  const { loginWallet, logoutWallet, changeNetwork } = useWallet();
+  const { loginWallet, 
+    //logoutWallet, 
+    //changeNetwork 
+  } = useWallet();
 
   return (
     <>
