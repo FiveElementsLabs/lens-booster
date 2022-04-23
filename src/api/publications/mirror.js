@@ -80,9 +80,9 @@ export const createMirror = async (signer, account, profileId, publicationId, po
   console.log("0x05e0-0x01");
 
   const createMirrorRequest = {
-    profileId: "0x05e0",
+    profileId: profileId,
     //publicationId: publicationId,
-    publicationId: "0x05ee-0x01",
+    publicationId: publicationId,
     referenceModule: {
       followerOnlyReferenceModule: true,
     },
