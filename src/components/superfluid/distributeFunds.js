@@ -56,6 +56,17 @@ export const DistributeFunds = () => {
     );
   }
 
+  const onDistributeFunds = async (e) => {
+
+    e.preventDefault();
+    console.log(e.target.value);
+
+    distribute(id, amount);
+    // setTimeout(() => {
+    //   setIsButtonLoading(false);
+    // }, 1000);
+  };
+
   const handleIdChange = (e) => {
     setId(() => ([e.target.name] = e.target.value));
   };
@@ -67,7 +78,7 @@ export const DistributeFunds = () => {
   return (
     <div>
       <h2>Distribute Funds</h2>
-      <form onSubmit={distribute}>
+      <form onSubmit={onDistributeFunds}>
         <FormGroup className="mb-3">
           <FormControl mt={5}>
             <FormLabel htmlFor="name">Enter your index ID</FormLabel>
