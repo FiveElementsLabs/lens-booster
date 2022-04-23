@@ -3,9 +3,7 @@ import { Box, Container } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import { useWallet } from '../../hooks/useWallet';
 
-import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
-import Feed from './Feed.js'
 
 export default function Layout() {
   const { autoLoginWallet } = useWallet();
@@ -22,7 +20,7 @@ export default function Layout() {
       <Navbar />
 
       <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
-        <Outlet/>
+        <Outlet />
       </Container>
 
       </Box>

@@ -1,9 +1,11 @@
 import {
   Box,
   Flex,
+  Button,
   Text,
   IconButton,
   Stack,
+  Input,
   Link,
   Collapse,
   Icon,
@@ -20,11 +22,8 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { Link as LinkRouter } from 'react-router-dom';
 
 import Logo from '../footer/Logo';
-import darkIcon from '../../windmill.png';
-import lightIcon from '../../windmill.png';
-import darkLogo from '../../windmill.png';
-import lightLogo from '../../windmill.png';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import darkLogo from '../../rocket.png';
+import lightLogo from '../../rocket.png';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
 
@@ -40,28 +39,31 @@ export default function Navbar() {
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
 
   return (
-    <Box backgroundColor={useColorModeValue('light_azure', 'dark_azure')} shadow='md'>
-      <Container maxW='container.xl'>
+    <Box backgroundColor={useColorModeValue('light_azure', 'dark_azure')} shadow="md">
+      <Container maxW="container.xl">
         <Box>
           <Flex minH={'60px'} py={{ base: 2 }} align={'center'}>
-            <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
+            <Flex
+              flex={{ base: 1, md: 'auto' }}
+              ml={{ base: -2 }}
+              display={{ base: 'flex', md: 'none' }}
+            >
               <IconButton
                 onClick={onToggle}
                 icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-                variant='solid'
+                variant="solid"
                 color={useColorModeValue('black', 'white')}
                 aria-label={'Toggle Navigation'}
               />
             </Flex>
-            <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} alignItems='center'>
+            <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} alignItems="center">
               <LinkRouter to={'/'}>
                 {isLargerThan640 ? (
-                  <Logo lightLogo={lightLogo} darkLogo={darkLogo} width='60rem' />
-                ) : 
-                ( <p></p>
-                //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
-                )
-              }
+                  <Logo lightLogo={lightLogo} darkLogo={darkLogo} width="60rem" />
+                ) : (
+                  <p></p>
+                  //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
+                )}
               </LinkRouter>
               <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                 <DesktopNav />
@@ -72,9 +74,7 @@ export default function Navbar() {
               <SelectProfile />
             </Box>
 
-            <ColorModeSwitcher mr={2} justifySelf='flex-end' />
-
-            <Connect variant='solid'>Connect Wallet</Connect>
+            <Connect variant="solid">Connect Wallet</Connect>
           </Flex>
 
           <Collapse in={isOpen} animateOpacity>
@@ -93,30 +93,40 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map(navItem => (
+      <Box>
+        <Input p={4} mt={2} placeholder="Search ..." />
+      </Box>
+      {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <LinkRouter to={navItem.href ?? '#'}>
                 <Box
                   p={2}
-                  fontSize='sm'
-                  fontWeight='bold'
+                  fontSize="md"
+                  fontWeight="bold"
                   color={linkColor}
                   _hover={{
                     textDecoration: 'none',
                     color: linkHoverColor,
                   }}
                 >
-                  {navItem.label}
+                  <Button>{navItem.label}</Button>
                 </Box>
               </LinkRouter>
             </PopoverTrigger>
 
             {navItem.children && (
-              <PopoverContent border={0} boxShadow={'xl'} bg={popoverContentBgColor} p={4} rounded={'xl'} minW={'sm'}>
+              <PopoverContent
+                border={0}
+                boxShadow={'xl'}
+                bg={popoverContentBgColor}
+                p={4}
+                rounded={'xl'}
+                minW={'sm'}
+              >
                 <Stack>
-                  {navItem.children.map(child => (
+                  {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
                 </Stack>
@@ -165,7 +175,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack p={4} display={{ md: 'none' }}>
-      {NAV_ITEMS.map(navItem => (
+      {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
@@ -209,7 +219,7 @@ const MobileNavItem = ({ label, children, href }) => {
           align={'start'}
         >
           {children &&
-            children.map(child => (
+            children.map((child) => (
               <Link key={child.label} py={2} href={child.href}>
                 {child.label}
               </Link>

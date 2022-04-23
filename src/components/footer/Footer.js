@@ -1,4 +1,4 @@
-import { Box, chakra, Container, Stack, Text, useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
+import { Box, chakra, Container, Stack, useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
 import { FaDiscord, FaTwitter } from 'react-icons/fa';
 import Logo from './Logo';
 

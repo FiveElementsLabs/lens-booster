@@ -1,102 +1,66 @@
-import { Box, Grid, GridItem, Stack, Text, Button, useColorModeValue } from '@chakra-ui/react';
-import PostPreview from "./PostPreview";
-
+import { Box, Grid, GridItem, Stack, useColorModeValue } from '@chakra-ui/react';
+import PostPreview from './PostPreview';
+import TopProfiles from './TopProfiles';
+import { getAvatar } from '../../lib/GetAvatar';
 
 const elements = [
   {
-    icon: '🐱',
-    text: 'I am a cat',
+    text: 'Fresh from the derby win, Tommy’s Tales returns to preview Inter v Roma! ',
+    name: 'Inter FC',
+    color1: '#00B4D6',
+    color2: '#00B4D6',
+    avatar: 'https://pbs.twimg.com/profile_images/1501851471993786372/e__2kcIx_400x400.jpg'
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'Imagine how happy our Inter Club members were after meeting @A10imperador at Inter headquarters',
+    name: 'Inter FC',
+    color1: '#00B4D6',
+    color2: '#00B4D6',
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'I am a dog', 
+    name: 'Dog',
   },
   {
-    icon: '🐶',
-    text: 'I am a dog',
+    text: 'I am luduvigo',
+    name: 'luduvigo',
   },
   {
-    icon: '🐶',
     text: 'I am a dog',
+    name: 'Dog',
   },
 ];
 
+
+
 export default function Feed() {
   return (
-<Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" gap={4} mt={4}>
-<GridItem colSpan={3} m={2}>
-  {elements.map((element, index) => (
-    <Box mb={4} width="100%" key={index}>
-      <Stack p="4" boxShadow="lg" borderRadius="sm">
-        <Stack direction="row" width="100%" alignItems="center">
-
-          <PostPreview
-          title={"My first post"}
-          desc={element.text}
-          author="Satoshi Nakamoto"
-          role="BTC master"
-          avatar="https://bit.ly/sage-adebayo"
-          date="17-03-2022 12:00 AM"
-        />
-
-        </Stack>
-      </Stack>
-    </Box>
-  ))}
-</GridItem>
-<GridItem colSpan={2} m={2}>
-  <Box border="1px" h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}></Box>
-</GridItem>
-
-  </Grid>
-  )}
-
-   /*   <GridItem rowSpan={1} colSpan={1}>
-        <Heading as="h3" size="lg" align="left">
-          Latest posts
-        </Heading>
+    <Grid h="200px" templateRows="repeat(2, 1fr)" 
+    templateColumns="repeat(5, 1fr)" mt={4}>
+      <GridItem colSpan={{ base: '5', md: '3'}} m={2}>
+        {elements.map((element, index) => (
+          <Box mb={4} width="100%" key={index}>
+            <Stack boxShadow="lg" borderRadius="sm">
+              <Stack direction="row" width="100%" alignItems="center">
+                <PostPreview
+                  /*title={'My first post'}*/
+                  desc={element.text}
+                  author={element.name}
+                  /*role="BTC master"*/
+                  avatar={element.avatar? element.avatar : getAvatar(element.name, element.color1, element.color2)}
+                  date="17-03-2022 12:00 AM"
+                />
+              </Stack>
+            </Stack>
+          </Box>
+        ))}
       </GridItem>
-      <GridItem rowSpan={10} colSpan={1} bg="papayawhip"></GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My first post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="general"
-          author="Satoshi Nakamoto"
-          role="BTC master"
-          avatar="https://bit.ly/sage-adebayo"
-          date="17-03-2022 12:00 AM"
-        />
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My second post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="finance"
-          author="Martin Odersky"
-          role="Computer scientist"
-          avatar="https://bit.ly/sage-adebayo"
-          date="16-03-2022 11:00 PM"
-        />
-      </GridItem>
-      <GridItem rowSpan={1} colSpan={1}>
-        <PostPreview
-          title="My third post"
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          category="ideas"
-          author="Sir Isaac Newton"
-          role="Inventor"
-          avatar="https://bit.ly/sage-adebayo"
-          date="15-03-2022 2:00 PM"
-        />
+      <GridItem colSpan={{ base: '5', md: '2'}} m={2}>
+        <Box h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}>
+          <TopProfiles></TopProfiles>
+        </Box>
+
       </GridItem>
     </Grid>
-
-    
   );
 }
-*/
