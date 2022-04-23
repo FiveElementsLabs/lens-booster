@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 //where the Superfluid logic takes place
-async function updateSubscription(id, address, shares) {
+export default async function updateSubscription(id, address, shares) {
   const sf = await Framework.create({
     networkName: "kovan",
     provider: customHttpProvider,

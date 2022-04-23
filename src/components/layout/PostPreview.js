@@ -14,6 +14,8 @@ import React, { useState, useEffect } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
+import updateSubscription from "../superfluid/updateSubscription";
+import distribute from "../superfluid/distributeFunds";
 import BoostModal from "./BoostModal";
 
 var moment = require("moment");
@@ -34,22 +36,33 @@ export default function PostPreview({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
-  const [{ account, provider }] = useSharedState();
+  const [{ account, provider, currentProfile }] = useSharedState();
   const [message, setMessage] = useState("");
   const toast = useToast();
+
+  const totalFollowers = currentProfile?.stats?.totalFollowers;
+  console.log(totalFollowers)
 
   const onCreateMirror = async (e) => {
     e.preventDefault();
     try {
       // See api/publications/post for full metadata types.
       const signer = await provider.getSigner();
-      const res = await createMirror(signer, account, profileId, publicationId, {});
+      const res = await createMirror(
+        signer,
+        account,
+        profileId,
+        publicationId,
+        {}
+      );
+      await updateSubscription(window.localStorage.getItem("indexID"), account, totalFollowers);
+      await distribute(window.localStorage.getItem("indexID"), window.localStorage.getItem("amount"))
 
       toast({
-        title: 'Congrats: your sharing is earning!',
-        status: 'success',
-        position: 'bottom-right',
-        variant: 'subtle',
+        title: "Congrats: your sharing is earning!",
+        status: "success",
+        position: "bottom-right",
+        variant: "subtle",
       });
     } catch (err) {
       console.error(err.message);
@@ -75,7 +88,11 @@ export default function PostPreview({
       </Flex>
       <Text mt={4}>{desc}</Text>
       <Box my={3}>
-        { image ? <img src={image} alt="post" width="auto" height="auto" /> : <></> }
+        {image ? (
+          <img src={image} alt="post" width="auto" height="auto" />
+        ) : (
+          <></>
+        )}
       </Box>
       <Stack direction="row" alignItems="center" mt={2}>
         <Button
@@ -97,7 +114,7 @@ export default function PostPreview({
           {message ? JSON.stringify(message) : ""}
         </Code>
       </Container>
-      <BoostModal onClose={onClose} onOpen={onOpen} isOpen={isOpen}/>
+      <BoostModal onClose={onClose} onOpen={onOpen} isOpen={isOpen} />
     </Box>
   );
 }

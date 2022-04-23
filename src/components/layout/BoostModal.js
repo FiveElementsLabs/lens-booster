@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -8,16 +9,19 @@ import {
   ModalCloseButton,
   FormControl,
   FormLabel,
+  useToast,
   Button,
   Input,
   useNumberInput,
-  HStack
+  HStack,
 } from "@chakra-ui/react";
 
-import createIndex from '../superfluid/createIndex';
+import createIndex from "../superfluid/createIndex";
 
 export default function BoostModal(props) {
   const { isOpen, onClose, onOpen } = props;
+  const toast = useToast();
+  const [amount, setAmount] = useState(0);
 
   function HookUsage() {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
@@ -32,6 +36,11 @@ export default function BoostModal(props) {
     const inc = getIncrementButtonProps();
     const dec = getDecrementButtonProps();
     const input = getInputProps();
+
+    useEffect(() => {
+      console.log(input["aria-valuenow"]);
+      window.localStorage.setItem("amount", input["aria-valuenow"]);
+    }, [input["aria-valuenow"]]);
 
     return (
       <HStack maxW="260px">
@@ -52,12 +61,27 @@ export default function BoostModal(props) {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>DAIx</FormLabel>
-              <HookUsage/>
+              <HookUsage />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="green" onClick={createIndex}>Confirm Boost</Button>
+            <Button
+              colorScheme="green"
+              onClick={async () => {
+                const id = await createIndex();
+                window.localStorage.setItem("indexID", id);
+                // window.localStorage.setItem("amount", 0);
+                toast({
+                  title: "You've just created a new Index: " + id,
+                  status: "success",
+                  position: "bottom-right",
+                  variant: "solid",
+                });
+              }}
+            >
+              Confirm Boost
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

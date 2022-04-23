@@ -5,7 +5,7 @@ import { FormGroup } from 'react-bootstrap';
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 //where the Superfluid logic takes place
-async function distribute(id, amount) {
+export default async function distribute(id, amount) {
   const sf = await Framework.create({
     networkName: 'kovan',
     provider: customHttpProvider,

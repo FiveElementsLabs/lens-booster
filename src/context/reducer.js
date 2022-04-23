@@ -7,7 +7,7 @@ export const initialState = {
   network_name: null,
   chain_id: null,
   loading: false,
-  currentProfile: {},
+  currentProfile: {}
 };
 
 export const reducer = (state, action) => {

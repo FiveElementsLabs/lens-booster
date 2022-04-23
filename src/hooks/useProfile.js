@@ -31,13 +31,15 @@ export const useProfile = () => {
         );
         if (currentProfileFromHandle) {
           setCurrentProfile(currentProfileFromHandle);
+          console.log(currentProfileFromHandle)
           dispatch({
             type: actions.SET_CURRENT_PROFILE,
-            payload: { currentProfile: currentProfileFromHandle },
+            payload: { currentProfile: currentProfileFromHandle},
           });
           console.log("currentProfileFromHandle: ", currentProfileFromHandle);
         } else {
           changeProfile(res.profiles.items[0]);
+          console.log("here is the first profile: ", res.profiles.items[0]);
           dispatch({
             type: actions.SET_CURRENT_PROFILE,
             payload: { currentProfile: res.profiles.items[0] },

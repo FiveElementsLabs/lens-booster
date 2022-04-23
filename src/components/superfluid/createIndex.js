@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { customHttpProvider } from "./config";
 import { Framework } from "@superfluid-finance/sdk-core";
-import { Button, Spinner } from '@chakra-ui/react';
+import { Button, Spinner, useToast } from '@chakra-ui/react';
 
 //id is a number randomly generated between 1 and a billion
 const id = Math.floor(Math.random() * 1000000000);
@@ -40,9 +40,12 @@ export default async function createIndex(indexId) {
        Index ID: ${id}
     `
     );
+
+
   } catch (error) {
     console.error(error);
   }
+  return id;
 }
 
 export const CreateIndex = () => {
