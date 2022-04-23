@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { customHttpProvider } from './config';
 import { Framework } from '@superfluid-finance/sdk-core';
-import { Form, FormGroup, Spinner } from 'react-bootstrap';
-import { Button, FormControl, FormLabel, Input, useColorModeValue } from '@chakra-ui/react';
+import { FormGroup } from 'react-bootstrap';
+import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 //where the Superfluid logic takes place
 async function distribute(id, amount) {
@@ -46,15 +46,6 @@ async function distribute(id, amount) {
 export const DistributeFunds = () => {
   const [id, setId] = useState('');
   const [amount, setAmount] = useState('');
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
-  function DistributeButton({ isLoading, children, ...props }) {
-    return (
-      <Button variant="success" className="button" {...props}>
-        {isButtonLoading ? <Spinner animation="border" /> : children}
-      </Button>
-    );
-  }
 
   const onDistributeFunds = async (e) => {
 
