@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getProfiles } from "../api/profile/get-profiles";
 import { useSharedState } from "../context/store";
+import actions from "../context/actions";
 
 export const useProfile = () => {
-  const [{ account, provider }] = useSharedState();
+  const [{ account, provider }, dispatch] = useSharedState();
   const [profiles, setProfiles] = useState();
   const [currentProfile, setCurrentProfile] = useState();
 
@@ -30,11 +31,24 @@ export const useProfile = () => {
         );
         if (currentProfileFromHandle) {
           setCurrentProfile(currentProfileFromHandle);
+          dispatch({
+            type: actions.SET_CURRENT_PROFILE,
+            payload: { currentProfile: currentProfileFromHandle },
+          });
+          console.log("currentProfileFromHandle: ", currentProfileFromHandle);
         } else {
           changeProfile(res.profiles.items[0]);
+          dispatch({
+            type: actions.SET_CURRENT_PROFILE,
+            payload: { currentProfile: res.profiles.items[0] },
+          });
         }
       } else {
         changeProfile(res.profiles.items[0]);
+        dispatch({
+          type: actions.SET_CURRENT_PROFILE,
+          payload: { currentProfile: res.profiles.items[0] },
+        });
       }
     }
   };
