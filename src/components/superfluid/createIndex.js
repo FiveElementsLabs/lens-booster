@@ -49,8 +49,6 @@ export default async function createIndex(indexId) {
 }
 
 export const CreateIndex = () => {
-  const [setIsButtonLoading] = useState(false);
-
 
   return (
     <div>
@@ -59,11 +57,7 @@ export const CreateIndex = () => {
       <Button mt={5} type="submit" colorScheme="teal" variant="outline"
 
         onClick={() => {
-          setIsButtonLoading(true);
           createIndex(id);
-          setTimeout(() => {
-            setIsButtonLoading(false);
-          }, 1000);
         }}
       >
         Click to Create Your Index
