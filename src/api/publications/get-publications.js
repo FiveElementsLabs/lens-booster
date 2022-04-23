@@ -36,7 +36,7 @@ const GET_PUBLICATIONS = `
     bio
     location
     website
-    twitterUrl
+    twitter
     handle
     picture {
       ... on NftImage {
@@ -125,9 +125,6 @@ const GET_PUBLICATIONS = `
 
   fragment CollectModuleFields on CollectModule {
     __typename
-    ... on EmptyCollectModuleSettings {
-      type
-    }
     ... on FeeCollectModuleSettings {
       type
       amount {
@@ -306,6 +303,7 @@ const getPublicationsRequest = getPublicationQuery => {
 };
 
 export const getPublications = async profileId => {
+  console.log(profileId)
   const result = await getPublicationsRequest({
     profileId: profileId,
     publicationTypes: ['POST'],

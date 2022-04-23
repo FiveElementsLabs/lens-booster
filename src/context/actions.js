@@ -2,6 +2,7 @@ const actions = {
     LOGIN_WALLET: 'LOGIN_WALLET',
     LOGOUT_WALLET: 'LOGOUT_WALLET',
     CHANGE_NETWORK: 'CHANGE_NETWORK',
+    SET_CURRENT_PROFILE: 'SET_CURRENT_PROFILE',
   };
   
   export default actions;
