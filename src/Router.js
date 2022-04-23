@@ -30,7 +30,7 @@ export default function Router() {
         <Routes>
           <Route element={<Layout />}>
             <Route path='/' index element={<Home />} />
-            <Route path='/0x05de' element={<Profile />} />
+            <Route path='/:profileId' element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path='*' element={<NotFound />} /> {/* 404 like page*/}
           </Route>
