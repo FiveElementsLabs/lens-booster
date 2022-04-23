@@ -6,6 +6,7 @@ import {
   Flex,
   Avatar,
   Code,
+  useToast,
   Container,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -35,6 +36,7 @@ export default function PostPreview({
   const initialRef = React.useRef();
   const [{ account, provider }] = useSharedState();
   const [message, setMessage] = useState("");
+  const toast = useToast();
 
   const onCreateMirror = async (e) => {
     e.preventDefault();
@@ -43,7 +45,12 @@ export default function PostPreview({
       const signer = await provider.getSigner();
       const res = await createMirror(signer, account, profileId, publicationId, {});
 
-      setMessage(res);
+      toast({
+        title: 'Congrats: your sharing is earning!',
+        status: 'success',
+        position: 'bottom-right',
+        variant: 'subtle',
+      });
     } catch (err) {
       console.error(err.message);
     }

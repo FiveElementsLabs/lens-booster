@@ -5,6 +5,7 @@ import {
   Stack,
   Container,
   Grid,
+  useToast,
   GridItem,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -57,7 +58,7 @@ export default function Settings() {
                   <Stack direction="row" width="100%" alignItems="center">
                     <PostPreview
                       /*title={'My first post'}*/
-                      desc={post.metadata.description}
+                      desc={post.metadata.content}
                       author={post.profile.handle}
                       profileId={profileId}
                       publicationId={post.id}
@@ -89,7 +90,7 @@ export default function Settings() {
 
       <Container maxW="container.md" mt={10}>
         <Code maxW="container.md">
-          {message ? JSON.stringify(message) : ""}
+          {message ? "Congrats: your sharing is earning!" : ""}
         </Code>
       </Container>
     </>
