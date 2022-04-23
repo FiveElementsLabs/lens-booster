@@ -19,10 +19,8 @@ import {
 
 export default function Connect(props) {
   const [{ account }] = useSharedState();
-  console.log(account)
-  const { isOpen, 
-    //onOpen, 
-    onClose } = useDisclosure();
+  
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { hasCopied, onCopy } = useClipboard(account || '');
   const { loginWallet, 
     //logoutWallet, 

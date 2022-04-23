@@ -28,6 +28,7 @@ import darkLogo from '../../rocket.png';
 import lightLogo from '../../rocket.png';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Connect from './Connect.js';
+import SelectProfile from './SelectProfile.js';
 
 const NAV_ITEMS = [
   {
@@ -71,8 +72,10 @@ export default function Navbar() {
                 <DesktopNav />
               </Flex>
             </Flex>
-
-            <ColorModeSwitcher mr={2} justifySelf="flex-end" />
+            
+            <Box display={{ base: 'none', md: 'block' }}>
+              <SelectProfile />
+            </Box>
 
             <Connect variant="solid">Connect Wallet</Connect>
           </Flex>
