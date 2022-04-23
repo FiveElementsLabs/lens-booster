@@ -27,8 +27,8 @@ export default function Router() {
     <BrowserRouter>
       <Wrapper>
         <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
+          <Route element={<Layout />}>
+            <Route path='/' index element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path='*' element={<NotFound />} /> {/* 404 like page*/}
           </Route>
