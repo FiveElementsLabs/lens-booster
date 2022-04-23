@@ -41,6 +41,8 @@ import {
              {"Boost \t\t"}{emoji.get('rocket') }
           </Button>
         </Stack>
+
+        
       </Box>
     );
   }
