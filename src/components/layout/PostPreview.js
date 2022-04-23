@@ -3,6 +3,7 @@ import {
     Text,
     Heading,
     Stack,
+    Button,
     Badge,
     Flex,
     Avatar,
@@ -20,7 +21,7 @@ import {
     ...rest
   }) {
     return (
-      <Box p={5} shadow="md" borderWidth="1px" {...rest} align="left">
+      <Box p={5} shadow="md" borderWidth="1px" {...rest} align="left" width='100%'>
         <Flex>
           <Avatar src={avatar} />
           <Box ml="3">
@@ -33,9 +34,16 @@ import {
         </Heading>
         <Text mt={4}>{desc}</Text>
         <HStack marginTop="1rem">
-          <Badge colorScheme={categories[category]}>{category}</Badge>
           <Text fontSize='xs'>{date}</Text>
         </HStack>
+        <Stack direction="row" alignItems="center"  mt={2}>
+          <Button colorScheme="teal" size="sm" variant="outline">
+            Like
+          </Button>
+          <Button colorScheme="teal" size="sm" variant="outline">
+            Mirror
+          </Button>
+        </Stack>
       </Box>
     );
   }
