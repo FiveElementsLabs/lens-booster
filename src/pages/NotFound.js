@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <Box textAlign='center'>
       <Heading fontSize='3xl' mt={10}>
-        Oops, the page you're trying to reach does not exist.
+        Ooops, the wind brought you here, but the page you're trying to reach does not exist. 
       </Heading>
       <Link to='/'>
         <Button mt={5}>Go Home</Button>

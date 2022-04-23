@@ -19,7 +19,6 @@ export default function Layout() {
     <>
       <Box position="relative" w="full" minH="100vh" m={4}>
         <Navbar />
-
         <Container maxW="container.xl" pb={{ base: 48, md: 28 }}>
           <Outlet />
         </Container>

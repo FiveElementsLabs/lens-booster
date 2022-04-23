@@ -12,6 +12,7 @@ import Layout from './components/layout/Layout';
 // These are all the pages that use the main Layout.
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile'
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
@@ -28,6 +29,7 @@ export default function Router() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path='*' element={<NotFound />} /> {/* 404 like page*/}
           </Route>
         </Routes>
