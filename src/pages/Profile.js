@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -7,6 +7,8 @@ import {
   Container,
   FormControl,
   FormLabel,
+  Grid,
+  GridItem,
   Input,
   Textarea,
   Text,
@@ -31,8 +33,8 @@ export default function Settings() {
   const [posts, setPosts] = useState([]);
   const [publications, setPublications] = useState([]);
 
-  const [message, setMessage] = useState("");
-  const [handle, setHandle] = useState("");
+  const [message, setMessage] = useState('');
+  const [handle, setHandle] = useState('');
   const [profileMetaData, setProfileMetaData] = useState({});
   const toast = useToast();
   const location = useLocation();
@@ -63,16 +65,16 @@ export default function Settings() {
 
   const onCreateProfile = async (e) => {
     e.preventDefault();
-    console.log("onCreateProfile: ", account + " " + handle);
+    console.log('onCreateProfile: ', account + ' ' + handle);
     try {
       const signer = await provider.getSigner();
       const res = await createProfile(account, handle, signer);
       setMessage(res);
       toast({
-        title: "New profile created",
-        status: "success",
-        position: "bottom-right",
-        variant: "subtle",
+        title: 'New profile created',
+        status: 'success',
+        position: 'bottom-right',
+        variant: 'subtle',
       });
     } catch (err) {
       console.error(err?.message);
@@ -99,10 +101,10 @@ export default function Settings() {
       // See api/profile/update-profile for full metadata types.
       await updateProfile(account, profileMetaData);
       toast({
-        title: "Profile updated",
-        status: "success",
-        position: "bottom-right",
-        variant: "subtle",
+        title: 'Profile updated',
+        status: 'success',
+        position: 'bottom-right',
+        variant: 'subtle',
       });
     } catch (err) {
       console.error(err?.message);
@@ -141,9 +143,7 @@ export default function Settings() {
       </Box>
 
       <Container maxW="container.md" mt={10}>
-        <Code maxW="container.md">
-          {message ? JSON.stringify(message) : ""}
-        </Code>
+        <Code maxW="container.md">{message ? JSON.stringify(message) : ''}</Code>
       </Container>
     </>
   );
