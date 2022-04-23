@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { customHttpProvider } from "./config";
 import { Framework } from "@superfluid-finance/sdk-core";
 import { Button } from '@chakra-ui/react';
