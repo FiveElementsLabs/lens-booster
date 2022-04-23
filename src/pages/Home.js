@@ -7,7 +7,7 @@ export default function Home(props) {
   return (
     <>
       <Hero />
-      <Feed />
+      <Feed/>
     </>
   );
 }
