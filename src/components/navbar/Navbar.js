@@ -26,6 +26,8 @@ import darkLogo from '../../rocket.png';
 import lightLogo from '../../rocket.png';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+
 
 const NAV_ITEMS = [
   {
@@ -70,7 +72,9 @@ export default function Navbar() {
               </Flex>
             </Flex>
             
-            <Box display={{ base: 'none', md: 'block' }}>
+            <ColorModeSwitcher mr={2} justifySelf='flex-end' />
+
+            <Box display={{ base: 'none', md: 'block' }} mr={3}>
               <SelectProfile />
             </Box>
 
