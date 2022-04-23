@@ -127,7 +127,6 @@ export default function Settings() {
                   id="handle"
                   type="text"
                   onChange={(e) => setHandle(e.target.value)}
-                  color={useColorModeValue('black', 'black')}
                 />
               </FormControl>
               <Button mt={5} type="submit" colorScheme="teal" variant="outline">
@@ -148,7 +147,6 @@ export default function Settings() {
                   onChange={(e) => updateProfileMetaData(e, 'name')}
                   disabled={true}
                   bg={useColorModeValue('white', 'dark_background')}
-                  color={useColorModeValue('black', 'black')}
                 />
               </FormControl>
               <FormControl mt={5} isRequired>

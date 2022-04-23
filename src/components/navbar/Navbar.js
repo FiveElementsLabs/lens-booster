@@ -31,8 +31,8 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const NAV_ITEMS = [
   {
-    label: 'Profile',
-    href: '/profile',
+    label: 'Settings',
+    href: '/settings',
   },
 ];
 

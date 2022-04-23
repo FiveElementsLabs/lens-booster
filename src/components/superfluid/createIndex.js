@@ -16,7 +16,7 @@ async function createIndex(indexId) {
 
   const signer = sf.createSigner({
     privateKey:
-      "0xd2ebfb1517ee73c4bd3d209530a7e1c25352542843077109ae77a2c0213375f1",
+      "aff925838ff510ae38e25daf0971e517b7c98e8a67bbdb685875d191d25f3f03",
     provider: customHttpProvider
   });
 
