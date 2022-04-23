@@ -93,7 +93,6 @@ export const UpdateSubscription = () => {
               name="subscriber"
               value={subscriber}
               onChange={handleSubscriberChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
@@ -104,7 +103,6 @@ export const UpdateSubscription = () => {
               name="units"
               value={units}
               onChange={handleUnitsChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
