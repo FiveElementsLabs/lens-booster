@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem, Stack, useColorModeValue } from '@chakra-ui/react';
 import PostPreview from './PostPreview';
-var randomHex = require('random-hex');
-
+import TopProfiles from './TopProfiles';
+import { getAvatar } from '../../lib/GetAvatar';
 
 const elements = [
   {
@@ -9,6 +9,7 @@ const elements = [
     name: 'Inter FC',
     color1: '#00B4D6',
     color2: '#00B4D6',
+    avatar: 'https://pbs.twimg.com/profile_images/1501851471993786372/e__2kcIx_400x400.jpg'
   },
   {
     text: 'Imagine how happy our Inter Club members were after meeting @A10imperador at Inter headquarters',
@@ -30,15 +31,7 @@ const elements = [
   },
 ];
 
-const getAvatar = (name, color1, color2) => {
-  if(!color1 || !color2) {
-    const color1 = randomHex.generate().substring(3, 6);
-    const color2 = randomHex.generate().substring(1, 4);
-    return `https://ui-avatars.com/api/?name=${name}&size=256&rounded=true&bold=true&color=${color1}&background=${color2}`;
-  } else {
-    return `https://ui-avatars.com/api/?name=${name}&size=256&rounded=true&bold=true&color=${color1}&background=${color2}`;
-  }
-}
+
 
 export default function Feed() {
   return (
@@ -54,7 +47,7 @@ export default function Feed() {
                   desc={element.text}
                   author={element.name}
                   /*role="BTC master"*/
-                  avatar={getAvatar(element.name, element.color1, element.color2)}
+                  avatar={element.avatar? element.avatar : getAvatar(element.name, element.color1, element.color2)}
                   date="17-03-2022 12:00 AM"
                 />
               </Stack>
@@ -63,7 +56,10 @@ export default function Feed() {
         ))}
       </GridItem>
       <GridItem colSpan={{ base: '5', md: '2'}} m={2}>
-        <Box border="1px" h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}></Box>
+        <Box h="100%" borderColor={useColorModeValue('black', 'white')} mb={4}>
+          <TopProfiles></TopProfiles>
+        </Box>
+
       </GridItem>
     </Grid>
   );

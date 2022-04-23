@@ -21,7 +21,7 @@ import {
     ...rest
   }) {
     return (
-      <Box p={5} shadow="md" borderWidth="1px" {...rest} align="left" width='100%'>
+      <Box p={5} rounded='lg' shadow="md" borderWidth="1px" {...rest} align="left" width='100%'>
         <Flex>
           <Avatar src={avatar} />
           <Box ml="3">
