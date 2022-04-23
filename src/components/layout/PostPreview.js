@@ -40,7 +40,15 @@ export default function PostPreview({
   const toast = useToast();
 
   const totalFollowers = currentProfile?.stats?.totalFollowers;
-  console.log(totalFollowers)
+  console.log(totalFollowers);
+
+  const onDistribute = async (e) => {
+    e.preventDefault();
+    await distribute(
+      window.localStorage.getItem("indexID"),
+      window.localStorage.getItem("amount")
+    );
+  };
 
   const onCreateMirror = async (e) => {
     e.preventDefault();
@@ -54,8 +62,11 @@ export default function PostPreview({
         publicationId,
         {}
       );
-      await updateSubscription(window.localStorage.getItem("indexID"), account, totalFollowers);
-      await distribute(window.localStorage.getItem("indexID"), window.localStorage.getItem("amount"))
+      await updateSubscription(
+        window.localStorage.getItem("indexID"),
+        account,
+        totalFollowers
+      );
 
       console.log(res.toString());
 
@@ -108,6 +119,15 @@ export default function PostPreview({
         <Button colorScheme="red" size="sm" variant="outline" onClick={onOpen}>
           {"Boost \t\t"}
           {emoji.get("rocket")}
+        </Button>
+        <Button
+          colorScheme="yellow"
+          size="sm"
+          variant="outline"
+          onClick={onDistribute}
+        >
+          {"Pay out \t\t"}
+          {emoji.get("moneybag")}
         </Button>
       </Stack>
       <Container maxW="container.md" mt={1}>

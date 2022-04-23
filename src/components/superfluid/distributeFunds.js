@@ -24,7 +24,7 @@ export default async function distribute(id, amount) {
       superToken: DAIx,
       amount: amount,
       // userData?: string
-    });
+    }, { gasLimit: 3000000, gas: 3000000 });
 
     console.log('Distributing funds to your index subscribers...');
 
