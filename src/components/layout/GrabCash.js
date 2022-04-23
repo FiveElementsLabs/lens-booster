@@ -9,21 +9,24 @@ const grabCash = [
   {
     name: 'Inter FC',
     handle: '@fcinter',
-    url: '/fcinter',
+    url: '/0x05ef',
+    totalpaid: '$52,340.00',
     avatar: 'https://pbs.twimg.com/profile_images/1501851471993786372/e__2kcIx_400x400.jpg',
   },
   {
-    name: 'luduvigo',
-    handle: '@luduvigo',
-    url: '/luduvigo',
-    avatar: 'https://avatars2.githubusercontent.com/u/1709898?s=460&v=4',
+    name: 'Boost DAO',
+    handle: '@boostdao',
+    totalpaid: '$300.00',
+    url: '/0x05ee',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmSghYdm87zoMzpCX5i3fidWLdREMKuP1tk9dGXXcxRyPc',
   },
   {
-    name: 'Vincenzo Manzon',
-    handle: '@vmanzon',
-    url: '/vmanzon',
-    avatar: 'https://avatars2.githubusercontent.com/u/1709898?s=460&v=4',
-  },
+    name: 'Devconnect',
+    handle: '@devconnect',
+    url: '/0x05f9',
+    totalpaid: '$4,230.00',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
+  }
 ];
 
 export default function GrabCash({
@@ -53,6 +56,7 @@ export default function GrabCash({
             <Box ml="3">
               <Text fontWeight="bold">{element.name}</Text>
               <Text fontSize="xs">{element.handle}</Text>
+              <Text fontSize="sm" fontWeight="bold">Total paid: {element.totalpaid}</Text>
             </Box>
           </Stack>
         </LinkRouter>

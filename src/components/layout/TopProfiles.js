@@ -17,7 +17,19 @@ const topProfiles = [
     handle: '@boostdao',
     url: '/0x05ee',
     avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmSghYdm87zoMzpCX5i3fidWLdREMKuP1tk9dGXXcxRyPc',
-  }
+  },
+  {
+    name: 'Devconnect',
+    handle: '@devconnect',
+    url: '/0x05f9',
+    avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
+  },
+  // {
+  //   name: 'Ciao bella',
+  //   handle: '@devconnect',
+  //   url: '/0x05fa',
+  //   avatar: 'https://ik.imagekit.io/lensterimg/tr:n-avatar/https://ipfs.infura.io/ipfs/QmXYNepRCTLvRUVHoUoGUNYyAbG7kweSLKYcsnCrQR6cbU',
+  // }
 ];
 
 export default function TopProfiles({
