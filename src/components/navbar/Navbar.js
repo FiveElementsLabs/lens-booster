@@ -26,6 +26,7 @@ import darkLogo from '../../windmill.png';
 import lightLogo from '../../windmill.png';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Connect from './Connect.js';
+import SelectProfile from './SelectProfile.js';
 
 const NAV_ITEMS = [
   {
@@ -66,7 +67,10 @@ export default function Navbar() {
                 <DesktopNav />
               </Flex>
             </Flex>
-
+            
+            <Box display={{ base: 'none', md: 'block' }}>
+              <SelectProfile />
+            </Box>
 
             <ColorModeSwitcher mr={2} justifySelf='flex-end' />
 

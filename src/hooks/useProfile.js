@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useEthers } from "@usedapp/core";
 import { getProfiles } from "../api/profile/get-profiles";
+import { useSharedState } from "../context/store";
 
 export const useProfile = () => {
-  const { account, library } = useEthers();
+  const [{ account, provider }] = useSharedState();
   const [profiles, setProfiles] = useState();
   const [currentProfile, setCurrentProfile] = useState();
 
@@ -16,7 +17,7 @@ export const useProfile = () => {
   const loadProfiles = async () => {
     if (account) {
       const current = localStorage.getItem("current_profile");
-      const res = await getProfiles(account, library.getSigner());
+      const res = await getProfiles(account, provider.getSigner());
 
       setProfiles(res.profiles.items);
 
