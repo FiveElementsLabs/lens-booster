@@ -42,7 +42,7 @@ export default function Features() {
           icon={<Icon as={FaMoneyBill} w={10} h={10} />}
           title={'Pay out'}
           text={
-            '💰 Meet your audience goal and pay out INFLENSERS who have boosted your content'
+            '💰 Reach your target and pay out INFLENSERS who have boosted your content'
           }
         />
       </SimpleGrid>
