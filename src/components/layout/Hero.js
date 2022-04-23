@@ -31,9 +31,9 @@ export default function Hero() {
             fontWeight={600}
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
-            Make money from <br />
+            Boost your contents and <br />
             <Text as={'span'} color={'green.400'}>
-              your audience
+            skyrocket your audience
             </Text>
           </Heading>
           <Text color={'gray.500'}>

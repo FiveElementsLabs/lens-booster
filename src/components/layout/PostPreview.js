@@ -36,7 +36,7 @@ export default function PostPreview({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ account, provider, currentProfile }] = useSharedState();
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
   const toast = useToast();
 
   const totalFollowers = currentProfile?.stats?.totalFollowers;

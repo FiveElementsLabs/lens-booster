@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -19,9 +19,8 @@ import {
 import createIndex from "../superfluid/createIndex";
 
 export default function BoostModal(props) {
-  const { isOpen, onClose, onOpen } = props;
+  const { isOpen, onClose } = props;
   const toast = useToast();
-  const [amount, setAmount] = useState(0);
 
   function HookUsage() {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
@@ -40,7 +39,7 @@ export default function BoostModal(props) {
     useEffect(() => {
       console.log(input["aria-valuenow"]);
       window.localStorage.setItem("amount", input["aria-valuenow"]);
-    }, [input["aria-valuenow"]]);
+    }, [input]);
 
     return (
       <HStack maxW="260px">
