@@ -22,11 +22,8 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import { Link as LinkRouter } from 'react-router-dom';
 
 import Logo from '../footer/Logo';
-//import darkIcon from '../../windmill.png';
-//import lightIcon from '../../windmill.png';
 import darkLogo from '../../rocket.png';
 import lightLogo from '../../rocket.png';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
 
