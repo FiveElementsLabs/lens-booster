@@ -12,7 +12,7 @@ async function distribute(id, amount) {
   });
 
   const signer = sf.createSigner({
-    privateKey: '0xd2ebfb1517ee73c4bd3d209530a7e1c25352542843077109ae77a2c0213375f1',
+    privateKey: 'aff925838ff510ae38e25daf0971e517b7c98e8a67bbdb685875d191d25f3f03',
     provider: customHttpProvider,
   });
 
@@ -56,6 +56,17 @@ export const DistributeFunds = () => {
     );
   }
 
+  const onDistributeFunds = async (e) => {
+
+    e.preventDefault();
+    console.log(e.target.value);
+
+    distribute(id, amount);
+    // setTimeout(() => {
+    //   setIsButtonLoading(false);
+    // }, 1000);
+  };
+
   const handleIdChange = (e) => {
     setId(() => ([e.target.name] = e.target.value));
   };
@@ -67,7 +78,7 @@ export const DistributeFunds = () => {
   return (
     <div>
       <h2>Distribute Funds</h2>
-      <Form>
+      <form onSubmit={onDistributeFunds}>
         <FormGroup className="mb-3">
           <FormControl mt={5}>
             <FormLabel htmlFor="name">Enter your index ID</FormLabel>
@@ -75,7 +86,6 @@ export const DistributeFunds = () => {
               name="id"
               value={id}
               onChange={handleIdChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
@@ -86,22 +96,13 @@ export const DistributeFunds = () => {
               name="amount"
               value={amount}
               onChange={handleAmountChange}
-              color={useColorModeValue('white', 'black')}
             />
           </FormControl>
         </FormGroup>
-        <Button mt={5} type="submit" colorScheme="teal" variant="outline"
-          onClick={() => {
-            setIsButtonLoading(true);
-            distribute(id, amount);
-            setTimeout(() => {
-              setIsButtonLoading(false);
-            }, 1000);
-          }}
-        >
+        <Button mt={5} type="submit" colorScheme="teal" variant="outline">
           Click to Distribute Funds to Your Index
         </Button>
-      </Form>
+      </form>
     </div>
   );
 };
