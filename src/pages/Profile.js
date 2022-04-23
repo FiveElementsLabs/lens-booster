@@ -60,6 +60,7 @@ export default function Settings() {
                       /*title={'My first post'}*/
                       desc={post.metadata.content}
                       author={post.profile.handle}
+                      index={index}
                       profileId={profileId}
                       publicationId={post.id}
                       /*role="BTC master"*/

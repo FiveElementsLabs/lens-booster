@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  Text,
   ModalCloseButton,
   FormControl,
   FormLabel,
@@ -21,12 +22,13 @@ import createIndex from "../superfluid/createIndex";
 export default function BoostModal(props) {
   const { isOpen, onClose } = props;
   const toast = useToast();
+  const [targetAudience, setTargetAudience] = useState("");
 
   function HookUsage() {
     const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
       useNumberInput({
         step: 10,
-        defaultValue: 50,
+        defaultValue: window.localStorage.getItem("amount") || 50,
         min: 1,
         max: 1000000000000000,
         precision: 2,
@@ -35,6 +37,10 @@ export default function BoostModal(props) {
     const inc = getIncrementButtonProps();
     const dec = getDecrementButtonProps();
     const input = getInputProps();
+
+    useEffect(() => {
+       setTargetAudience(window.localStorage.getItem("amount") * 100)
+    }, [window.localStorage.getItem("amount")]);
 
     useEffect(() => {
       console.log(input["aria-valuenow"]);
@@ -65,11 +71,15 @@ export default function BoostModal(props) {
           </ModalBody>
 
           <ModalFooter>
+            <Text mr={3}>
+              Target audience: {targetAudience}
+            </Text>
             <Button
               colorScheme="green"
               onClick={async () => {
                 const id = await createIndex();
                 window.localStorage.setItem("indexID", id);
+                window.localStorage.setItem("currentFollowers", 0)
                 // window.localStorage.setItem("amount", 0);
                 toast({
                   title: "You've just created a new Index: " + id,

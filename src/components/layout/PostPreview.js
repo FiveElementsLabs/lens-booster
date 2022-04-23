@@ -10,13 +10,14 @@ import {
   Container,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
 import updateSubscription from "../superfluid/updateSubscription";
 import distribute from "../superfluid/distributeFunds";
 import BoostModal from "./BoostModal";
+import { isNullableType } from "graphql";
 
 var moment = require("moment");
 var emoji = require("node-emoji");
@@ -31,13 +32,24 @@ export default function PostPreview({
   date,
   image,
   profileId,
+  index,
   publicationId,
   ...rest
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [{ account, provider, currentProfile }] = useSharedState();
+  const [currentFollowers, setCurrentFollowers] = useState(
+    window.localStorage.getItem("currentFollowers") || null
+  );
   const [message] = useState("");
   const toast = useToast();
+
+  useEffect(() => {
+    console.log(window.localStorage.getItem("currentFollowers"));
+    const followers = window.localStorage.getItem("currentFollowers");
+    setCurrentFollowers(followers);
+    console.log(currentFollowers);
+  }, [window.localStorage.getItem("currentFollowers")]);
 
   const totalFollowers = currentProfile?.stats?.totalFollowers;
   console.log(totalFollowers);
@@ -46,7 +58,7 @@ export default function PostPreview({
     e.preventDefault();
     await distribute(
       window.localStorage.getItem("indexID"),
-      window.localStorage.getItem("amount")
+      window.localStorage.getItem("amount") * 0.01
     );
   };
 
@@ -65,13 +77,24 @@ export default function PostPreview({
       await updateSubscription(
         window.localStorage.getItem("indexID"),
         account,
-        totalFollowers
+        10
       );
+
+      console.log(
+        parseInt(window.localStorage.getItem("currentFollowers")) + 10
+      );
+      window.localStorage.setItem(
+        "currentFollowers",
+        parseInt(window.localStorage.getItem("currentFollowers")) + 10
+      );
+
+      console.log(window.localStorage.getItem("currentFollowers"));
+      setCurrentFollowers(window.localStorage.getItem("currentFollowers"));
 
       console.log(res.toString());
 
       toast({
-        title: "Congrats: your sharing is earning!",
+        title: "Congrats: you're earning by sharing!",
         status: "success",
         position: "bottom-right",
         variant: "subtle",
@@ -120,15 +143,28 @@ export default function PostPreview({
           {"Boost \t\t"}
           {emoji.get("rocket")}
         </Button>
-        <Button
-          colorScheme="yellow"
-          size="sm"
-          variant="outline"
-          onClick={onDistribute}
-        >
-          {"Pay out \t\t"}
-          {emoji.get("moneybag")}
-        </Button>
+        {index === 0 &&
+        window.localStorage.getItem("amount") > 0 &&
+        window.localStorage.getItem("currentFollowers") >= 0 ? (
+          <Button
+            colorScheme="yellow"
+            size="sm"
+            variant="outline"
+            onClick={onDistribute}
+          >
+            {"Pay out \t\t"}
+            {emoji.get("moneybag")}
+            {index === 0
+              ? "(" +
+                currentFollowers +
+                "/" +
+                window.localStorage.getItem("amount") * 100 +
+                ")"
+              : ""}
+          </Button>
+        ) : (
+          <></>
+        )}
       </Stack>
       <Container maxW="container.md" mt={1}>
         <Code maxW="container.md">

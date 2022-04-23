@@ -6,6 +6,8 @@ import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 //where the Superfluid logic takes place
 export default async function distribute(id, amount) {
+  console.log("indexID: " + id);
+  console.log("amount: " + amount);
   const sf = await Framework.create({
     networkName: 'kovan',
     provider: customHttpProvider,
