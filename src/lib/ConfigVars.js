@@ -5,7 +5,7 @@
 export const APP_NAME = 'LensWindmill';
 export const APP_DESC = '';
 
-export const LENS_API_URL = 'https://api-mumbai.lens.dev/';
+export const LENS_API_URL = 'https://api.lens.dev';
 export const MUMBAI_RPC_URL = 'https://rpc-mumbai.matic.today';
 export const MUMBAI_SCAN = 'https://mumbai.polygonscan.com/';
 

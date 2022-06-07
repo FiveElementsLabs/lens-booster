@@ -15,6 +15,9 @@ export const useProfile = () => {
   };
 
   const loadProfiles = async () => {
+
+    console.log(account, 'account');
+
     if (account) {
       const current = localStorage.getItem("current_profile");
       const res = await getProfiles(account, provider.getSigner());
@@ -34,7 +37,7 @@ export const useProfile = () => {
           console.log(currentProfileFromHandle)
           dispatch({
             type: actions.SET_CURRENT_PROFILE,
-            payload: { currentProfile: currentProfileFromHandle},
+            payload: { currentProfile: currentProfileFromHandle },
           });
           console.log("currentProfileFromHandle: ", currentProfileFromHandle);
         } else {

@@ -17,8 +17,6 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-import createIndex from "../superfluid/createIndex";
-
 export default function BoostModal(props) {
   const { isOpen, onClose } = props;
   const toast = useToast();
@@ -39,7 +37,7 @@ export default function BoostModal(props) {
     const input = getInputProps();
 
     useEffect(() => {
-       setTargetAudience(window.localStorage.getItem("amount") * 100)
+      setTargetAudience(window.localStorage.getItem("amount") * 100)
     }, [window.localStorage.getItem("amount")]);
 
     useEffect(() => {
@@ -77,16 +75,6 @@ export default function BoostModal(props) {
             <Button
               colorScheme="green"
               onClick={async () => {
-                const id = await createIndex();
-                window.localStorage.setItem("indexID", id);
-                window.localStorage.setItem("currentFollowers", 0)
-                // window.localStorage.setItem("amount", 0);
-                toast({
-                  title: "You've just created a new Index: " + id,
-                  status: "success",
-                  position: "bottom-right",
-                  variant: "solid",
-                });
               }}
             >
               Confirm Boost

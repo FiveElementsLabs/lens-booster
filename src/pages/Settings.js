@@ -21,9 +21,6 @@ import { createProfile } from '../api/profile/create-profile';
 import { updateProfile } from '../api/profile/update-profile';
 import { useSharedState } from '../context/store';
 import { createPost } from '../api/publications/post';
-import { CreateIndex } from '../components/superfluid/createIndex';
-import { UpdateSubscription } from '../components/superfluid/updateSubscription';
-import { DistributeFunds } from '../components/superfluid/distributeFunds';
 
 export default function Settings() {
   const [{ account, provider }] = useSharedState();
@@ -108,15 +105,6 @@ export default function Settings() {
     <>
       <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" mt={4}>
         <GridItem colSpan={{ base: '5', md: '2' }} m={2}>
-          <Box mx="auto" mt={5} maxW="container.md" border="1px solid gray" rounded="xl" p={4}>
-            <CreateIndex></CreateIndex>
-          </Box>
-          <Box mx="auto" mt={5} maxW="container.md" border="1px solid gray" rounded="xl" p={4}>
-            <UpdateSubscription></UpdateSubscription>
-          </Box>
-          <Box mx="auto" mt={5} maxW="container.md" border="1px solid gray" rounded="xl" p={4}>
-            <DistributeFunds></DistributeFunds>
-          </Box>
 
           <Box mx="auto" mt={5} maxW="container.md" border="1px solid gray" rounded="xl" p={4}>
             <Text>Create new Profile</Text>

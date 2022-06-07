@@ -14,8 +14,6 @@ import React, { useEffect, useState } from "react";
 
 import { useSharedState } from "../../context/store";
 import { createMirror } from "../../api/publications/mirror";
-import updateSubscription from "../superfluid/updateSubscription";
-import distribute from "../superfluid/distributeFunds";
 import BoostModal from "./BoostModal";
 
 var moment = require("moment");
@@ -48,64 +46,6 @@ export default function PostPreview({
   const totalFollowers = currentProfile?.stats?.totalFollowers;
   console.log(totalFollowers);
 
-  const onDistribute = async (e) => {
-    e.preventDefault();
-    await distribute(
-      window.localStorage.getItem("indexID"),
-      window.localStorage.getItem("amount")
-    );
-    
-    toast({
-      title: "Funds distributed",
-      status: "success",
-      position: "bottom-right",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
-
-  const onCreateMirror = async (e) => {
-    e.preventDefault();
-    try {
-      // See api/publications/post for full metadata types.
-      const signer = await provider.getSigner();
-      const res = await createMirror(
-        signer,
-        account,
-        profileId,
-        publicationId,
-        {}
-      );
-      await updateSubscription(
-        window.localStorage.getItem("indexID"),
-        account,
-        10
-      );
-
-      console.log(
-        parseInt(window.localStorage.getItem("currentFollowers")) + 10
-      );
-      window.localStorage.setItem(
-        "currentFollowers",
-        parseInt(window.localStorage.getItem("currentFollowers")) + 100
-      );
-
-      console.log(window.localStorage.getItem("currentFollowers"));
-      if (window.localStorage.getItem("currentFollowers")) {
-        setCurrentFollowers(window.localStorage.getItem("currentFollowers"));
-      }
-      console.log(res.toString());
-
-      toast({
-        title: "Congrats: you're earning by sharing!",
-        status: "success",
-        position: "bottom-right",
-        variant: "subtle",
-      });
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   return (
     <Box
@@ -134,7 +74,6 @@ export default function PostPreview({
       </Box>
       <Stack direction="row" alignItems="center" mt={2}>
         <Button
-          onClick={onCreateMirror}
           colorScheme="teal"
           size="sm"
           variant="outline"
@@ -147,23 +86,22 @@ export default function PostPreview({
           {emoji.get("rocket")}
         </Button>
         {index === 0 &&
-        window.localStorage.getItem("amount") > 0 &&
-        window.localStorage.getItem("currentFollowers") &&
-        window.localStorage.getItem("currentFollowers") >= 0 ? (
+          window.localStorage.getItem("amount") > 0 &&
+          window.localStorage.getItem("currentFollowers") &&
+          window.localStorage.getItem("currentFollowers") >= 0 ? (
           <Button
             colorScheme="yellow"
             size="sm"
             variant="outline"
-            onClick={onDistribute}
           >
             {"Pay out \t\t"}
             {emoji.get("moneybag")}
             {index === 0
               ? "(" +
-                (currentFollowers === "undefined" ? 0 : currentFollowers) +
-                "/" +
-                window.localStorage.getItem("amount") * 100 +
-                ")"
+              (currentFollowers === "undefined" ? 0 : currentFollowers) +
+              "/" +
+              window.localStorage.getItem("amount") * 100 +
+              ")"
               : ""}
           </Button>
         ) : (

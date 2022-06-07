@@ -9,7 +9,7 @@ import TopProfiles from '../components/layout/TopProfiles';
 import GrabCash from '../components/layout/GrabCash';
 import { getAvatar } from '../lib/GetAvatar';
 
-export default function Settings() {
+export default function Profile() {
   const { profileId } = useParams();
 
   const { currentProfile } = useProfile();
