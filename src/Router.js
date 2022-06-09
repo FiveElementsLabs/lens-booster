@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 /*
  *  React-Router-Dom setup
@@ -7,15 +7,15 @@ import { useLayoutEffect } from 'react';
  */
 
 // This is the main Layout.
-import Layout from './components/layout/Layout';
+import Layout from "./components/layout/Layout";
 
 // These are all the pages that use the main Layout.
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
-import Settings from './pages/Settings'
-import Profile from './pages/Profile';
-import ProfileView from './pages/ProfileView';
-import Track from './pages/Track';
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
+import ProfileView from "./pages/ProfileView";
+import Track from "./pages/Track";
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
@@ -31,12 +31,12 @@ export default function Router() {
       <Wrapper>
         <Routes>
           <Route element={<Layout />}>
-            <Route path='/' index element={<Home />} />
-            <Route path='/:profileId' element={<Profile />} />
-            <Route path='/profile/:profileHandle' element={<ProfileView />} />
+            <Route path="/" index element={<Home />} />
+            <Route path="/:profileId" element={<Profile />} />
+            <Route path="/profile/:profileHandle" element={<ProfileView />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/track" element={<Track />} />
-            <Route path='*' element={<NotFound />} /> {/* 404 like page*/}
+            <Route path="*" element={<NotFound />} /> {/* 404 like page*/}
           </Route>
         </Routes>
       </Wrapper>

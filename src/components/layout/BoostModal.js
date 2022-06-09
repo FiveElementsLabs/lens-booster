@@ -37,7 +37,7 @@ export default function BoostModal(props) {
     const input = getInputProps();
 
     useEffect(() => {
-      setTargetAudience(window.localStorage.getItem("amount") * 100)
+      setTargetAudience(window.localStorage.getItem("amount") * 100);
     }, [window.localStorage.getItem("amount")]);
 
     useEffect(() => {
@@ -69,14 +69,8 @@ export default function BoostModal(props) {
           </ModalBody>
 
           <ModalFooter>
-            <Text mr={3}>
-              Target audience: {targetAudience}
-            </Text>
-            <Button
-              colorScheme="green"
-              onClick={async () => {
-              }}
-            >
+            <Text mr={3}>Target audience: {targetAudience}</Text>
+            <Button colorScheme="green" onClick={async () => {}}>
               Confirm Boost
             </Button>
           </ModalFooter>

@@ -1,7 +1,7 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { getAuthenticationToken } from './State';
-import { LENS_API_URL } from './ConfigVars';
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { getAuthenticationToken } from "./State";
+import { LENS_API_URL } from "./ConfigVars";
 
 // This is an utility to help Apollo client handle the auth middleware.
 const httpLink = createHttpLink({
@@ -12,11 +12,11 @@ const httpLink = createHttpLink({
 // to inject the Auth header token in every query.
 const authLink = setContext((_, { headers }) => {
   const token = getAuthenticationToken();
-
+  console.log("token: ", token);
   return {
     headers: {
       ...headers,
-      'x-access-token': token ? `Bearer ${token}` : '',
+      "x-access-token": token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -26,5 +26,5 @@ const Client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
+console.log("Client: ", Client);
 export default Client;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ChakraProvider,
   Box,
@@ -8,9 +8,9 @@ import {
   // Code,
   Grid,
   theme,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 //import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Router from './Router'
+import Router from "./Router";
 //import { Logo } from './Logo';
 
 function App() {
