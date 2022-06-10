@@ -46,16 +46,15 @@ const elements = [
 export default function Feed() {
   return (
     <>
-      <Grid
-        h="2150px"
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(9, 1fr)"
-        mt="48px"
-      >
-        <GridItem colSpan={{ base: "5", md: "6" }} mt={6} mr={3}>
+      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(9, 1fr)">
+        <GridItem colSpan={{ base: "9", md: "6" }} mr={{ base: 0, md: 3 }}>
           <HowItWorks />
         </GridItem>
-        <GridItem colSpan={{ base: "5", md: "3" }} mt={6} ml={3}>
+        <GridItem
+          colSpan={{ base: "9", md: "3" }}
+          mt={{ base: 10, md: 0 }}
+          ml={{ base: 0, md: 3 }}
+        >
           <Box
             h="100%"
             borderColor={useColorModeValue("black", "white")}

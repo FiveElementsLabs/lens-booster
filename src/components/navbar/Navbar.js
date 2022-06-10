@@ -112,12 +112,16 @@ export default function Navbar() {
                 <Twitter width="35px" heigth="24px" />
               </Link>
             </Box>
-            <Box mr={3}>
-              <Lens width="35px" heigth="24px" />
-            </Box>
-            <Box mr={3}>
-              <Discord width="35px" heigth="24px" />
-            </Box>
+            <Link href="https://lens.xyz/">
+              <Box mr={3}>
+                <Lens width="35px" heigth="24px" />
+              </Box>
+            </Link>
+            <Link href="https://discord.gg/bxfTM37Xyk">
+              <Box mr={3}>
+                <Discord width="35px" heigth="24px" />
+              </Box>
+            </Link>
             <Connect variant="solid">Connect Wallet</Connect>
           </Flex>
 

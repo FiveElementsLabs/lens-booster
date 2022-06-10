@@ -36,7 +36,7 @@ export default function Hero() {
           <Text
             fontSize={{ base: "2xl", sm: "2xl", md: "2xl" }}
             color="#5C6F81"
-            fontWeight="400"
+            fontWeight="300"
             fontFamily="'Roboto', sans-serif"
           >
             <b>Boost</b> your content and <b>skyrocket your audience</b>
