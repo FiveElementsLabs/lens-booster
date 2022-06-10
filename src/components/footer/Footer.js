@@ -29,31 +29,13 @@ export default function Footer() {
         fontFamily="'Prompt', sans-serif"
         fontWeight={600}
       >
-        <GridItem colSpan={{ base: "2" }}>
+        <GridItem colSpan={{ base: "4", md: "2" }} alignContent>
           {" "}
-          <LensBoosterIcon width="50rem" />
+          <LensBoosterIcon width="20rem" />
         </GridItem>
-        <GridItem colSpan={{ base: "2" }}>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
           {" "}
-          <Link href="https://fiveelementslabs.com/">
-            <Flex>
-              <Box w="fit-content" my="auto" mr={2}>
-                <FiveElementsFooter />
-              </Box>{" "}
-              <Text
-                color="#5C6F81"
-                width="fit-content"
-                display="inline"
-                fontSize={12}
-              >
-                By Five Elements Labs
-              </Text>
-            </Flex>
-          </Link>
-        </GridItem>
-        <GridItem colSpan={{ base: "2" }}>
-          {" "}
-          <Link>
+          <Link href="https://discord.gg/bxfTM37Xyk">
             <Flex>
               <Box w="fit-content" my="auto" mr={2}>
                 <ContactFooter />
@@ -70,9 +52,9 @@ export default function Footer() {
           </Link>
         </GridItem>
 
-        <GridItem colSpan={{ base: "2" }}>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
           {" "}
-          <Link>
+          <Link href="https://lens.xyz/">
             <Flex>
               <Box w="fit-content" my="auto" mr={2}>
                 <LensFooter />
@@ -88,7 +70,7 @@ export default function Footer() {
             </Flex>
           </Link>
         </GridItem>
-        <GridItem colSpan={{ base: "2" }}>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
           {" "}
           <Link href="https://twitter.com/LensBooster">
             <Flex>
@@ -106,9 +88,9 @@ export default function Footer() {
             </Flex>
           </Link>
         </GridItem>
-        <GridItem colSpan={{ base: "2" }}>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
           {" "}
-          <Link href="https://discord.gg/t3PQeh3896">
+          <Link href="https://discord.gg/bxfTM37Xyk">
             <Flex>
               <Box w="fit-content" my="auto" mr={2}>
                 <DiscordFooter />
@@ -120,6 +102,24 @@ export default function Footer() {
                 fontSize={12}
               >
                 Discord
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://fiveelementslabs.com/">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <FiveElementsFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                By Five Elements Labs
               </Text>
             </Flex>
           </Link>

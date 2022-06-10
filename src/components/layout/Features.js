@@ -23,7 +23,7 @@ const Feature = ({ title, text, icon }) => {
       >
         {title}
       </Text>
-      <Text textAlign={"left"} color="#5C6F81">
+      <Text textAlign={"left"} color="#5C6F81" fontWeight="300">
         {text}
       </Text>
     </Box>
@@ -33,12 +33,12 @@ const Feature = ({ title, text, icon }) => {
 export default function Features() {
   return (
     <Box mt="21px">
-      <Grid
-        h="200px"
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(9, 1fr)"
-      >
-        <GridItem colSpan={{ base: "9", md: "3" }} m={3} ml={0}>
+      <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(9, 1fr)">
+        <GridItem
+          colSpan={{ base: "9", md: "3" }}
+          m={{ base: 0, md: 3 }}
+          ml={{ base: 0, md: 0 }}
+        >
           <Feature
             icon={<Rocket width="64px" heigth="64px" />}
             title={"Boost your Lens content"}
@@ -52,7 +52,7 @@ export default function Features() {
             }
           />
         </GridItem>
-        <GridItem colSpan={{ base: "9", md: "3" }} m={3}>
+        <GridItem colSpan={{ base: "9", md: "3" }} m={{ base: 0, md: 3 }}>
           <Feature
             icon={<Share width="64px" heigth="64px" />}
             title={"Share and Earn"}
@@ -66,7 +66,11 @@ export default function Features() {
             }
           />
         </GridItem>
-        <GridItem colSpan={{ base: "9", md: "3" }} m={3} mr={0}>
+        <GridItem
+          colSpan={{ base: "9", md: "3" }}
+          m={{ base: 0, md: 3 }}
+          mr={{ base: 0, md: 0 }}
+        >
           <Feature
             icon={<Coin width="64px" heigth="64px" />}
             title={"Pay out"}

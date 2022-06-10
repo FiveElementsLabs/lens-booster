@@ -23,6 +23,7 @@ export default function HowItWorks() {
         textAlign="left"
         mt={6}
         boxShadow="lg"
+        fontWeight="300"
       >
         <Heading
           as="h5"
@@ -33,7 +34,12 @@ export default function HowItWorks() {
         >
           What is Lens Booster
         </Heading>
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           Lens Booster is a web3 advertising protocol built on Lens. The idea
           behind Lens Booster is to disintermediate <b>advertising</b> by
           creating a market between advertisers that want to promote contents
@@ -53,7 +59,7 @@ export default function HowItWorks() {
         >
           Who is Lens Booster for
         </Heading>
-        <Text fontSize={24} color="#5C6F81" w="80%">
+        <Text fontSize={24} color="#5C6F81" w={{ base: "100%", md: "80%" }}>
           Lens Booster is for users of Lens protocol and Lens applications such
           as Lenster.xyz
         </Text>
@@ -65,6 +71,7 @@ export default function HowItWorks() {
         textAlign="left"
         mt={6}
         boxShadow="lg"
+        fontWeight="300"
       >
         <Flex>
           <Heading
@@ -90,7 +97,7 @@ export default function HowItWorks() {
           </Heading>
         </Flex>
 
-        <Text fontSize={24} color="#5C6F81" w="80%">
+        <Text fontSize={24} color="#5C6F81" w={{ base: "100%", md: "80%" }}>
           Advertisers can create sponsored campaigns by setting duration, budget
           and other parameters that control how the budget is distributed among
           inflensers. Inflensers can share contents and be rewarded based on
@@ -104,6 +111,7 @@ export default function HowItWorks() {
         textAlign="left"
         mt={6}
         boxShadow="lg"
+        fontWeight="300"
       >
         <Flex>
           <Heading
@@ -129,7 +137,7 @@ export default function HowItWorks() {
           </Heading>
         </Flex>
 
-        <Text fontSize={24} color="#5C6F81" w="80%">
+        <Text fontSize={24} color="#5C6F81" w={{ base: "100%", md: "80%" }}>
           Users with Lens profile can share incentivized contents from the
           Lensbooster page to promote it to all their social media page.
         </Text>
@@ -141,6 +149,7 @@ export default function HowItWorks() {
         textAlign="left"
         mt={6}
         boxShadow="lg"
+        fontWeight="300"
       >
         <Heading
           as="h5"
@@ -151,17 +160,33 @@ export default function HowItWorks() {
         >
           How the payoff is calculated
         </Heading>
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           The payoff is computed according the following formula:
         </Text>
-        <Text fontSize={24} color="#1A4587" w="80%" mb={4} fontStyle="italic">
+        <Text
+          fontSize={24}
+          color="#1A4587"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+          fontStyle="italic"
+        >
           <b>
             Payoff (usdc) = Boost score (floor) + CPClick * clicks + CPAction *
             on chain events
           </b>
         </Text>
 
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           <Text fontSize={24} color="#1A4587" display="inline">
             <b>Boost score:&nbsp;</b>
           </Text>
@@ -169,19 +194,34 @@ export default function HowItWorks() {
           profiles. In the first version of the product will be computed off
           chain with Lens profile activity metrics;
         </Text>
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           <Text fontSize={24} color="#1A4587" display="inline">
             <b>CPClick:&nbsp;</b>
           </Text>
           The cost per click set by advertisers (can be 0);
         </Text>
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           <Text fontSize={24} color="#1A4587" display="inline">
             <b>Clicks:&nbsp;</b>
           </Text>
           Number of clicks to sponsor platform coming from shared post;
         </Text>
-        <Text fontSize={24} color="#5C6F81" w="80%" mb={4}>
+        <Text
+          fontSize={24}
+          color="#5C6F81"
+          w={{ base: "100%", md: "80%" }}
+          mb={4}
+        >
           <Text fontSize={24} color="#1A4587" display="inline">
             <b>CPAction:&nbsp;</b>
           </Text>
@@ -203,7 +243,7 @@ export default function HowItWorks() {
         >
           How the payoff is distributed
         </Heading>
-        <Text fontSize={24} color="#5C6F81" w="80%">
+        <Text fontSize={24} color="#5C6F81" w={{ base: "100%", md: "80%" }}>
           The payoff for mirroring is distributed at the mirror transactions,
           while the payoff for interactions (clicks and or on chain events) is
           distributed periodically (usually, weekly).
