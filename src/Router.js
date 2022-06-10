@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import ProfileView from "./pages/ProfileView";
+import Inflenser from "./pages/Inflenser";
 import Track from "./pages/Track";
 
 const Wrapper = ({ children }) => {
@@ -34,6 +35,7 @@ export default function Router() {
             <Route path="/" index element={<Home />} />
             <Route path="/:profileId" element={<Profile />} />
             <Route path="/profile/:profileHandle" element={<ProfileView />} />
+            <Route path="/inflenser" element={<Inflenser />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/track" element={<Track />} />
             <Route path="*" element={<NotFound />} /> {/* 404 like page*/}

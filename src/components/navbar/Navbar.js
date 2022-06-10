@@ -16,65 +16,90 @@ import {
   useDisclosure,
   useMediaQuery,
   Container,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Link as LinkRouter } from 'react-router-dom';
+import {
+  HamburgerIcon,
+  CloseIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
+import { Link as LinkRouter } from "react-router-dom";
 
-import Logo from '../footer/Logo';
-import darkLogo from '../../rocket.png';
-import lightLogo from '../../rocket.png';
-import Connect from './Connect.js';
-import SelectProfile from './SelectProfile.js';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-
+import Logo from "../footer/Logo";
+import darkLogo from "../../rocket.png";
+import lightLogo from "../../rocket.png";
+import Connect from "./Connect.js";
+import SelectProfile from "./SelectProfile.js";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 const NAV_ITEMS = [
   {
-    label: 'Settings',
-    href: '/settings',
+    label: "Settings",
+    href: "/settings",
+  },
+  {
+    label: "Inflenser",
+    href: "/inflenser",
   },
 ];
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
-  const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
+  const [isLargerThan640] = useMediaQuery("(min-width: 640px)");
 
   return (
-    <Box backgroundColor={useColorModeValue('light_azure', 'dark_azure')} shadow="md">
+    <Box
+      backgroundColor={useColorModeValue("light_azure", "dark_azure")}
+      shadow="md"
+    >
       <Container maxW="container.xl">
         <Box>
-          <Flex minH={'60px'} py={{ base: 2 }} align={'center'}>
+          <Flex minH={"60px"} py={{ base: 2 }} align={"center"}>
             <Flex
-              flex={{ base: 1, md: 'auto' }}
+              flex={{ base: 1, md: "auto" }}
               ml={{ base: -2 }}
-              display={{ base: 'flex', md: 'none' }}
+              display={{ base: "flex", md: "none" }}
             >
               <IconButton
                 onClick={onToggle}
-                icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+                icon={
+                  isOpen ? (
+                    <CloseIcon w={3} h={3} />
+                  ) : (
+                    <HamburgerIcon w={5} h={5} />
+                  )
+                }
                 variant="solid"
-                color={useColorModeValue('black', 'white')}
-                aria-label={'Toggle Navigation'}
+                color={useColorModeValue("black", "white")}
+                aria-label={"Toggle Navigation"}
               />
             </Flex>
-            <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} alignItems="center">
-              <LinkRouter to={'/'}>
+            <Flex
+              flex={{ base: 1 }}
+              justify={{ base: "center", md: "start" }}
+              alignItems="center"
+            >
+              <LinkRouter to={"/"}>
                 {isLargerThan640 ? (
-                  <Logo lightLogo={lightLogo} darkLogo={darkLogo} width="60rem" />
+                  <Logo
+                    lightLogo={lightLogo}
+                    darkLogo={darkLogo}
+                    width="60rem"
+                  />
                 ) : (
                   <p></p>
                   //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
                 )}
               </LinkRouter>
-              <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+              <Flex display={{ base: "none", md: "flex" }} ml={10}>
                 <DesktopNav />
               </Flex>
             </Flex>
-            
-            <ColorModeSwitcher mr={2} justifySelf='flex-end' />
 
-            <Box display={{ base: 'none', md: 'block' }} mr={3}>
+            <ColorModeSwitcher mr={2} justifySelf="flex-end" />
+
+            <Box display={{ base: "none", md: "block" }} mr={3}>
               <SelectProfile />
             </Box>
 
@@ -91,27 +116,27 @@ export default function Navbar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={"row"} spacing={4}>
       <Box>
         <Input p={4} mt={2} placeholder="Search ..." />
       </Box>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+          <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <LinkRouter to={navItem.href ?? '#'}>
+              <LinkRouter to={navItem.href ?? "#"}>
                 <Box
                   p={2}
                   fontSize="md"
                   fontWeight="bold"
                   color={linkColor}
                   _hover={{
-                    textDecoration: 'none',
+                    textDecoration: "none",
                     color: linkHoverColor,
                   }}
                 >
@@ -123,11 +148,11 @@ const DesktopNav = () => {
             {navItem.children && (
               <PopoverContent
                 border={0}
-                boxShadow={'xl'}
+                boxShadow={"xl"}
                 bg={popoverContentBgColor}
                 p={4}
-                rounded={'xl'}
-                minW={'sm'}
+                rounded={"xl"}
+                minW={"sm"}
               >
                 <Stack>
                   {navItem.children.map((child) => (
@@ -147,29 +172,33 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
-      role={'group'}
-      display={'block'}
+      role={"group"}
+      display={"block"}
       p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
+      rounded={"md"}
+      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
     >
-      <Stack direction={'row'} align={'center'}>
+      <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text transition={'all .3s ease'} _groupHover={{ color: 'pink.400' }} fontWeight={500}>
+          <Text
+            transition={"all .3s ease"}
+            _groupHover={{ color: "pink.400" }}
+            fontWeight={500}
+          >
             {label}
           </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
+          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
         <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
+          transition={"all .3s ease"}
+          transform={"translateX(-10px)"}
           opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
+          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+          justify={"flex-end"}
+          align={"center"}
           flex={1}
         >
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -178,7 +207,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const MobileNav = () => {
   return (
-    <Stack p={4} display={{ md: 'none' }}>
+    <Stack p={4} display={{ md: "none" }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -194,33 +223,33 @@ const MobileNavItem = ({ label, children, href }) => {
       <Flex
         py={2}
         as={Link}
-        href={href ?? '#'}
-        justify={'space-between'}
-        align={'center'}
+        href={href ?? "#"}
+        justify={"space-between"}
+        align={"center"}
         _hover={{
-          textDecoration: 'none',
+          textDecoration: "none",
         }}
       >
         <Text fontWeight={600}>{label}</Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
             h={6}
           />
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
           mt={2}
           pl={4}
           borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.400', 'gray.600')}
-          align={'start'}
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.400", "gray.600")}
+          align={"start"}
         >
           {children &&
             children.map((child) => (
