@@ -1,51 +1,86 @@
-import { Box, SimpleGrid, Icon, Text, Stack, Flex } from '@chakra-ui/react';
-import { FaShareSquare, FaRocket, FaMoneyBill } from 'react-icons/fa';
+import { Box, Text, GridItem, Grid } from "@chakra-ui/react";
+import Rocket from "../icons/Rocket";
+import Coin from "../icons/Coin";
+import Share from "../icons/Share";
 
 const Feature = ({ title, text, icon }) => {
   return (
-    <Stack>
-      <Flex
-        w={16}
-        h={16}
-        align={'center'}
-        justify={'center'}
-        color={'white'}
-        rounded={'full'}
-        mb={1}>
-        {icon}
-      </Flex>
-      <Text textAlign={'left'} fontWeight={600}>{title}</Text>
-      <Text textAlign={'left'}>{text}</Text>
-    </Stack>
+    <Box
+      boxShadow="lg"
+      borderRadius="20px"
+      p={6}
+      backgroundColor="#ffffff"
+      h="95%"
+    >
+      {icon}
+      <Text
+        textAlign={"left"}
+        fontWeight={600}
+        mt={2}
+        color="#00203F"
+        fontSize={24}
+        fontFamily="'Prompt', sans-serif"
+      >
+        {title}
+      </Text>
+      <Text textAlign={"left"} color="#5C6F81">
+        {text}
+      </Text>
+    </Box>
   );
 };
 
 export default function Features() {
   return (
-    <Box p={4}>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-        <Feature
-          icon={<Icon as={FaRocket} w={10} h={10} />}
-          title={'Boost your Lens content'}
-          text={
-            '🚀 BOOSTERS launch Advertising campaigns to BOOST their content '
-          }
-        />
-        <Feature
-          icon={<Icon as={FaShareSquare} w={10} h={10} />}
-          title={'Share and Earn'}
-          text={
-            'INFLENSERS mirror and share advertised content to earn based on the size of their audience'    
-          }
-        />
-        <Feature
-          icon={<Icon as={FaMoneyBill} w={10} h={10} />}
-          title={'Pay out'}
-          text={
-            '💰 Reach your target and pay out INFLENSERS who have boosted your content'
-          }
-        />
-      </SimpleGrid>
+    <Box mt="21px">
+      <Grid
+        h="200px"
+        templateRows="repeat(2, 1fr)"
+        templateColumns="repeat(9, 1fr)"
+      >
+        <GridItem colSpan={{ base: "9", md: "3" }} m={3} ml={0}>
+          <Feature
+            icon={<Rocket width="64px" heigth="64px" />}
+            title={"Boost your Lens content"}
+            text={
+              <>
+                <Text>
+                  <b>BOOSTERS</b> launch Advertising campaigns to <b>BOOST</b>{" "}
+                  their content
+                </Text>
+              </>
+            }
+          />
+        </GridItem>
+        <GridItem colSpan={{ base: "9", md: "3" }} m={3}>
+          <Feature
+            icon={<Share width="64px" heigth="64px" />}
+            title={"Share and Earn"}
+            text={
+              <>
+                <Text>
+                  <b>INFLENSERS</b> mirror and share advertised content to earn
+                  based on the size of their audience
+                </Text>
+              </>
+            }
+          />
+        </GridItem>
+        <GridItem colSpan={{ base: "9", md: "3" }} m={3} mr={0}>
+          <Feature
+            icon={<Coin width="64px" heigth="64px" />}
+            title={"Pay out"}
+            text={
+              <>
+                <Text>
+                  Reach your target and pay out <b>INFLENSERS</b> who have
+                  boosted your content
+                </Text>
+              </>
+            }
+          />
+        </GridItem>
+      </Grid>
     </Box>
   );
 }

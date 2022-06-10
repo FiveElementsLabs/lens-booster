@@ -1,46 +1,56 @@
-import Head from 'next/head';
+import Head from "next/head";
 import {
   Box,
   Heading,
   Container,
   Text,
   Stack,
-} from '@chakra-ui/react';
-import Features from '../../components/layout/Features';
+  Button,
+  Flex,
+} from "@chakra-ui/react";
+import LensBox from "../icons/Lens_Deco_Box.svg";
 
 export default function Hero() {
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
-      <Container maxW={'3xl'}>
-        <Stack
-          as={Box}
-          textAlign={'center'}
-          spacing={{ base: 8, md: 14 }}
-          mt={8}
-          py={{ base: 10, md: 12 }}>
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}>
-            Lens 
-            <Text as={'span'} color={'green.400'}>
-            Booster
-            </Text>
-          <Text  fontSize={{ base: '2xl', sm: '2xl', md: '2xl' }}>
-
-            Boost your content and skyrocket your audience
+      <Box
+        backgroundImage={LensBox}
+        backgroundSize="cover"
+        as={Box}
+        textAlign={"center"}
+        mt={8}
+        py={{ base: 12, md: 20 }}
+        borderRadius="20px"
+        boxShadow="lg"
+      >
+        <Heading
+          fontWeight={600}
+          fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+          maxW="sm"
+          mx="auto"
+          textAlign={"center"}
+          color="#00203F"
+          fontFamily="'Prompt', sans-serif"
+        >
+          LensBooster
+          <Text
+            fontSize={{ base: "2xl", sm: "2xl", md: "2xl" }}
+            color="#5C6F81"
+            fontWeight="400"
+            fontFamily="'Roboto', sans-serif"
+          >
+            <b>Boost</b> your content and <b>skyrocket your audience</b>
           </Text>
-          </Heading>
-        </Stack>
-      </Container>
-        <Features py={{ base: 6, md: 8 }} />
+        </Heading>
+        <Flex w="fit-content" mx="auto" gap={4} mt={6}>
+          <Button bg="#FF6827" color="white" flexBasis="100%" p="20px">
+            CREATE CAMPAIGN
+          </Button>
+          <Button bg="#FF6827" color="white" flexBasis="100%">
+            SHARE & EARN
+          </Button>
+        </Flex>
+      </Box>
     </>
   );
 }
