@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ChakraProvider,
   Box,
@@ -8,16 +8,18 @@ import {
   // Code,
   Grid,
   theme,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+
+import Theme from "./lib/Theme";
 //import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Router from './Router'
+import Router from "./Router";
 //import { Logo } from './Logo';
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={Theme}>
       <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
+        <Grid minH="100vh">
           <Router />
         </Grid>
       </Box>
