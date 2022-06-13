@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useMediaQuery,
   Container,
+  Heading,
 } from "@chakra-ui/react";
 
 import {
@@ -26,21 +27,25 @@ import {
 } from "@chakra-ui/icons";
 import { Link as LinkRouter } from "react-router-dom";
 
-import Logo from "../footer/Logo";
+import LensBoosterIcon from "../icons/LensBoosterIcon";
+import Discord from "../icons/Discord";
+import Twitter from "../icons/Twitter";
+import Lens from "../icons/Lens";
 import darkLogo from "../../rocket.png";
 import lightLogo from "../../rocket.png";
 import Connect from "./Connect.js";
 import SelectProfile from "./SelectProfile.js";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
+import Smiley from "../icons/Smiley";
 
 const NAV_ITEMS = [
   {
-    label: "Settings",
-    href: "/settings",
+    label: "INFLENSER",
+    href: "/inflenser",
   },
   {
-    label: "Inflenser",
-    href: "/inflenser",
+    label: "ADVERTISER",
+    href: "/settings",
   },
 ];
 
@@ -82,11 +87,12 @@ export default function Navbar() {
             >
               <LinkRouter to={"/"}>
                 {isLargerThan640 ? (
-                  <Logo
-                    lightLogo={lightLogo}
-                    darkLogo={darkLogo}
-                    width="60rem"
-                  />
+                  <Flex alignItems="center">
+                    <LensBoosterIcon width="60px" heigth="60px" />
+                    <Heading color="#00203F" fontSize={34}>
+                      Lens Booster
+                    </Heading>
+                  </Flex>
                 ) : (
                   <p></p>
                   //  <Logo lightLogo={lightIcon} darkLogo={darkIcon} width='60rem' />
@@ -96,13 +102,26 @@ export default function Navbar() {
                 <DesktopNav />
               </Flex>
             </Flex>
-
-            <ColorModeSwitcher mr={2} justifySelf="flex-end" />
-
+            {/* <ColorModeSwitcher mr={2} justifySelf='flex-end' /> */}
             <Box display={{ base: "none", md: "block" }} mr={3}>
               <SelectProfile />
             </Box>
 
+            <Box mr={3}>
+              <Link href="https://twitter.com/LensBooster">
+                <Twitter width="35px" heigth="24px" />
+              </Link>
+            </Box>
+            <Link href="https://lens.xyz/">
+              <Box mr={3}>
+                <Lens width="35px" heigth="24px" />
+              </Box>
+            </Link>
+            <Link href="https://discord.gg/bxfTM37Xyk">
+              <Box mr={3}>
+                <Discord width="35px" heigth="24px" />
+              </Box>
+            </Link>
             <Connect variant="solid">Connect Wallet</Connect>
           </Flex>
 
@@ -122,86 +141,20 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={"row"} spacing={4}>
-      <Box>
-        <Input p={4} mt={2} placeholder="Search ..." />
-      </Box>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <LinkRouter to={navItem.href ?? "#"}>
-                <Box
-                  p={2}
-                  fontSize="md"
-                  fontWeight="bold"
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: "none",
-                    color: linkHoverColor,
-                  }}
-                >
-                  <Button>{navItem.label}</Button>
-                </Box>
-              </LinkRouter>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
+          <Link
+            color="#5C6F81"
+            fontSize="16px"
+            fontFamily="'Prompt', sans-serif"
+            fontWeight={500}
+            href={navItem.href}
+          >
+            {navItem.label.toUpperCase()}
+          </Link>
         </Box>
       ))}
     </Stack>
-  );
-};
-
-const DesktopSubNav = ({ label, href, subLabel }) => {
-  return (
-    <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
-    >
-      <Stack direction={"row"} align={"center"}>
-        <Box>
-          <Text
-            transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
-          opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
-          flex={1}
-        >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Link>
   );
 };
 

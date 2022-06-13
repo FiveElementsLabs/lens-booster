@@ -9,7 +9,7 @@ import { mode } from "@chakra-ui/theme-tools";
 const colors = {
   primary: "#0055FF",
   light_accent: "#ECF1FE",
-  light_azure: "#C5E2FC",
+  light_azure: "#F0F3FA",
   light_background: "#E6EBF1",
   dark_accent: "#04143A",
   dark_azure: "#1A365D",
@@ -21,6 +21,7 @@ const styles = {
   global: (props) => ({
     body: {
       bg: mode("light_background", "dark_background")(props),
+      fontFamily: "'Roboto', sans-serif",
     },
   }),
 };
@@ -43,10 +44,16 @@ const components = {
 };
 
 const config = {
-  initialColorMode: "dark",
+  initialColorMode: "light",
   useSystemColorMode: false,
 };
 
-const Theme = extendTheme({ colors, styles, components, config });
+const fonts = {
+  body: {
+    fontFamily: `'Roboto', sans-serif`,
+  },
+};
+
+const Theme = extendTheme({ colors, styles, components, config, fonts });
 
 export default Theme;

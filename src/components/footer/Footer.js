@@ -1,62 +1,130 @@
-import { Box, chakra, Container, Stack, useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
-import { FaDiscord, FaTwitter } from 'react-icons/fa';
-import Logo from './Logo';
-
-import lightIcon from '../../windmill.png';
-import darkIcon from '../../windmill.png';
-
-const SocialButton = ({ children, label, href }) => {
-  return (
-    <chakra.button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-      rounded={'full'}
-      w={8}
-      h={8}
-      cursor={'pointer'}
-      as={'a'}
-      href={href}
-      display={'inline-flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      transition={'background 0.3s ease'}
-      _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
+import {
+  Box,
+  useColorModeValue,
+  Grid,
+  GridItem,
+  Link,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
+import LensBoosterIcon from "../icons/LensBoosterIcon";
+import TwitterFooter from "../icons/TwitterFooter";
+import DiscordFooter from "../icons/DiscordFooter";
+import FiveElementsFooter from "../icons/FiveElementsFooter";
+import ContactFooter from "../icons/ContactFooter";
+import LensFooter from "../icons/LensFooter";
 
 export default function Footer() {
   return (
     <Box
-      position='absolute'
-      bottom='0'
-      w='full'
-      backgroundColor={useColorModeValue('light_azure', 'dark_azure')}
-      color={useColorModeValue('gray.700', 'gray.100')}
+      backgroundColor={useColorModeValue("light_azure", "dark_azure")}
+      padding={7}
     >
-      <Container
-        as={Stack}
-        maxW='container.xl'
-        py={4}
-        direction={{ base: 'column', md: 'row' }}
-        spacing={4}
-        justify={{ base: 'center', md: 'space-between' }}
-        align={{ base: 'center', md: 'center' }}
+      <Grid
+        templateRows="repeat(1, 1fr)"
+        templateColumns="repeat(12, 1fr)"
+        maxW="container.xl"
+        mx="auto"
+        alignItems="center"
+        fontFamily="'Prompt', sans-serif"
+        fontWeight={600}
       >
-        <Logo darkLogo={darkIcon} lightLogo={lightIcon} width="50rem"/>
-        <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Twitter'} href={'#'}>
-            <FaTwitter />
-          </SocialButton>
-          <SocialButton label={'Discord'} href={'#'}>
-            <FaDiscord />
-          </SocialButton>
-        </Stack>
-      </Container>
+        <GridItem colSpan={{ base: "4", md: "2" }} alignContent>
+          {" "}
+          <LensBoosterIcon width="20rem" />
+        </GridItem>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://discord.gg/bxfTM37Xyk">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <ContactFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                Contact us
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://lens.xyz/">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <LensFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                Lens
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://twitter.com/LensBooster">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <TwitterFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                Twitter
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://discord.gg/bxfTM37Xyk">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <DiscordFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                Discord
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+        <GridItem colSpan={{ base: "4", md: "2" }}>
+          {" "}
+          <Link href="https://fiveelementslabs.com/">
+            <Flex>
+              <Box w="fit-content" my="auto" mr={2}>
+                <FiveElementsFooter />
+              </Box>{" "}
+              <Text
+                color="#5C6F81"
+                width="fit-content"
+                display="inline"
+                fontSize={12}
+              >
+                By Five Elements Labs
+              </Text>
+            </Flex>
+          </Link>
+        </GridItem>
+      </Grid>
     </Box>
   );
 }

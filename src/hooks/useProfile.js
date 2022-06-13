@@ -15,8 +15,7 @@ export const useProfile = () => {
   };
 
   const loadProfiles = async () => {
-
-    console.log(account, 'account');
+    console.log(account, "account");
 
     if (account) {
       const current = localStorage.getItem("current_profile");
@@ -34,7 +33,7 @@ export const useProfile = () => {
         );
         if (currentProfileFromHandle) {
           setCurrentProfile(currentProfileFromHandle);
-          console.log(currentProfileFromHandle)
+          console.log(currentProfileFromHandle);
           dispatch({
             type: actions.SET_CURRENT_PROFILE,
             payload: { currentProfile: currentProfileFromHandle },
@@ -62,8 +61,6 @@ export const useProfile = () => {
     (async () => {
       await loadProfiles();
     })();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
   return { profiles, currentProfile, changeProfile };

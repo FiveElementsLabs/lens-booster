@@ -1,6 +1,14 @@
 import Head from "next/head";
-import { Box, Heading, Container, Text, Stack, Button } from "@chakra-ui/react";
-import Features from "../../components/layout/Features";
+import {
+  Box,
+  Heading,
+  Container,
+  Text,
+  Stack,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
+import LensBox from "../icons/Lens_Deco_Box.svg";
 import { useMirror } from "../../hooks/useMirror";
 
 export default function Hero() {
@@ -8,49 +16,44 @@ export default function Hero() {
 
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
-      <Container maxW={"3xl"}>
-        <Stack
-          as={Box}
+      <Box
+        backgroundImage={LensBox}
+        backgroundSize="cover"
+        as={Box}
+        textAlign={"center"}
+        mt={8}
+        py={{ base: 12, md: 20 }}
+        borderRadius="20px"
+        boxShadow="lg"
+      >
+        <Heading
+          fontWeight={600}
+          fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+          maxW="sm"
+          mx="auto"
           textAlign={"center"}
-          spacing={{ base: 8, md: 14 }}
-          mt={8}
-          py={{ base: 10, md: 12 }}
+          color="#00203F"
+          fontFamily="'Prompt', sans-serif"
         >
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight={"110%"}
+          LensBooster
+          <Text
+            fontSize={{ base: "2xl", sm: "2xl", md: "2xl" }}
+            color="#5C6F81"
+            fontWeight="300"
+            fontFamily="'Roboto', sans-serif"
           >
-            Lens
-            <Text as={"span"} color={"green.400"}>
-              Booster
-            </Text>
-            <Text fontSize={{ base: "2xl", sm: "2xl", md: "2xl" }}>
-              Boost your content and skyrocket your audience
-            </Text>
-          </Heading>
-          <Button
-            colorScheme="teal"
-            variant="outline"
-            onClick={() =>
-              createPost(
-                "0x2fb4",
-                "https://ipfs.infura.io/ipfs/QmUrNCDN42eQUZLZhbMKQEAvPRkKgehya5hRxttBX8R5oY"
-              )
-            }
-          >
-            Mirror
+            <b>Boost</b> your content and <b>skyrocket your audience</b>
+          </Text>
+        </Heading>
+        <Flex w="fit-content" mx="auto" gap={4} mt={6}>
+          <Button bg="#FF6827" color="white" flexBasis="100%" p="20px">
+            CREATE CAMPAIGN
           </Button>
-        </Stack>
-      </Container>
-      <Features py={{ base: 6, md: 8 }} />
+          <Button bg="#FF6827" color="white" flexBasis="100%">
+            SHARE & EARN
+          </Button>
+        </Flex>
+      </Box>
     </>
   );
 }

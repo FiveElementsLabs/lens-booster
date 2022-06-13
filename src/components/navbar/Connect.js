@@ -31,7 +31,14 @@ export default function Connect(props) {
   return (
     <>
       {!account ? (
-        <Button onClick={loginWallet}>Connect Wallet</Button>
+        <Button
+          onClick={loginWallet}
+          bg="#FF6827"
+          color="white"
+          fontFamily="'Prompt', sans-serif"
+        >
+          LOGIN WITH LENS
+        </Button>
       ) : (
         <Button>{shortenAddress(account)}</Button>
       )}

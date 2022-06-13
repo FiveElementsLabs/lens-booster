@@ -20,7 +20,14 @@ import AdvertisersStats from "./AdvertisersStats";
 export default function Dashboard() {
   return (
     <>
-      <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="white">
+      <Box
+        mt={8}
+        p={5}
+        borderRadius="20px"
+        boxShadow="lg"
+        bg="white"
+        fontFamily="'Prompt', sans-serif"
+      >
         <Flex alignItems="center">
           <Text color="#FF6827" fontSize={26}>
             Total earned
