@@ -54,7 +54,7 @@ export default function Footer() {
 
         <GridItem colSpan={{ base: "4", md: "2" }}>
           {" "}
-          <Link href="https://lens.xyz/">
+          <Link href="https://www.lensfrens.xyz/lensbooster.lens">
             <Flex>
               <Box w="fit-content" my="auto" mr={2}>
                 <LensFooter />

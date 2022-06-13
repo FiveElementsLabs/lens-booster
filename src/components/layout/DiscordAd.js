@@ -14,7 +14,7 @@ export default function DiscordAd() {
               Inflenser?
             </Heading>
             <Heading fontSize={30} fontFamily="'Prompt', sans-serif">
-              Talk with us!
+              Let's talk
             </Heading>
           </Box>
           <Box>
