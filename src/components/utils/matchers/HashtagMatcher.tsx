@@ -1,16 +1,14 @@
+import { Matcher } from "interweave";
+import Link from "next/link";
+import React from "react";
 
-import { Matcher } from 'interweave'
-import Link from 'next/link'
-import React from 'react'
+const STATIC_ASSETS = "https://assets.lenster.xyz/images";
 
-const STATIC_ASSETS = 'https://assets.lenster.xyz/images'
-
- const hashflags = ['lenster', 'bitcoin', 'ethereum', 'lens']
-
+const hashflags = ["lenster", "bitcoin", "ethereum", "lens"];
 
 export function Hashtag({ ...props }: any) {
-  const hashflag = props.display.slice(1).toLowerCase()
-  const hasHashflag = hashflags.includes(hashflag)
+  const hashflag = props.display.slice(1).toLowerCase();
+  const hasHashflag = hashflags.includes(hashflag);
 
   return (
     <span className="inline-flex items-center space-x-1">
@@ -31,23 +29,23 @@ export function Hashtag({ ...props }: any) {
         />
       )}
     </span>
-  )
+  );
 }
 
 export class HashtagMatcher extends Matcher {
   replaceWith(match: string, props: any) {
-    return React.createElement(Hashtag, props, match)
+    return React.createElement(Hashtag, props, match);
   }
 
   asTag(): string {
-    return 'a'
+    return "a";
   }
 
   match(value: string) {
     return this.doMatch(value, /\B#(\w+)/, (matches) => {
       return {
-        display: matches[0]
-      }
-    })
+        display: matches[0],
+      };
+    });
   }
 }
