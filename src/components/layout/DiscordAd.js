@@ -31,7 +31,7 @@ export default function DiscordAd() {
           padding={6}
           fontFamily="'Prompt', sans-serif"
         >
-          JOIN OUR DISCORD
+          <a href="https://discord.gg/bxfTM37Xyk">JOIN OUR DISCORD</a>
         </Button>
       </Box>
     </>
