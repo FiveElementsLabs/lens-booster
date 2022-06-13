@@ -40,7 +40,7 @@ import Smiley from "../icons/Smiley";
 
 const NAV_ITEMS = [
   {
-    label: "INFLENSER",
+    label: "LENS USERS",
     href: "/settings",
   },
   {

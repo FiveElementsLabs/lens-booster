@@ -100,7 +100,7 @@ export default function HowItWorks() {
         <Text fontSize={24} color="#5C6F81" w={{ base: "100%", md: "80%" }}>
           Advertisers can create sponsored campaigns by setting duration, budget
           and other parameters that control how the budget is distributed among
-          inflensers.
+          Lens users.
         </Text>
       </Box>
       <Box
