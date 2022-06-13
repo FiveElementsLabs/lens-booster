@@ -11,7 +11,7 @@ export default function DiscordAd() {
               Advertiser?
             </Heading>
             <Heading fontSize={30} fontFamily="'Prompt', sans-serif">
-              Inflenser?
+              Lens User?
             </Heading>
             <Heading fontSize={30} fontFamily="'Prompt', sans-serif">
               Let's talk
