@@ -55,7 +55,7 @@ export default function Navbar() {
 
   return (
     <Box
-      backgroundColor={useColorModeValue("light_azure", "dark_azure")}
+      backgroundColor={useColorModeValue("light_azure", "light_azure")}
       shadow="md"
     >
       <Container maxW="container.xl">

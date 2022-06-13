@@ -6,7 +6,7 @@ export default function DiscordAd() {
     <>
       <Box bg="#ffffff" borderRadius="20px" p={6} boxShadow="lg">
         <Flex justifyContent="space-between">
-          <Box textAlign="left">
+          <Box textAlign="left" color="#00203F">
             <Heading fontSize={30} fontFamily="'Prompt', sans-serif">
               Advertiser?
             </Heading>
@@ -31,7 +31,7 @@ export default function DiscordAd() {
           padding={6}
           fontFamily="'Prompt', sans-serif"
         >
-          JOIN OUR DISCORD
+          <a href="https://discord.gg/bxfTM37Xyk">JOIN OUR DISCORD</a>
         </Button>
       </Box>
     </>

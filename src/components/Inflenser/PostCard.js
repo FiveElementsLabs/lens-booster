@@ -21,7 +21,14 @@ export default function PostCard({ publicationId }) {
   return (
     <>
       {publication?.metadata && (
-        <Box bg="white" p={5} mt={8} borderRadius="20px" textAlign="left">
+        <Box
+          bg="white"
+          p={5}
+          mt={8}
+          borderRadius="20px"
+          textAlign="left"
+          color="black"
+        >
           <Markup>{publication.metadata.content}</Markup>
         </Box>
       )}

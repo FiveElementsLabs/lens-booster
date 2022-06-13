@@ -13,7 +13,14 @@ import {
 export default function AdvertisersStats() {
   return (
     <>
-      <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff">
+      <Box
+        mt={8}
+        p={5}
+        borderRadius="20px"
+        boxShadow="lg"
+        bg="#ffffff"
+        color="#5C6F81"
+      >
         <TableContainer>
           <Table size="sm" variant="simple">
             <Thead>

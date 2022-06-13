@@ -17,7 +17,7 @@ import LensFooter from "../icons/LensFooter";
 export default function Footer() {
   return (
     <Box
-      backgroundColor={useColorModeValue("light_azure", "dark_azure")}
+      backgroundColor={useColorModeValue("light_azure", "light_azure")}
       padding={7}
     >
       <Grid
