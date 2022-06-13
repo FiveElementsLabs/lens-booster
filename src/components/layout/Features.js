@@ -41,11 +41,11 @@ export default function Features() {
         >
           <Feature
             icon={<Rocket width="64px" heigth="64px" />}
-            title={"Boost your Lens content"}
+            title={"Promote your campaign"}
             text={
               <>
                 <Text>
-                  <b>BOOSTERS</b> launch Advertising campaigns to <b>BOOST</b>{" "}
+                  <b>ADVERTISERS</b> launch Advertising campaigns to promote{" "}
                   their content
                 </Text>
               </>
@@ -59,7 +59,7 @@ export default function Features() {
             text={
               <>
                 <Text>
-                  <b>INFLENSERS</b> mirror and share advertised content to earn
+                  <b>LENS USERS</b> repost advertised content to earn
                   based on the size of their audience
                 </Text>
               </>
@@ -73,12 +73,12 @@ export default function Features() {
         >
           <Feature
             icon={<Coin width="64px" heigth="64px" />}
-            title={"Pay out"}
+            title={"No middleman"}
             text={
               <>
                 <Text>
-                  Reach your target and pay out <b>INFLENSERS</b> who have
-                  boosted your content
+                  Pay out <b>LENS USERS</b> who have
+                  boosted your content according to actions 
                 </Text>
               </>
             }

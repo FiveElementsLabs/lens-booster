@@ -112,7 +112,7 @@ export default function Navbar() {
                 <Twitter width="35px" heigth="24px" />
               </Link>
             </Box>
-            <Link href="https://lens.xyz/">
+            <Link href="https://www.lensfrens.xyz/lensbooster.lens">
               <Box mr={3}>
                 <Lens width="35px" heigth="24px" />
               </Box>

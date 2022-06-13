@@ -47,7 +47,7 @@ export default function Hero() {
             CREATE CAMPAIGN
           </Button>
           <Button bg="#FF6827" color="white" flexBasis="100%">
-            SHARE & EARN
+            REPOST & EARN
           </Button>
         </Flex>
       </Box>
