@@ -43,7 +43,7 @@ export default function HowItWorks() {
           Lens Booster is a web3 advertising protocol built on Lens. The idea
           behind Lens Booster is to disintermediate <b>advertising</b> by
           creating a market between advertisers that want to promote contents
-          and creators / users of Lens (inflensers) that can host the contents
+          and creators / users of Lens (lens user) that can host the contents
           in their Lens profiles, visibile in various frontends (see{" "}
           <Link color="#1988F7" href="https://lenster.xyz/">
             Lenster.xyz
@@ -132,7 +132,7 @@ export default function HowItWorks() {
             paddingLeft={2}
             fontFamily="'Prompt', sans-serif"
           >
-            Inflensers
+            Lens users
           </Heading>
         </Flex>
 
