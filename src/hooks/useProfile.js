@@ -20,7 +20,7 @@ export const useProfile = () => {
     if (account) {
       const current = localStorage.getItem("current_profile");
       const res = await getProfiles(account, provider.getSigner());
-
+      console.log(res)
       setProfiles(res.profiles.items);
 
       // Set the profile as the first in the array as default.

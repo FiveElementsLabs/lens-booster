@@ -52,6 +52,8 @@ export const useMirror = () => {
 
   const createPost = async (profileId, contentURI) => {
     console.log("createPost start");
+    console.log('profileId: ', profileId)
+    console.log('contentURI: ', contentURI)
     const signer = await provider.getSigner();
 
     const signedTypeData = async (domain, types, value) => {

@@ -1,4 +1,4 @@
-import { HashtagMatcher } from "../utils/matchers/HashtagMatcher.tsx";
+/*import { HashtagMatcher } from "../utils/matchers/HashtagMatcher.tsx";
 import { MDBoldMatcher } from "../utils/matchers/markdown/MDBoldMatcher.tsx";
 import { MDCodeMatcher } from "../utils/matchers/markdown/MDCodeMatcher.tsx";
 import { MDQuoteMatcher } from "../utils/matchers/markdown/MDQuoteMatcher.tsx";
@@ -32,4 +32,4 @@ const Markup = ({ children }) => {
   );
 };
 
-export default Markup;
+export default Markup;*/
