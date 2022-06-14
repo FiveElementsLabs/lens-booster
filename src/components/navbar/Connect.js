@@ -1,8 +1,8 @@
-import { CopyIcon } from "@chakra-ui/icons";
-import { useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { useSharedState } from "../../context/store.js";
-import { useWallet } from "../../hooks/useWallet.js";
-import { shortenAddress } from "../../utils/utils.js";
+import { CopyIcon } from '@chakra-ui/icons';
+import { useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { useSharedState } from '../../context/store.js';
+import { useWallet } from '../../hooks/useWallet.js';
+import { shortenAddress } from '../../utils/utils.js';
 import {
   Box,
   Text,
@@ -15,7 +15,7 @@ import {
   ModalContent,
   ModalOverlay,
   ModalCloseButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 export default function Connect(props) {
   const [{ account }] = useSharedState();
@@ -25,7 +25,7 @@ export default function Connect(props) {
     //onOpen,
     onClose,
   } = useDisclosure();
-  const { hasCopied, onCopy } = useClipboard(account || "");
+  const { hasCopied, onCopy } = useClipboard(account || '');
   const { loginWallet } = useWallet();
 
   return (
@@ -36,40 +36,29 @@ export default function Connect(props) {
           bg="#FF6827"
           color="white"
           fontFamily="'Prompt', sans-serif"
+          height={{ base: '28px', md: '34px' }}
         >
-          LOGIN WITH LENS
+          {window.innerWidth <= 640 ? 'LENS LOGIN' : 'LOGIN WITH LENS'}
         </Button>
       ) : (
-        <Button>{shortenAddress(account)}</Button>
+        <Button bg="#FF6827" color="white" fontFamily="'Prompt', sans-serif" height={{ base: '28px', md: '34px' }}>
+          {shortenAddress(account)}
+        </Button>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-          bg={useColorModeValue("light_background", "dark_background")}
-        >
+        <ModalContent bg={useColorModeValue('light_background', 'dark_background')}>
           <ModalHeader>Account</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box
-              id="modal-account-card"
-              padding={3}
-              mb={4}
-              rounded="lg"
-              backgroundColor={useColorModeValue("light_azure", "dark_azure")}
-            >
+            <Box id="modal-account-card" padding={3} mb={4} rounded="lg">
               <Text mb={1}>Connected with Metamask:</Text>
               <Text mb={3} fontWeight="bold" fontSize="sm">
                 {account}
               </Text>
               <Flex>
-                <Button
-                  variant="link"
-                  mr={6}
-                  size="sm"
-                  rightIcon={<CopyIcon />}
-                  onClick={onCopy}
-                >
-                  {hasCopied ? "Copied" : "Copy"}
+                <Button variant="link" mr={6} size="sm" rightIcon={<CopyIcon />} onClick={onCopy}>
+                  {hasCopied ? 'Copied' : 'Copy'}
                 </Button>
               </Flex>
             </Box>
