@@ -158,6 +158,7 @@ const MobileNav = () => {
       color="#5C6F81"
       fontSize="18px"
       fontWeight="700"
+      fontFamily="'Prompt', sans-serif"
     >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
