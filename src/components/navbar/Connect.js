@@ -41,7 +41,9 @@ export default function Connect(props) {
           {window.innerWidth <= 640 ? 'LENS LOGIN' : 'LOGIN WITH LENS'}
         </Button>
       ) : (
-        <Button>{shortenAddress(account)}</Button>
+        <Button bg="#FF6827" color="white" fontFamily="'Prompt', sans-serif" height={{ base: '28px', md: '34px' }}>
+          {shortenAddress(account)}
+        </Button>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -49,13 +51,7 @@ export default function Connect(props) {
           <ModalHeader>Account</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box
-              id="modal-account-card"
-              padding={3}
-              mb={4}
-              rounded="lg"
-              backgroundColor={useColorModeValue('light_azure', 'dark_azure')}
-            >
+            <Box id="modal-account-card" padding={3} mb={4} rounded="lg">
               <Text mb={1}>Connected with Metamask:</Text>
               <Text mb={3} fontWeight="bold" fontSize="sm">
                 {account}
