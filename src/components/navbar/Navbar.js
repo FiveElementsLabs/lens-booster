@@ -27,12 +27,8 @@ import LensBoosterIcon from '../icons/LensBoosterIcon';
 import Discord from '../icons/Discord';
 import Twitter from '../icons/Twitter';
 import Lens from '../icons/Lens';
-import darkLogo from '../../rocket.png';
-import lightLogo from '../../rocket.png';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Smiley from '../icons/Smiley';
 
 const NAV_ITEMS = [
   {

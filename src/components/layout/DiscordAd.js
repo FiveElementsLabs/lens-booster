@@ -1,5 +1,5 @@
 import { Box, Heading, Flex, Button, useMediaQuery } from '@chakra-ui/react';
-import Chat from '../icons/Chat';
+import ChatIcon from '../icons/ChatIcon';
 
 export default function DiscordAd() {
   const [isTablet] = useMediaQuery('(min-width: 768px) and (max-width: 1024px)');
@@ -19,7 +19,7 @@ export default function DiscordAd() {
               Let's talk
             </Heading>
           </Box>
-          <Box> {!isTablet && <Chat width="101px" heigth="101px" />}</Box>
+          <Box> {!isTablet && <ChatIcon width="101px" heigth="101px" />}</Box>
         </Flex>
         <Button
           color="white"

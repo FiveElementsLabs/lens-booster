@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Box, Heading, Container, Text, Stack, Button, Flex, useMediaQuery } from '@chakra-ui/react';
-import LensBox from '../icons/Lens_Deco_Box.svg';
-import LensBoxMobile from '../icons/Lens_Deco_Box_Mobile.svg';
+import HeroBackground from '../icons/Lens_Deco_Box.svg';
+import HeroMobileBackground from '../icons/Lens_Deco_Box_Mobile.svg';
 
 export default function Hero() {
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <>
       <Box
-        backgroundImage={isLargerThan640 ? LensBox : LensBoxMobile}
+        backgroundImage={isLargerThan640 ? HeroBackground : HeroMobileBackground}
         backgroundSize="cover"
         as={Box}
         textAlign={'center'}
@@ -28,12 +28,7 @@ export default function Hero() {
           fontFamily="'Prompt', sans-serif"
         >
           LensBooster
-          <Text
-            fontSize={{ base: '2xl', sm: '2xl', md: '2xl' }}
-            color="#5C6F81"
-            fontWeight="300"
-            fontFamily="'Roboto', sans-serif"
-          >
+          <Text fontSize="2xl" color="#5C6F81" fontWeight="300" fontFamily="'Roboto', sans-serif">
             <b>Boost</b> your content and <b>skyrocket your audience</b>
           </Text>
         </Heading>
