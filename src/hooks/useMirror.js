@@ -51,9 +51,7 @@ export const useMirror = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const createPost = async (profileId, contentURI) => {
-    console.log("createPost start");
-    console.log('profileId: ', profileId)
-    console.log('contentURI: ', contentURI)
+   
     const signer = await provider.getSigner();
 
     const signedTypeData = async (domain, types, value) => {
@@ -90,21 +88,13 @@ export const useMirror = () => {
       typedData.value
     );
     const { v, r, s } = splitSignature(signature);
-    console.log("v", v);
-    console.log("r", r);
-    console.log("s", s);
-
-    console.log(
-      "LensCampaignAddress",
-      process.env.REACT_APP_LENSCAMPAIGN_ADDRESS
-    );
+    
     const LensCampaign = new Contract(
       "0x26E50B44b75673CC68be0811afBeC40DD0b8814a",
       LensCampaignABI.abi,
       signer
     );
-    console.log("before transaction");
-    console.log(LensCampaign);
+
     const tx = await LensCampaign.handlePost(
       {
         profileId: typedData.value.profileId,
@@ -124,7 +114,6 @@ export const useMirror = () => {
         gasLimit: 3000000,
       }
     );
-    console.log(tx.hash);
 
     try {
       await tx.wait();

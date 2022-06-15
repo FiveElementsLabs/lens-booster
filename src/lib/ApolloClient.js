@@ -12,7 +12,6 @@ const httpLink = createHttpLink({
 // to inject the Auth header token in every query.
 const authLink = setContext((_, { headers }) => {
   const token = getAuthenticationToken();
-  console.log("token: ", token);
   return {
     headers: {
       ...headers,
@@ -26,5 +25,4 @@ const Client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-console.log("Client: ", Client);
 export default Client;

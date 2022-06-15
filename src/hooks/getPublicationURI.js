@@ -17,7 +17,6 @@ export const getPublicationURI = () => {
 
         const LensHub = new Contract('0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d',LensHubAbi,signer)
 
-    console.log('LensHub: ', LensHub)
                 URI = await LensHub.getContentURI(profileId, postId);
            } catch(e) {
             console.log('Failed with error: ', e?.message)
@@ -34,7 +33,6 @@ export const getPublicationURI = () => {
             const signer = await provider.getSigner()
 
             const LensHub = new Contract('0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d', LensHubAbi, signer)
-            console.log(account)
             profileId = await LensHub.defaultProfile(account)
         } catch (e) {
             console.log('Failed with error: ', e?.message)

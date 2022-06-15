@@ -13,6 +13,7 @@ export default function Dashboard() {
       <Box bg="#1A4587" p={5} mt={8} borderRadius="20px">
         <Heading color="white">Active Campaigns</Heading>
       </Box>
+
       {/* Array of posts*/}
       {publicationIds.map((id) => (
         <PostCard key={id} publicationId={id} />

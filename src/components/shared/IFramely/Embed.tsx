@@ -9,7 +9,7 @@ interface Props {
 
 const Embed: FC<Props> = ({ og }) => {
   return (
-    <Box marginTop="1rem" fontSize="0.875rem" lineHeight="1.25rem">
+    <Box marginTop="1rem" fontSize="0.875rem" lineHeight="1.25rem" w="100%">
       <a
         href={og.url}
         target="_blank"
@@ -19,7 +19,7 @@ const Embed: FC<Props> = ({ og }) => {
         <Card>
           {!og.isSquare && og.thumbnail && (
             <Image
-              w="full"
+              w="100%"
               borderTopRadius="0.75rem"
               className="w-full rounded-t-xl"
               src={og.thumbnail}
@@ -28,6 +28,7 @@ const Embed: FC<Props> = ({ og }) => {
           )}
           <Box display="flex" alignItems="center">
             {og.isSquare && og.thumbnail && (
+
               <Image
                 width="9rem"
                 height="9rem"
@@ -40,9 +41,9 @@ const Embed: FC<Props> = ({ og }) => {
               padding="1.25rem"
               overflow="hidden"
               textOverflow="ellipsis"
-              whiteSpace="nowrap"
+              whiteSpace={{base: "initial", md: "nowrap"}}
             >
-              <Box className="space-y-1.5">
+              <Box className="space-y-1.5" h={{base: '3rem', md: 'auto'}}>
                 {og.title && <Box fontWeight="700">{og.title}</Box>}
                 {og.description && (
                   <Box color="gray.500" overflow="hidden">

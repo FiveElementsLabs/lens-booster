@@ -105,3 +105,6 @@ dist
 
 .DS_Store
 src/.DS_Store
+
+# Build folder
+build/

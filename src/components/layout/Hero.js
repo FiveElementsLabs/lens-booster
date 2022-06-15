@@ -1,58 +1,65 @@
-import Head from "next/head";
-import {
-  Box,
-  Heading,
-  Container,
-  Text,
-  Stack,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
-import LensBox from "../icons/Lens_Deco_Box.svg";
-import { useMirror } from "../../hooks/useMirror";
+import Head from 'next/head';
+import { Box, Heading, Container, Text, Stack, Button, Flex, useMediaQuery } from '@chakra-ui/react';
+import HeroBackground from '../icons/Lens_Deco_Box.svg';
+import HeroMobileBackground from '../icons/Lens_Deco_Box_Mobile.svg';
 
 export default function Hero() {
-  const { createPost } = useMirror();
+  const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
 
   return (
     <>
       <Box
-        backgroundImage={LensBox}
+        backgroundImage={isLargerThan640 ? HeroBackground : HeroMobileBackground}
         backgroundSize="cover"
         as={Box}
-        textAlign={"center"}
+        textAlign={'center'}
         mt={8}
-        py={{ base: 12, md: 20 }}
+        py={{ base: 40, md: 20 }}
         borderRadius="20px"
         boxShadow="lg"
       >
         <Heading
           fontWeight={600}
-          fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+          fontSize={{ base: '5xl', sm: '4xl', md: '6xl' }}
           maxW="sm"
           mx="auto"
-          textAlign={"center"}
+          textAlign={'center'}
           color="#00203F"
           fontFamily="'Prompt', sans-serif"
         >
           LensBooster
-          <Text
-            fontSize={{ base: "2xl", sm: "2xl", md: "2xl" }}
-            color="#5C6F81"
-            fontWeight="300"
-            fontFamily="'Roboto', sans-serif"
-          >
+          <Text fontSize="2xl" color="#5C6F81" fontWeight="300" fontFamily="'Roboto', sans-serif">
             <b>Boost</b> your content and <b>skyrocket your audience</b>
           </Text>
         </Heading>
-        <Flex w="fit-content" mx="auto" gap={4} mt={6}>
-          <Button bg="#FF6827" color="white" flexBasis="100%" p="20px">
+        <Box
+          w={{ base: '55%', md: 'fit-content' }}
+          mx="auto"
+          gap={{ base: 0, md: 4 }}
+          mt={6}
+          display={{ base: 'block', md: 'flex' }}
+        >
+          <Button
+            bg="#FF6827"
+            color="white"
+            flexBasis="100%"
+            display={{ base: 'block', md: 'initial' }}
+            minW="inherit"
+            w={{ base: '100%', md: 'auto' }}
+          >
             CREATE CAMPAIGN
           </Button>
-          <Button bg="#FF6827" color="white" flexBasis="100%">
-            SHARE & EARN
+          <Button
+            bg="#FF6827"
+            color="white"
+            flexBasis="100%"
+            minW="inherit"
+            mt={{ base: 4, md: 0 }}
+            w={{ base: '100%', md: 'auto' }}
+          >
+            REPOST & EARN
           </Button>
-        </Flex>
+        </Box>
       </Box>
     </>
   );
