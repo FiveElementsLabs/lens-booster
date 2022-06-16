@@ -1,25 +1,22 @@
 import { Box, Table, TableContainer, Thead, Tbody, Th, Tr, Td, Avatar } from '@chakra-ui/react';
 
 import { useCampaignManager } from '../../hooks/useCampaignManager';
-import { useCampaign } from '../../hooks/useCampaign';
-import { useEffect } from 'react';
+import { useSharedState } from '../../context/store';
+import { useEffect, useState } from 'react';
 
 export default function AdvertisersStats() {
-  const { getCampaigns } = useCampaignManager();
-  const { getAdvertiserData, getNumberOfActions } = useCampaign();
+  const { getUserStatsByCampaign } = useCampaignManager();
+  const [{ provider }, dispatch] = useSharedState();
+
+  const [campaignsPayed, setCampaignsPayed] = useState([]);
 
   useEffect(() => {
-    const get = async () => {
-      const campaigns = await getCampaigns('0x4a', '0x03ff');
-      console.log('campaigns: ', campaigns);
-
-      const res = await getNumberOfActions(campaigns);
-      console.log(res);
+    const getUserStats = async () => {
+      const campaings = await getUserStatsByCampaign();
+      setCampaignsPayed(campaings);
     };
-
-    //get();
-    get();
-  }, []);
+    getUserStats();
+  }, [provider]);
 
   return (
     <>
@@ -52,66 +49,12 @@ export default function AdvertisersStats() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
-                  <Avatar
-                    name="InterFC"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
-                    size="xs"
-                    mr={2}
-                    fontWeight={600}
-                  />
-                  INTER FC
-                </Td>
-
-                <Td fontSize={15} color="#00203F" fontWeight={600}>
-                  Fan Token summer special promotion
-                </Td>
-                <Td fontWeight={300}>$ 236.50</Td>
-                <Td fontWeight={300}>106</Td>
-                <Td fontWeight={300}>114</Td>
-                <Td fontWeight={300}>59</Td>
-                <Td fontWeight={300}>$ 623.25</Td>
-              </Tr>
-
-              <Tr>
-                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
-                  <Avatar
-                    name="InterFC"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
-                    size="xs"
-                    mr={2}
-                  />
-                  INTER FC
-                </Td>
-                <Td fontSize={15} color="#00203F" fontWeight={600}>
-                  Fan Token summer special promotion
-                </Td>
-                <Td fontWeight={300}>$ 236.50</Td>
-                <Td fontWeight={300}>106</Td>
-                <Td fontWeight={300}>114</Td>
-                <Td fontWeight={300}>59</Td>
-                <Td fontWeight={300}>$ 623.25</Td>
-              </Tr>
-              <Tr>
-                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
-                  <Avatar
-                    name="InterFC"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
-                    size="xs"
-                    mr={2}
-                  />
-                  INTER FC
-                </Td>
-                <Td fontSize={15} color="#00203F" fontWeight={600}>
-                  Fan Token summer special promotion
-                </Td>
-                <Td fontWeight={300}>$ 236.50</Td>
-                <Td fontWeight={300}>106</Td>
-                <Td fontWeight={300}>114</Td>
-                <Td fontWeight={300}>59</Td>
-                <Td fontWeight={300}>$ 623.25</Td>
-              </Tr>
+              {campaignsPayed.length != 0 &&
+                campaignsPayed.map((campaign, index) => (
+                  <>
+                    <CampaignsStatsTab key={index} campaign={campaign} />
+                  </>
+                ))}
             </Tbody>
           </Table>
         </TableContainer>
@@ -119,3 +62,26 @@ export default function AdvertisersStats() {
     </>
   );
 }
+
+const CampaignsStatsTab = ({ ...props }) => {
+  const campaign = props.campaign;
+  return (
+    <>
+      <Tr>
+        <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
+          <Avatar name={campaign.name} src={campaign.picture} size="xs" mr={2} fontWeight={600} />
+          {campaign.name}
+        </Td>
+
+        <Td fontSize={15} color="#00203F" fontWeight={600}>
+          Fan Token summer special promotion
+        </Td>
+        <Td fontWeight={300}>$ {campaign.earned} </Td>
+        <Td fontWeight={300}>{campaign.mirrors}</Td>
+        <Td fontWeight={300}>{campaign.clicks.toNumber()}</Td>
+        <Td fontWeight={300}>{campaign.actions.toNumber()}</Td>
+        <Td fontWeight={300}>$ {campaign.earned}</Td>
+      </Tr>
+    </>
+  );
+};

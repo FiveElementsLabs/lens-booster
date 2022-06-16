@@ -1,3 +1,4 @@
 export const addresses = {
-  CampaignManager: '0xd78eFAb315cAf4B4B55dc0A760db864813669c3f',
+  CampaignManager: '0xD0798f8308EFE28516C36D5d0dC31f68fD8D0d05',
+  LensHub: '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d',
 };

@@ -1,28 +1,20 @@
-import { create } from "ipfs-http-client";
-import { v4 as uuidv4 } from "uuid";
-import { LENS_PUBLICATION_METADATA_VERSION, APP_ID } from "./ConfigVars";
+import { create } from 'ipfs-http-client';
+import { v4 as uuidv4 } from 'uuid';
+import { LENS_PUBLICATION_METADATA_VERSION, APP_ID } from './ConfigVars';
 
 const client = create({
-  host: "ipfs.infura.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  protocol: "https",
+  protocol: 'https',
 });
 
 export const uploadIpfs = async (postMetaData) => {
-  const {
-    description,
-    content,
-    external_url,
-    image,
-    imageMimeType,
-    name,
-    media,
-    attributes,
-  } = postMetaData;
+  const { description, content, external_url, image, imageMimeType, name, media, attributes } = postMetaData;
+  console.log(postMetaData);
 
   const result = await client.add(
     JSON.stringify({
-      version: LENS_PUBLICATION_METADATA_VERSION || "1.0.0",
+      version: LENS_PUBLICATION_METADATA_VERSION || '1.0.0',
       metadata_id: uuidv4(),
       description,
       content,
@@ -43,12 +35,12 @@ export const uploadIpfs = async (postMetaData) => {
     })
   );
 
-  console.log("upload result ipfs", result);
+  console.log('upload result ipfs', result);
   return result;
 };
 
 export const getIpfs = async (URI) => {
   const result = await client.get(URI);
-  console.log("get result ipfs", result);
+  console.log('get result ipfs', result);
   return result;
 };

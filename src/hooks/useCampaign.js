@@ -11,12 +11,9 @@ export const useCampaign = () => {
     const Campaign = new Contract(campaignAddress, CampaignJson, signer);
 
     try {
-      const payouts = await Campaign.payouts();
-      console.log('Campaign Contract: ', payouts);
+      const payouts = await Campaign.getPayouts();
 
-      return {
-        ...payouts,
-      };
+      return payouts;
     } catch (e) {
       console.log('Error getting the payouts: ', e?.messagge);
     }
@@ -32,9 +29,11 @@ export const useCampaign = () => {
         try {
           const userId = await Campaign.userIdPosted(i);
           if (!userId) break;
+          const alreadyPayed = await Campaign.getInflenserPayed(userId);
+          const toBePayed = await Campaign.getInflenserToBePayed(userId);
           numberOfActions.push({
-            clicks: Math.ceil(Math.random() * 100),
-            events: Math.ceil(Math.random() * 100),
+            clicks: alreadyPayed[0].toNumber() + toBePayed[0].toNumber(),
+            events: alreadyPayed[1].toNumber() + toBePayed[1].toNumber(),
           });
           i++;
         } catch (e) {
@@ -49,17 +48,15 @@ export const useCampaign = () => {
     }
   };
 
-  const getCampaignDuration = async (campaignAddress) => {
+  const getCampaignInfo = async (campaignAddress) => {
     const signer = await provider.getSigner();
     const Campaign = new Contract(campaignAddress, CampaignJson, signer);
     try {
-      const duration = await Campaign.campaignDuration();
-      console.log('Campaign Contract: ', duration);
+      const campaignInfo = await Campaign.getCampaignInfo();
+      return campaignInfo;
     } catch (e) {
-      console.log('Error getting the campaign duration: ', e?.messagge);
+      console.log('Error getting the campaign info: ', e?.messagge);
     }
-
-    return duration;
   };
-  return { getAdvertiserPayouts, getNumberOfActions, getCampaignDuration };
+  return { getAdvertiserPayouts, getNumberOfActions, getCampaignInfo };
 };

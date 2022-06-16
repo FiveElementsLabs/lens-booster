@@ -2,21 +2,21 @@ import { withDefaultSize } from '@chakra-ui/react';
 import { ethers, utils, Contract } from 'ethers';
 import { addresses } from '../context/addresses';
 import { useSharedState } from '../context/store';
+import { getPublication } from './getPublication';
 
 const CampaignManagerJson = require('../components/abis/CampaignManager.json');
 const CampaignJson = require('../components/abis/LensCampaign.json');
+const LensHubJson = require('../components/abis/LensHub.json');
 
 export const useCampaignManager = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const getCampaigns = async (userId, postId) => {
     const signer = await provider?.getSigner();
-    console.log(addresses.CampaignManager);
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
 
     try {
       const campaignAddress = await CampaignManager.addressesCampaign(userId, postId);
-      console.log(`Campaign address found at ${campaignAddress}`);
 
       return campaignAddress;
     } catch (e) {
@@ -24,33 +24,74 @@ export const useCampaignManager = () => {
     }
   };
 
-  const getUserStatsByCampaign = async (userId) => {
-    const signer = await provider.getSigner();
+  const getCampaignsPublicationID = async () => {
+    const signer = await provider?.getSigner();
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
     let i = 0;
+    let pub = [];
     while (true) {
       try {
-        console.log('inside while');
+        console.log('campaign found: ', CampaignManager);
+
+        const campaignAddress = await CampaignManager.addressesCampaignAd(i);
+        if (!campaignAddress) break;
+        console.log('campaign found2: ', campaignAddress);
+        const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+
+        const campaignInfo = await Campaign.getCampaignInfo();
+        pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
+        console.log(pub);
+
+        i++;
+      } catch (e) {
+        console.log('Error fetching all pubids: ', e?.messagge);
+        break;
+      }
+    }
+
+    return pub;
+  };
+
+  const getUserStatsByCampaign = async () => {
+    const signer = await provider.getSigner();
+    const LensHub = new Contract(addresses.LensHub, LensHubJson, signer);
+    const defaultProfile = '0x01'; //await LensHub.defaultProfile(await signer.getAddress());
+    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+    let i = 0;
+
+    let campaignsPayed = [];
+
+    while (true) {
+      try {
         const campaignAddresses = await CampaignManager.addressesCampaignAd(i);
-        console.log('new campaign address: ', campaignAddresses);
 
         if (!campaignAddresses) break;
-        console.log('new campaign address: ', campaignAddresses);
         const Campaign = new Contract(campaignAddresses, CampaignJson, signer);
-        console.log('userId: ', userId);
-        const payed = await Campaign.payedProfile(userId);
-        console.log('payed: ', payed);
-        if (!payed) break;
+        const inflenserProfile = await Campaign.getInflenserPayed(defaultProfile);
+        const inflenserInfo = await Campaign.getInflenserInfo(defaultProfile);
+        const payouts = await Campaign.getPayouts();
+        const publicationId = defaultProfile + '-' + inflenserInfo[2].toHexString();
 
-        console.log(Campaign.address);
-        // a
+        const pub = (await getPublication(publicationId)).data.publication;
+
+        campaignsPayed.push({
+          name: pub.profile.name,
+          picture: pub.profile.picture?.original?.url,
+          earned: payouts[0].toNumber() + payouts[3] * inflenserProfile[0] + payouts[6] * inflenserProfile[1],
+          clicks: inflenserProfile[0],
+          actions: inflenserProfile[1],
+          mirrors: pub.stats.totalAmountOfMirrors,
+        });
+
         i++;
       } catch (e) {
         console.log('Error getting the userId: ', e?.messagge);
         break;
       }
     }
+
+    return campaignsPayed;
   };
 
-  return { getCampaigns, getUserStatsByCampaign };
+  return { getCampaigns, getUserStatsByCampaign, getCampaignsPublicationID };
 };
