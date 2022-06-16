@@ -32,7 +32,7 @@ const Feature = ({ title, text, icon }) => {
 
 export default function Features() {
   return (
-    <Box mt="21px">
+    <Box mt="21px" mb={{ base: "25px", md: 0 }}>
       <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(9, 1fr)">
         <GridItem
           colSpan={{ base: "9", md: "3" }}

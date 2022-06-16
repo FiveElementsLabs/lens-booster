@@ -11,9 +11,9 @@ const colors = {
   light_accent: "#ECF1FE",
   light_azure: "#F0F3FA",
   light_background: "#E6EBF1",
-  dark_accent: "#04143A",
-  dark_azure: "#1A365D",
-  dark_background: "#122451",
+  dark_accent: "#ECF1FE",
+  dark_azure: "#F0F3FA",
+  dark_background: "#E6EBF1",
   yellow_accent: "#FF9900",
 };
 
@@ -32,6 +32,13 @@ const components = {
       brand: (props) => ({
         backgroundColor: mode("yellow_accent", "primary")(props),
       }),
+    },
+  },
+  Divider: {
+    variants: {
+      gray: {
+        borderColor: "gray.200",
+      },
     },
   },
 };

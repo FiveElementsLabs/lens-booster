@@ -32,12 +32,12 @@ import SelectProfile from './SelectProfile.js';
 
 const NAV_ITEMS = [
   {
-    label: 'LENS USERS',
-    href: '/settings',
+    label: "INFLENSER",
+    href: "/inflenser",
   },
   {
-    label: 'ADVERTISER',
-    href: '/',
+    label: "ADVERTISER",
+    href: "/settings",
   },
 ];
 
@@ -46,7 +46,10 @@ export default function Navbar() {
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
 
   return (
-    <Box backgroundColor={useColorModeValue('light_azure', 'dark_azure')} shadow="md">
+    <Box
+      backgroundColor={useColorModeValue("light_azure", "light_azure")}
+      shadow="md"
+    >
       <Container maxW="container.xl">
         <Box>
           <Flex
@@ -135,7 +138,13 @@ const DesktopNav = () => {
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Link color="#5C6F81" fontSize="16px" fontFamily="'Prompt', sans-serif" fontWeight={500}>
+          <Link
+            color="#5C6F81"
+            fontSize="16px"
+            fontFamily="'Prompt', sans-serif"
+            fontWeight={500}
+            href={navItem.href}
+          >
             {navItem.label.toUpperCase()}
           </Link>
         </Box>

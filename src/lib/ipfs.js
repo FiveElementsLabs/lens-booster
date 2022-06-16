@@ -8,7 +8,7 @@ const client = create({
   protocol: 'https',
 });
 
-export const uploadIpfs = async postMetaData => {
+export const uploadIpfs = async (postMetaData) => {
   const { description, content, external_url, image, imageMimeType, name, media, attributes } = postMetaData;
 
   const result = await client.add(
@@ -34,6 +34,10 @@ export const uploadIpfs = async postMetaData => {
     })
   );
 
-  console.log('upload result ipfs', result);
+  return result;
+};
+
+export const getIpfs = async (URI) => {
+  const result = await client.get(URI);
   return result;
 };

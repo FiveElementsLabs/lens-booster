@@ -1,17 +1,17 @@
-import { ColorModeScript } from '@chakra-ui/react';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { SharedStateProvider } from './context/store';
-import * as serviceWorker from './serviceWorker';
+import { ColorModeScript } from "@chakra-ui/react";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { SharedStateProvider } from "./context/store";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <SharedStateProvider>
     <ColorModeScript />
     <App />
   </SharedStateProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -42,10 +42,8 @@ export default function PostPreview({
   );
   const [message] = useState("");
   const toast = useToast();
-
   const totalFollowers = currentProfile?.stats?.totalFollowers;
   console.log(totalFollowers);
-
 
   return (
     <Box
@@ -73,11 +71,7 @@ export default function PostPreview({
         )}
       </Box>
       <Stack direction="row" alignItems="center" mt={2}>
-        <Button
-          colorScheme="teal"
-          size="sm"
-          variant="outline"
-        >
+        <Button colorScheme="teal" size="sm" variant="outline">
           {"Share & Earn \t\t"}
           {emoji.get("repeat")}
         </Button>
@@ -86,22 +80,18 @@ export default function PostPreview({
           {emoji.get("rocket")}
         </Button>
         {index === 0 &&
-          window.localStorage.getItem("amount") > 0 &&
-          window.localStorage.getItem("currentFollowers") &&
-          window.localStorage.getItem("currentFollowers") >= 0 ? (
-          <Button
-            colorScheme="yellow"
-            size="sm"
-            variant="outline"
-          >
+        window.localStorage.getItem("amount") > 0 &&
+        window.localStorage.getItem("currentFollowers") &&
+        window.localStorage.getItem("currentFollowers") >= 0 ? (
+          <Button colorScheme="yellow" size="sm" variant="outline">
             {"Pay out \t\t"}
             {emoji.get("moneybag")}
             {index === 0
               ? "(" +
-              (currentFollowers === "undefined" ? 0 : currentFollowers) +
-              "/" +
-              window.localStorage.getItem("amount") * 100 +
-              ")"
+                (currentFollowers === "undefined" ? 0 : currentFollowers) +
+                "/" +
+                window.localStorage.getItem("amount") * 100 +
+                ")"
               : ""}
           </Button>
         ) : (

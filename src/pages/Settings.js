@@ -41,7 +41,6 @@ export default function Settings() {
 
   const onCreateProfile = async (e) => {
     e.preventDefault();
-    console.log('onCreateProfile: ', account + ' ' + handle);
     try {
       const signer = await provider.getSigner();
       const res = await createProfile(account, handle, signer);
@@ -105,17 +104,12 @@ export default function Settings() {
     <>
       <Grid h="200px" templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" mt={4}>
         <GridItem colSpan={{ base: '5', md: '2' }} m={2}>
-
           <Box mx="auto" mt={5} maxW="container.md" border="1px solid gray" rounded="xl" p={4}>
             <Text>Create new Profile</Text>
             <form onSubmit={onCreateProfile}>
               <FormControl mt={5} isRequired>
                 <FormLabel htmlFor="handle">Handle</FormLabel>
-                <Input
-                  id="handle"
-                  type="text"
-                  onChange={(e) => setHandle(e.target.value)}
-                />
+                <Input id="handle" type="text" onChange={(e) => setHandle(e.target.value)} />
               </FormControl>
               <Button mt={5} type="submit" colorScheme="teal" variant="outline">
                 Create Profile
@@ -134,7 +128,7 @@ export default function Settings() {
                   type="text"
                   onChange={(e) => updateProfileMetaData(e, 'name')}
                   disabled={true}
-                  bg={useColorModeValue('white', 'dark_background')}
+                  bg={useColorModeValue('white', 'white')}
                 />
               </FormControl>
               <FormControl mt={5} isRequired>
@@ -194,11 +188,7 @@ export default function Settings() {
             <form onSubmit={onCreatePost}>
               <FormControl mt={5} isRequired>
                 <FormLabel htmlFor="profileId">Profile ID</FormLabel>
-                <Input
-                  id="profileId"
-                  type="text"
-                  onChange={(e) => updatePostMetaData(e, 'profileId')}
-                />
+                <Input id="profileId" type="text" onChange={(e) => updatePostMetaData(e, 'profileId')} />
               </FormControl>
               <FormControl mt={5}>
                 <FormLabel htmlFor="name">Name</FormLabel>
@@ -206,19 +196,11 @@ export default function Settings() {
               </FormControl>
               <FormControl mt={5}>
                 <FormLabel htmlFor="description">Description</FormLabel>
-                <Input
-                  id="description"
-                  type="text"
-                  onChange={(e) => updatePostMetaData(e, 'description')}
-                />
+                <Input id="description" type="text" onChange={(e) => updatePostMetaData(e, 'description')} />
               </FormControl>
               <FormControl mt={5}>
                 <FormLabel htmlFor="external_url">External URL</FormLabel>
-                <Input
-                  id="external_url"
-                  type="text"
-                  onChange={(e) => updatePostMetaData(e, 'external_url')}
-                />
+                <Input id="external_url" type="text" onChange={(e) => updatePostMetaData(e, 'external_url')} />
               </FormControl>
               <FormControl mt={5}>
                 <FormLabel htmlFor="image">Image URL</FormLabel>
