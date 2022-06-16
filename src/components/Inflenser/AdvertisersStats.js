@@ -1,88 +1,59 @@
-import {
-  Box,
-  Table,
-  TableContainer,
-  Thead,
-  Tbody,
-  Th,
-  Tr,
-  Td,
-  Avatar,
-} from "@chakra-ui/react";
+import { Box, Table, TableContainer, Thead, Tbody, Th, Tr, Td, Avatar } from '@chakra-ui/react';
+
+import { useCampaignManager } from '../../hooks/useCampaignManager';
+import { useCampaign } from '../../hooks/useCampaign';
+import { useEffect } from 'react';
 
 export default function AdvertisersStats() {
+  const { getCampaigns } = useCampaignManager();
+  const { getAdvertiserData, getNumberOfActions } = useCampaign();
+
+  useEffect(() => {
+    const get = async () => {
+      const campaigns = await getCampaigns('0x4a', '0x03ff');
+      console.log('campaigns: ', campaigns);
+
+      const res = await getNumberOfActions(campaigns);
+      console.log(res);
+    };
+
+    //get();
+    get();
+  }, []);
+
   return (
     <>
-      <Box
-        mt={8}
-        p={5}
-        borderRadius="20px"
-        boxShadow="lg"
-        bg="#ffffff"
-        color="#5C6F81"
-      >
+      <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81">
         <TableContainer>
           <Table size="sm" variant="simple">
             <Thead>
               <Tr borderColor="gray.500">
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Advertiser
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Campaign title
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Earned
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Mirrors
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Clicks
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Events
                 </Th>
-                <Th
-                  fontSize={16}
-                  color="#1A4587"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
                   Total earn
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td
-                  fontSize={20}
-                  color="#00203F"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
                   <Avatar
                     name="InterFC"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
@@ -104,11 +75,7 @@ export default function AdvertisersStats() {
               </Tr>
 
               <Tr>
-                <Td
-                  fontSize={20}
-                  color="#00203F"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
                   <Avatar
                     name="InterFC"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
@@ -127,11 +94,7 @@ export default function AdvertisersStats() {
                 <Td fontWeight={300}>$ 623.25</Td>
               </Tr>
               <Tr>
-                <Td
-                  fontSize={20}
-                  color="#00203F"
-                  fontFamily="'Prompt', sans-serif"
-                >
+                <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
                   <Avatar
                     name="InterFC"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/1200px-FC_Internazionale_Milano_2021.svg.png"
