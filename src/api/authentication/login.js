@@ -9,7 +9,7 @@ const GET_CHALLENGE = `
   }
 `;
 
-export const generateChallenge = address => {
+export const generateChallenge = (address) => {
   return ApolloClient.query({
     query: gql(GET_CHALLENGE),
     variables: {
@@ -49,7 +49,7 @@ export const login = async (address, signer) => {
     };
   }
 
-  console.log('inside login')
+  console.log('inside login');
 
   try {
     // We request a challenge from the server.

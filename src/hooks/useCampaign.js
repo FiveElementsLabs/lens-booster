@@ -1,7 +1,7 @@
 import { ethers, utils, Contract } from 'ethers';
 import { useSharedState } from '../context/store';
 
-const CampaignJson = require('../components/abis/LensCampaign.json');
+const CampaignJson = require('../abis/LensCampaign.json');
 
 export const useCampaign = () => {
   const [{ provider }, dispatch] = useSharedState();

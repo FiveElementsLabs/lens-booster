@@ -1,6 +1,6 @@
 import { ethers, utils, Contract } from 'ethers';
 import { useSharedState } from '../context/store';
-const LensHubAbi = require('../components/abis/LensHub.json');
+const LensHubAbi = require('../abis/LensHub.json');
 
 import { useProfile } from './useProfile';
 

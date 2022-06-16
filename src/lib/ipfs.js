@@ -34,12 +34,10 @@ export const uploadIpfs = async (postMetaData) => {
     })
   );
 
-  console.log('upload result ipfs', result);
   return result;
 };
 
 export const getIpfs = async (URI) => {
   const result = await client.get(URI);
-  console.log('get result ipfs', result);
   return result;
 };

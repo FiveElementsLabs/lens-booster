@@ -4,9 +4,7 @@ import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, Che
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-import { getIpfs, uploadIpfs } from '../../lib/ipfs';
-import { getPublication } from '../../hooks/getPublication';
-import Markup from '../shared/Markup';
+import { uploadIpfs } from '../../lib/ipfs';
 import IFramely from '../shared/IFramely/index.tsx';
 import { useMirror } from '../../hooks/useMirror';
 import { getPublicationURI } from '../../hooks/getPublicationURI';

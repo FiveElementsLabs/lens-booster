@@ -4,9 +4,9 @@ import { addresses } from '../context/addresses';
 import { useSharedState } from '../context/store';
 import { getPublication } from './getPublication';
 
-const CampaignManagerJson = require('../components/abis/CampaignManager.json');
-const CampaignJson = require('../components/abis/LensCampaign.json');
-const LensHubJson = require('../components/abis/LensHub.json');
+const CampaignManagerJson = require('../abis/CampaignManager.json');
+const CampaignJson = require('../abis/LensCampaign.json');
+const LensHubJson = require('../abis/LensHub.json');
 
 export const useCampaignManager = () => {
   const [{ provider }, dispatch] = useSharedState();
