@@ -8,10 +8,7 @@ import LensFooter from '../icons/LensFooter';
 
 export default function Footer() {
   return (
-    <Box
-      backgroundColor={useColorModeValue("light_azure", "light_azure")}
-      padding={7}
-    >
+    <Box backgroundColor={useColorModeValue('light_azure', 'light_azure')} padding={7}>
       <Grid
         templateRows="repeat(1, 1fr)"
         templateColumns="repeat(12, 1fr)"
