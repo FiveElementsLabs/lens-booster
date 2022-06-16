@@ -1,9 +1,9 @@
-import { ethers, utils, Contract } from "ethers";
-import { useSharedState } from "../context/store";
-import { gql } from "@apollo/client/core";
-import ApolloClient from "../lib/ApolloClient";
-import { omit } from "../lib/Helpers";
-const LensCampaignABI = require("../components/abis/LensCampaign.json");
+import { ethers, utils, Contract } from 'ethers';
+import { useSharedState } from '../context/store';
+import { gql } from '@apollo/client/core';
+import ApolloClient from '../lib/ApolloClient';
+import { omit } from '../lib/Helpers';
+const LensCampaignABI = require('../abis/LensCampaign.json');
 
 const CREATE_POST_TYPED_DATA = `
  mutation($request: CreatePublicPostRequest!) { 
@@ -51,14 +51,13 @@ export const useMirror = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const createPost = async (profileId, contentURI) => {
-   
     const signer = await provider.getSigner();
 
     const signedTypeData = async (domain, types, value) => {
       return await signer._signTypedData(
-        omit(domain, "__typename"),
-        omit(types, "__typename"),
-        omit(value, "__typename")
+        omit(domain, '__typename'),
+        omit(types, '__typename'),
+        omit(value, '__typename')
       );
     };
 
@@ -82,18 +81,10 @@ export const useMirror = () => {
     const result = await createPostTypedData(createPostRequest);
     const typedData = result.data.createPostTypedData.typedData;
 
-    const signature = await signedTypeData(
-      typedData.domain,
-      typedData.types,
-      typedData.value
-    );
+    const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);
     const { v, r, s } = splitSignature(signature);
-    
-    const LensCampaign = new Contract(
-      "0x26E50B44b75673CC68be0811afBeC40DD0b8814a",
-      LensCampaignABI.abi,
-      signer
-    );
+
+    const LensCampaign = new Contract('0x26E50B44b75673CC68be0811afBeC40DD0b8814a', LensCampaignABI.abi, signer);
 
     const tx = await LensCampaign.handlePost(
       {
@@ -117,7 +108,7 @@ export const useMirror = () => {
 
     try {
       await tx.wait();
-      console.log("transaction success");
+      console.log('transaction success');
     } catch (e) {
       console.log(e);
     }
