@@ -10,7 +10,6 @@ const client = create({
 
 export const uploadIpfs = async (postMetaData) => {
   const { description, content, external_url, image, imageMimeType, name, media, attributes } = postMetaData;
-  console.log(postMetaData);
 
   const result = await client.add(
     JSON.stringify({
