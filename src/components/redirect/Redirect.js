@@ -21,7 +21,6 @@ export default function Redirect({ ...props }) {
         campaignsAddress: dataIpfs.campaignsAddress,
         inflenserId: dataIpfs.inflenserId.hex,
       };
-      console.log(req);
       fetch('https://jjmby4bsuc.execute-api.eu-west-1.amazonaws.com/redirectHandleClick', {
         method: 'POST',
         headers: {
@@ -29,25 +28,15 @@ export default function Redirect({ ...props }) {
         },
         body: JSON.stringify(req),
       }).then((res) => {
-        console.log('Request complete! response:', res);
+        window.location.href = dataIpfs.urlToRedirect;
       });
       setIpfsData(dataIpfs);
 
-      //window.location.href = dataIpfs.urlToRedirect;
+      //;
     };
 
     getIpfsData();
   }, []);
 
-  return (
-    <>
-      {ipfsData?.urlToRedirect && (
-        <Box>
-          {ipfsData.urlToRedirect}&nbsp;
-          {ipfsData.inflenserId.hex.toString()}&nbsp;
-          {ipfsData.campaignsAddress}&nbsp;
-        </Box>
-      )}
-    </>
-  );
+  return <>{ipfsData?.urlToRedirect && <Box>Redirect...</Box>}</>;
 }
