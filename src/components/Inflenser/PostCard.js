@@ -4,210 +4,113 @@ import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, Che
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-import { getIpfs } from '../../lib/ipfs';
-import { getPublication } from '../../hooks/getPublication';
+import { uploadIpfs } from '../../lib/ipfs';
 import IFramely from '../shared/IFramely/index.tsx';
 import { useMirror } from '../../hooks/useMirror';
 import { getPublicationURI } from '../../hooks/getPublicationURI';
+import { useCampaignManager } from '../../hooks/useCampaignManager';
+import { useCampaign } from '../../hooks/useCampaign';
+import { useSharedState } from '../../context/store';
+import { fetchPublication } from '../../hooks/usePublication';
 
 export default function PostCard({ publicationId }) {
   const { createPost } = useMirror();
+  const { getDefaultProfile } = getPublicationURI();
+  const { getCampaigns } = useCampaignManager();
+  const { getAdvertiserPayouts, getNumberOfActions, getCampaignInfo } = useCampaign();
+  const [{ provider }] = useSharedState();
 
-  //https://ipfs.infura.io/ipfs/QmVSNBUEKM5JVnus1bhzrc9Wg6UXZpCcmKAWZYszU3sWYa
-  const STATIC_ASSETS = 'https://assets.lenster.xyz/images';
   const [publication, setPublication] = useState(<></>);
   const [linkExternal, setLinkExternal] = useState('');
   const [arrayJsxPost2, setArrayJsxPost2] = useState(<></>);
   const [settingState, useSettingState] = useState(false);
   const [statsState, setStatsState] = useState(false);
-  const [postUri, setPostUri] = useState('');
   const [userProfileId, setUserProfileId] = useState('');
-  const [numberOfLines, setNumberOfLines] = useState('');
+  const [numberOfLines, setNumberOfLines] = useState(3);
+  const [numberOfEvents, setNumberOfEvents] = useState(0);
+  const [numberOfPosts, setNumberOfPosts] = useState(0);
+  const [numberOfClicks, setNumberOfClicks] = useState(0);
+  const [postPayout, setPostPayout] = useState(0);
+  const [clickPayout, setClickPayout] = useState(0);
+  const [actionPayout, setActionPayout] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [remainingBudget, setRemainingBudget] = useState(0);
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
-
-  const { getPubURI, getDefaultProfile } = getPublicationURI();
   let profileIdPostId = publicationId.split('-');
 
-  useEffect(() => {
-    const fetchPublication = async () => {
-      const fetchedPublication = await getPublication(publicationId);
-      setNumberOfLines(3);
-      let arrayJsxPost = [];
-      /*
-      <Text> asjdajsdjajs <Link>@lens</Link> ahshdahsdh </Text>
-      */
-      const hashflags = ['lenster', 'bitcoin', 'ethereum', 'lens'];
-      let indexAt = [];
-      let index = 0;
-      let lastIndex = 0;
-      let lastUrlIndex = 0;
-      const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
-      const url = fetchedPublication.data.publication.metadata.content.match(urlRegex) || [];
-      const urlIndex =
-        url?.map((u) => {
-          return fetchedPublication.data.publication.metadata.content.indexOf(u);
-        }) || [];
+  const getUserProfileId = async () => {
+    const userProfile = await getDefaultProfile();
+    setUserProfileId(userProfile);
+  };
 
-      if (!url) {
-        urlIndex.push(-1);
-        url.push('');
-      }
-      if (urlIndex != -1) setLinkExternal(url[0]);
-      while (index != -1) {
-        let appIndex = fetchedPublication.data.publication.metadata.content.indexOf('@', index + 1);
+  const getPub = async () => {
+    const fetchedData = await fetchPublication(publicationId);
 
-        let hashtagIndex = fetchedPublication.data.publication.metadata.content.indexOf('#', index + 1);
+    setArrayJsxPost2(fetchedData.arrayJsxPost);
+    setPublication(fetchedData.fetchedPublication);
+    setLinkExternal(fetchedData.linkExternal);
+    console.log(fetchedData.linkExternal);
+  };
 
-        index = Math.min(appIndex != -1 ? appIndex : Infinity, hashtagIndex != -1 ? hashtagIndex : Infinity);
+  const getData = async () => {
+    const campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
 
-        let spaceIndex = fetchedPublication.data.publication.metadata.content.indexOf(' ', index);
-        //indexAt.push({ startIndex: index, endIndex: spaceIndex }); // push the index of the @
-        if (index == -1 || index == Infinity) {
-          if (
-            fetchedPublication.data.publication.metadata.content.length > urlIndex[lastUrlIndex] &&
-            lastIndex < urlIndex[lastUrlIndex]
-          ) {
-            arrayJsxPost.push(
-              <>{fetchedPublication.data.publication.metadata.content.substring(lastIndex, urlIndex[lastUrlIndex])}</>
-            );
-            arrayJsxPost.push(
-              <Link
-                color="#1988F7"
-                href={fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex],
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length
-                )}
-              >
-                {fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex],
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length
-                )}
-              </Link>
-            );
-            arrayJsxPost.push(
-              <>
-                {fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length,
-                  fetchedPublication.data.publication.metadata.content.length
-                )}
-              </>
-            );
-          } else {
-            arrayJsxPost.push(
-              <>
-                {fetchedPublication.data.publication.metadata.content.substring(
-                  lastIndex,
-                  fetchedPublication.data.publication.metadata.content.length
-                )}
-              </>
-            );
-          }
-          break;
-        } else {
-          if (lastIndex < urlIndex[lastUrlIndex] && index > urlIndex[lastUrlIndex]) {
-            arrayJsxPost.push(
-              <>{fetchedPublication.data.publication.metadata.content.substring(lastIndex, urlIndex[lastUrlIndex])}</>
-            );
+    const numberOfAction = await getNumberOfActions(campaigns);
+    const advertiserData = await getAdvertiserPayouts(campaigns);
+    const campaignInfo = await getCampaignInfo(campaigns);
+    let numberOfEventsSum = 0;
+    let numberOfClicksSum = 0;
 
-            arrayJsxPost.push(
-              <Link
-                color="#1988F7"
-                href={fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex],
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length
-                )}
-              >
-                {fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex],
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length
-                )}
-              </Link>
-            );
-            arrayJsxPost.push(
-              <>
-                {fetchedPublication.data.publication.metadata.content.substring(
-                  urlIndex[lastUrlIndex] + url[lastUrlIndex].length,
-                  index
-                )}
-              </>
-            );
-            lastUrlIndex++;
-          } else {
-            arrayJsxPost.push(<>{fetchedPublication.data.publication.metadata.content.substring(lastIndex, index)}</>);
-          }
-        }
+    for (let i = 0; i < numberOfAction.length; i++) {
+      numberOfEventsSum += numberOfAction[i].events;
+      numberOfClicksSum += numberOfAction[i].clicks;
+    }
+    setNumberOfEvents(numberOfEventsSum);
+    setNumberOfClicks(numberOfClicksSum);
+    setNumberOfPosts(numberOfAction.length);
 
-        if (index != -1 && index != Infinity) {
-          if (index == appIndex) {
-            arrayJsxPost.push(
-              <Link
-                color="#1988F7"
-                href={`https://lenster.xyz/u/${fetchedPublication.data.publication.metadata.content
-                  .substring(index, spaceIndex)
-                  .trim()
-                  .slice(1)}`}
-              >
-                {fetchedPublication.data.publication.metadata.content.substring(index, spaceIndex)}
-              </Link>
-            );
-          } else {
-            arrayJsxPost.push(
-              <Box display="inline-flex">
-                <Link
-                  color="#1988F7"
-                  href={`https://lenster.xyz/search?q=${fetchedPublication.data.publication.metadata.content
-                    .substring(index, spaceIndex)
-                    .trim()
-                    .slice(1)
-                    .toLowerCase()}&type=pubs&src=link_click`}
-                >
-                  {fetchedPublication.data.publication.metadata.content.substring(index - 1, spaceIndex).toUpperCase()}
-                </Link>
-                {hashflags.includes(
-                  fetchedPublication.data.publication.metadata.content
-                    .substring(index, spaceIndex)
-                    .trim()
-                    .slice(1)
-                    .toLowerCase()
-                ) && (
-                  <Image
-                    height={4}
-                    marginTop="auto"
-                    marginBottom="auto"
-                    src={`${STATIC_ASSETS}/hashflags/${fetchedPublication.data.publication.metadata.content
-                      .substring(index, spaceIndex)
-                      .trim()
-                      .slice(1)
-                      .toLowerCase()}.png`}
-                  />
-                )}
-              </Box>
-            );
-          }
-        }
-        lastIndex = spaceIndex;
-      }
+    setPostPayout(Number(advertiserData[0]).toFixed(2));
+    setClickPayout(Number(advertiserData[3]).toFixed(2));
+    setActionPayout(Number(advertiserData[6]).toFixed(2));
 
-      setArrayJsxPost2(arrayJsxPost);
-      setPublication(fetchedPublication.data.publication);
-    };
-
-    fetchPublication();
-  }, []);
+    setDuration(
+      moment
+        .duration(Number(campaignInfo[2]) * 1000)
+        .asDays()
+        .toFixed(2)
+    );
+    const budget =
+      Number(Number(advertiserData[2]).toFixed(2)) +
+      Number(Number(advertiserData[5]).toFixed(2)) +
+      Number(Number(advertiserData[8]).toFixed(2));
+    setRemainingBudget(budget);
+  };
 
   useEffect(() => {
-    const getURI = async () => {
-      const URI = await getPubURI(profileIdPostId[0], profileIdPostId[1]);
-      setPostUri(URI);
-    };
-    const getUserProfileId = async () => {
-      const userProfile = await getDefaultProfile();
-      setUserProfileId(userProfile);
-    };
-
-    getURI();
+    getPub();
     getUserProfileId();
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [provider]);
+
+  const handleCreatePost = async () => {
+    const content = publication.metadata.content;
+
+    const url = content.match(/(((https?:\/\/)|(www\.))[^\s]+)/g) || [];
+    const urlIndex = content.indexOf(url[0]) || [];
+    const newContent =
+      content.substring(0, urlIndex) +
+      'http://www.google.it' +
+      content.substring(urlIndex + url[0].length - 1, content.length);
+
+    let publicationMetaData = JSON.parse(JSON.stringify(publication));
+    publicationMetaData.metadata.content = newContent;
+    const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
+
+    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path);
+  };
 
   return (
     <>
@@ -321,7 +224,7 @@ export default function PostCard({ publicationId }) {
                         Remaining Budget
                       </Text>
                       <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        10 $
+                        {remainingBudget} $
                       </Text>
                     </Box>
                   </Flex>
@@ -337,7 +240,7 @@ export default function PostCard({ publicationId }) {
                         Duration
                       </Text>
                       <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        10 $
+                        {duration} days
                       </Text>
                     </Box>
                   </Flex>
@@ -353,7 +256,7 @@ export default function PostCard({ publicationId }) {
                         # of posts by inflensers
                       </Text>
                       <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        10 $
+                        {numberOfPosts}
                       </Text>
                     </Box>
                   </Flex>
@@ -385,7 +288,7 @@ export default function PostCard({ publicationId }) {
                       bg="#F0F3FA"
                       onClick={() => useSettingState(!settingState)}
                     >
-                      Settings
+                      Stats
                     </Button>
                     <Box
                       color="#1A4587"
@@ -402,10 +305,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            Clicks
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {numberOfClicks}
                           </Text>
                         </Box>
                       </Flex>
@@ -415,10 +318,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            Actions
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {numberOfEvents}
                           </Text>
                         </Box>
                       </Flex>
@@ -428,10 +331,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            Re-Posts
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {numberOfPosts}
                           </Text>
                         </Box>
                       </Flex>
@@ -460,7 +363,7 @@ export default function PostCard({ publicationId }) {
                       bg="#F0F3FA"
                       onClick={() => setStatsState(!statsState)}
                     >
-                      Stats
+                      Metrics
                     </Button>
                     <Box
                       color="#1A4587"
@@ -477,10 +380,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            CpC
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {clickPayout} $
                           </Text>
                         </Box>
                       </Flex>
@@ -490,10 +393,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            CpA
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {actionPayout} $
                           </Text>
                         </Box>
                       </Flex>
@@ -503,10 +406,10 @@ export default function PostCard({ publicationId }) {
                         </Box>
                         <Box>
                           <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                            Mirror
+                            CpP
                           </Text>
                           <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                            10 $
+                            {postPayout} $
                           </Text>
                         </Box>
                       </Flex>
@@ -548,15 +451,13 @@ export default function PostCard({ publicationId }) {
                     padding="15px 14px"
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
-                    onClick={() => createPost(userProfileId.toHexString(), postUri)}
+                    onClick={() => handleCreatePost()}
                   >
                     POST
                   </Button>
                 </Flex>
               </Box>
             </Box>
-
-            {/* https://ipfs.infura.io/ipfs/QmfH6CowXn26mom62Rt5LezGhMa4gKcTDHmkk9uK2rGbgi */}
           </Flex>
         </>
       )}
