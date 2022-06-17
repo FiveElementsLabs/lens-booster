@@ -54,8 +54,6 @@ export const useMirror = () => {
   const createPost = async (profileId, contentURI, campaignsAddress) => {
     const signer = await provider.getSigner();
 
-    console.log('profileId', profileId);
-
     const signedTypeData = async (domain, types, value) => {
       return await signer._signTypedData(
         omit(domain, '__typename'),
@@ -80,28 +78,18 @@ export const useMirror = () => {
         followerOnlyReferenceModule: false,
       },
     };
-    console.log('preparing to sign typed data1');
     const result = await createPostTypedData(createPostRequest);
-    console.log(result);
     const typedData = result.data.createPostTypedData.typedData;
 
     const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);
     const { v, r, s } = splitSignature(signature);
-    console.log(campaignsAddress);
-    console.log(signer);
     const LensCampaign = new Contract(campaignsAddress, LensCampaignABI, signer);
-    console.log(LensCampaign);
-    console.log(v);
-    console.log(r);
-    console.log(s);
-    console.log(typedData);
     const sig = {
       v,
       r,
       s,
       deadline: typedData.value.deadline,
     };
-    console.log(sig);
 
     const tx = await LensCampaign.handlePost(
       typedData.value.profileId,

@@ -40,7 +40,6 @@ export default function PostCard({ publicationId }) {
 
   const getUserProfileId = async () => {
     const userProfile = await getDefaultProfile();
-    console.log(userProfile);
     setUserProfileId(userProfile);
   };
 
@@ -50,7 +49,6 @@ export default function PostCard({ publicationId }) {
     setArrayJsxPost2(fetchedData.arrayJsxPost);
     setPublication(fetchedData.fetchedPublication);
     setLinkExternal(fetchedData.linkExternal);
-    console.log(fetchedData.linkExternal);
   };
 
   const getData = async () => {
@@ -106,10 +104,7 @@ export default function PostCard({ publicationId }) {
       campaignsAddress: campaignsAddress,
     };
 
-    console.log('redirect obj: ', redirectObj);
-
     const redirectIpfs = await uploadIpfsRedirect(redirectObj);
-    console.log('redirect ipfs: ', redirectIpfs);
 
     const url = content.match(/(((https?:\/\/)|(www\.))[^\s]+)/g) || [];
     const urlIndex = content.indexOf(url[0]) || [];
