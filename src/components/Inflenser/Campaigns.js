@@ -22,7 +22,7 @@ export default function Dashboard() {
       <Box bg="#1A4587" p={5} mt={8} borderRadius="20px">
         <Heading color="white">Active Campaigns</Heading>
       </Box>
-      {console.log('fidn: ', publicationIds)}
+
       {/* Array of posts*/}
       {publicationIds &&
         publicationIds.length != 0 &&

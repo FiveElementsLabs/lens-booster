@@ -31,16 +31,12 @@ export const useCampaignManager = () => {
     let pub = [];
     while (true) {
       try {
-        console.log('campaign found: ', CampaignManager);
-
         const campaignAddress = await CampaignManager.addressesCampaignAd(i);
         if (!campaignAddress) break;
-        console.log('campaign found2: ', campaignAddress);
         const Campaign = new Contract(campaignAddress, CampaignJson, signer);
 
         const campaignInfo = await Campaign.getCampaignInfo();
         pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
-        console.log(pub);
 
         i++;
       } catch (e) {
