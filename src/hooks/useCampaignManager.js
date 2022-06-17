@@ -59,13 +59,12 @@ export const useCampaignManager = () => {
     while (true) {
       try {
         const campaignAddresses = await CampaignManager.addressesCampaignAd(i);
-
         if (!campaignAddresses) break;
         const Campaign = new Contract(campaignAddresses, CampaignJson, signer);
         const inflenserProfile = await Campaign.getInflenserPayed(defaultProfile);
         const inflenserInfo = await Campaign.getInflenserInfo(defaultProfile);
         const payouts = await Campaign.getPayouts();
-        const publicationId = defaultProfile + '-' + inflenserInfo[2].toHexString();
+        const publicationId = defaultProfile.toHexString() + '-' + inflenserInfo[2].toHexString();
 
         const pub = (await getPublication(publicationId)).data.publication;
 
