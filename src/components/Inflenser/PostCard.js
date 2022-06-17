@@ -4,7 +4,7 @@ import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, Che
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-import { uploadIpfs } from '../../lib/ipfs';
+import { uploadIpfs, uploadIpfsRedirect } from '../../lib/ipfs';
 import IFramely from '../shared/IFramely/index.tsx';
 import { useMirror } from '../../hooks/useMirror';
 import { getPublicationURI } from '../../hooks/getPublicationURI';
@@ -49,7 +49,6 @@ export default function PostCard({ publicationId }) {
     setArrayJsxPost2(fetchedData.arrayJsxPost);
     setPublication(fetchedData.fetchedPublication);
     setLinkExternal(fetchedData.linkExternal);
-    console.log(fetchedData.linkExternal);
   };
 
   const getData = async () => {
@@ -97,19 +96,29 @@ export default function PostCard({ publicationId }) {
 
   const handleCreatePost = async () => {
     const content = publication.metadata.content;
+    const campaignsAddress = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
+    const redirectObj = {
+      urlToRedirect: 'https://github.com/FiveElementsLabs',
+      inflenserId: userProfileId,
+      campaignsAddress: campaignsAddress,
+    };
+
+    const redirectIpfs = await uploadIpfsRedirect(redirectObj);
 
     const url = content.match(/(((https?:\/\/)|(www\.))[^\s]+)/g) || [];
     const urlIndex = content.indexOf(url[0]) || [];
     const newContent =
       content.substring(0, urlIndex) +
-      'http://www.google.it' +
+      'https://lensbooster.xyz/redirect/' +
+      redirectIpfs.path +
       content.substring(urlIndex + url[0].length - 1, content.length);
 
     let publicationMetaData = JSON.parse(JSON.stringify(publication));
     publicationMetaData.metadata.content = newContent;
     const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
 
-    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path);
+    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path, campaignsAddress);
   };
 
   return (

@@ -37,6 +37,20 @@ export const uploadIpfs = async (postMetaData) => {
   return result;
 };
 
+export const uploadIpfsRedirect = async (objRedirect) => {
+  const { urlToRedirect, inflenserId, campaignsAddress } = objRedirect;
+
+  const result = await client.add(
+    JSON.stringify({
+      urlToRedirect: urlToRedirect,
+      inflenserId: inflenserId,
+      campaignsAddress: campaignsAddress,
+    })
+  );
+
+  return result;
+};
+
 export const getIpfs = async (URI) => {
   const result = await client.get(URI);
   return result;

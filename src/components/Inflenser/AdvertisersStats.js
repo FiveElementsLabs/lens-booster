@@ -1,18 +1,21 @@
 import { Box, Table, TableContainer, Thead, Tbody, Th, Tr, Td, Avatar } from '@chakra-ui/react';
 
 import { useCampaignManager } from '../../hooks/useCampaignManager';
+import { getPublicationURI } from '../../hooks/getPublicationURI';
 import { useSharedState } from '../../context/store';
 import { useEffect, useState } from 'react';
 
 export default function AdvertisersStats() {
   const { getUserStatsByCampaign } = useCampaignManager();
+  const { getDefaultProfile } = getPublicationURI();
   const [{ provider }, dispatch] = useSharedState();
 
   const [campaignsPayed, setCampaignsPayed] = useState([]);
 
   useEffect(() => {
     const getUserStats = async () => {
-      const campaings = await getUserStatsByCampaign();
+      const userProfile = await getDefaultProfile();
+      const campaings = await getUserStatsByCampaign(userProfile);
       setCampaignsPayed(campaings);
     };
     getUserStats();

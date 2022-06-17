@@ -3,18 +3,21 @@ import { Box, Avatar, Button, Text, Divider, Flex } from '@chakra-ui/react';
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useCampaignManager } from '../../hooks/useCampaignManager';
+import { getPublicationURI } from '../../hooks/getPublicationURI';
 import { useEffect } from 'react';
 import { useSharedState } from '../../context/store';
 
 export default function AdvertisersStatsMobile() {
   const { getUserStatsByCampaign } = useCampaignManager();
+  const { getDefaultProfile } = getPublicationURI();
   const [{ provider }, dispatch] = useSharedState();
 
   const [campaignsPayed, setCampaignsPayed] = useState([]);
 
   useEffect(() => {
     const getUserStats = async () => {
-      const campaings = await getUserStatsByCampaign();
+      const userProfile = await getDefaultProfile();
+      const campaings = await getUserStatsByCampaign(userProfile);
       setCampaignsPayed(campaings);
     };
     getUserStats();
