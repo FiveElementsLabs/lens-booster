@@ -48,10 +48,9 @@ export const useCampaignManager = () => {
     return pub;
   };
 
-  const getUserStatsByCampaign = async () => {
+  const getUserStatsByCampaign = async (defaultProfile) => {
     const signer = await provider.getSigner();
     const LensHub = new Contract(addresses.LensHub, LensHubJson, signer);
-    const defaultProfile = '0x01'; //await LensHub.defaultProfile(await signer.getAddress());
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
     let i = 0;
 

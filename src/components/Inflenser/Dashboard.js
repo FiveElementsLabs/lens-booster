@@ -20,12 +20,14 @@ import AdvertisersStats from './AdvertisersStats';
 import AdvertisersStatsMobile from './AdvertisersStatsMobile';
 
 import { useCampaignManager } from '../../hooks/useCampaignManager';
+import { getPublicationURI } from '../../hooks/getPublicationURI';
 import { useSharedState } from '../../context/store';
 import { useEffect, useState } from 'react';
 
 export default function Dashboard() {
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
   const { getUserStatsByCampaign } = useCampaignManager();
+  const { getDefaultProfile } = getPublicationURI();
   const [{ provider }, dispatch] = useSharedState();
 
   const [campaignsPayed, setCampaignsPayed] = useState([]);
@@ -36,7 +38,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getUserStats = async () => {
-      const campaings = await getUserStatsByCampaign();
+      const userProfile = await getDefaultProfile();
+      const campaings = await getUserStatsByCampaign(userProfile);
       let earnTotal = 0;
       let mirrorTotal = 0;
       let clickTotal = 0;

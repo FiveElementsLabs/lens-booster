@@ -4,7 +4,7 @@ import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, Che
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-import { uploadIpfs } from '../../lib/ipfs';
+import { uploadIpfs, uploadIpfsRedirect } from '../../lib/ipfs';
 import IFramely from '../shared/IFramely/index.tsx';
 import { useMirror } from '../../hooks/useMirror';
 import { getPublicationURI } from '../../hooks/getPublicationURI';
@@ -40,6 +40,7 @@ export default function PostCard({ publicationId }) {
 
   const getUserProfileId = async () => {
     const userProfile = await getDefaultProfile();
+    console.log(userProfile);
     setUserProfileId(userProfile);
   };
 
@@ -97,19 +98,32 @@ export default function PostCard({ publicationId }) {
 
   const handleCreatePost = async () => {
     const content = publication.metadata.content;
+    const campaignsAddress = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
+    const redirectObj = {
+      urlToRedirect: 'https://github.com/FiveElementsLabs',
+      inflenserId: userProfileId,
+      campaignsAddress: campaignsAddress,
+    };
+
+    console.log('redirect obj: ', redirectObj);
+
+    const redirectIpfs = await uploadIpfsRedirect(redirectObj);
+    console.log('redirect ipfs: ', redirectIpfs);
 
     const url = content.match(/(((https?:\/\/)|(www\.))[^\s]+)/g) || [];
     const urlIndex = content.indexOf(url[0]) || [];
     const newContent =
       content.substring(0, urlIndex) +
-      'http://www.google.it' +
+      'https://lensbooster.xyz/redirect/' +
+      redirectIpfs.path +
       content.substring(urlIndex + url[0].length - 1, content.length);
 
     let publicationMetaData = JSON.parse(JSON.stringify(publication));
     publicationMetaData.metadata.content = newContent;
     const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
 
-    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path);
+    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path, campaignsAddress);
   };
 
   return (
