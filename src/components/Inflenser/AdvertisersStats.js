@@ -79,11 +79,11 @@ const CampaignsStatsTab = ({ ...props }) => {
         <Td fontSize={15} color="#00203F" fontWeight={600}>
           Fan Token summer special promotion
         </Td>
-        <Td fontWeight={300}>$ {campaign.earned} </Td>
+        <Td fontWeight={300}>$ {campaign.earned / 1e6} </Td>
         <Td fontWeight={300}>{campaign.mirrors}</Td>
         <Td fontWeight={300}>{campaign.clicks.toNumber()}</Td>
         <Td fontWeight={300}>{campaign.actions.toNumber()}</Td>
-        <Td fontWeight={300}>$ {campaign.earned}</Td>
+        <Td fontWeight={300}>$ {campaign.earned / 1e6}</Td>
       </Tr>
     </>
   );
