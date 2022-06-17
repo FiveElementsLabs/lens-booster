@@ -73,7 +73,7 @@ export default function Dashboard() {
               fontWeight={600}
               lineHeight={{ base: 1, md: 1.5 }}
             >
-              {totalEarn}
+              $ {totalEarn / 1e6}
             </Text>
           </Text>
 
