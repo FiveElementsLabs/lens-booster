@@ -98,14 +98,14 @@ export default function PostCard({ publicationId }) {
     const content = publication.metadata.content;
     const campaignsAddress = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
 
-    const redirectIpfs = await uploadIpfsRedirect(redirectObj);
-
     const url = content.match(/(((https?:\/\/)|(www\.))[^\s]+)/g) || [];
     const redirectObj = {
       urlToRedirect: url[0].slice(0, -1),
       inflenserId: userProfileId,
       campaignsAddress: campaignsAddress,
     };
+    const redirectIpfs = await uploadIpfsRedirect(redirectObj);
+
     const urlIndex = content.indexOf(url[0]) || [];
     const newContent =
       content.substring(0, urlIndex) +
