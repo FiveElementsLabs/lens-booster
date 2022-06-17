@@ -34,10 +34,13 @@ const NAV_ITEMS = [
   {
     label: 'INFLENSER',
     href: '/inflenser',
+<<<<<<< HEAD
   },
   {
     label: 'ADVERTISER',
     href: '/settings',
+=======
+>>>>>>> 763a9e041228ddf03a13a7029e21f4b99db074d8
   },
 ];
 
