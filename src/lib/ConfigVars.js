@@ -15,4 +15,4 @@ export const LENS_HUB_CONTRACT = '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d';
 // Check for updates here: https://docs.lens.dev/docs/metadata-standards
 export const LENS_PUBLICATION_METADATA_VERSION = '1.0.0';
 
-export const APP_ID = 'testing-lens-booster';
+export const APP_ID = 'Lens Booster';
