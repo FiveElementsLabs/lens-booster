@@ -68,7 +68,10 @@ export default function PostCard({ publicationId }) {
     setNumberOfClicks(numberOfClicksSum);
     setNumberOfPosts(numberOfAction.length);
 
+    console.log('userScore');
+
     const userScore = await getUserScore(userProfileId);
+    console.log('userscore', userScore);
 
     setPostPayout(Number(advertiserData[0]).toFixed(2) * userScore);
     setClickPayout(Number(advertiserData[3]).toFixed(2));
@@ -85,7 +88,7 @@ export default function PostCard({ publicationId }) {
   useEffect(() => {
     getPub();
     getUserProfileId();
-  }, []);
+  }, [provider]);
 
   useEffect(() => {
     getData();

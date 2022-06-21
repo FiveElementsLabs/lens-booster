@@ -1,41 +1,48 @@
-import { useEffect } from "react";
-import { ethers } from "ethers";
-import toast from "react-hot-toast";
-import { useSharedState } from "../context/store";
-import actions from "../context/actions";
-import networks from "../helpers/networks";
+import { useEffect } from 'react';
+import { ethers } from 'ethers';
+import toast from 'react-hot-toast';
+import { useSharedState } from '../context/store';
+import actions from '../context/actions';
+import networks from '../helpers/networks';
 
 export const useWallet = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const networkChanged = async () => {
-    const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-    const { name: network_name, chainId: chain_id } =
-      await Web3Provider.getNetwork();
-    dispatch({
-      type: actions.CHANGE_NETWORK,
-      payload: { network_name, chain_id, provider: Web3Provider },
-    });
+    if (!window.ethereum) {
+      const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+      const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
+      dispatch({
+        type: actions.CHANGE_NETWORK,
+        payload: { network_name, chain_id, provider: Web3Provider },
+      });
+    } else {
+      console.log('PROVIDER NO WALLET');
+
+      const Web3Provider = new ethers.getDefaultProvider('polygon');
+      console.log(Web3Provider);
+      const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
+      dispatch({
+        type: actions.CHANGE_NETWORK,
+        payload: { network_name, chain_id, provider: Web3Provider },
+      });
+    }
   };
 
   useEffect(() => {
-    window?.ethereum?.on("chainChanged", async () => await networkChanged());
+    window?.ethereum?.on('chainChanged', async () => await networkChanged());
 
     return () => {
-      window.ethereum.removeListener(
-        "chainChanged",
-        async () => await networkChanged()
-      );
+      window.ethereum.removeListener('chainChanged', async () => await networkChanged());
     };
   }, []);
 
   const connectMetamask = async () => {
-    if (!window.ethereum) toast.error("No compatible wallet found.");
+    if (!window.ethereum) toast.error('No compatible wallet found.');
 
     const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-    const account = (await Web3Provider.send("eth_requestAccounts", []))[0];
-    const { name: network_name, chainId: chain_id } =
-      await Web3Provider.getNetwork();
+    const account = (await Web3Provider.send('eth_requestAccounts', []))[0];
+    const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
 
     dispatch({
       type: actions.LOGIN_WALLET,
@@ -46,15 +53,14 @@ export const useWallet = () => {
   const loginWallet = async () => {
     try {
       await connectMetamask();
-      toast.success("Wallet connected");
+      toast.success('Wallet connected');
     } catch (err) {
       console.error(err);
     }
   };
 
   const autoLoginWallet = async () => {
-    const shouldAutoConnect =
-      window.localStorage.getItem("shouldConnectMetamask") === "true";
+    const shouldAutoConnect = window.localStorage.getItem('shouldConnectMetamask') === 'true';
 
     if (shouldAutoConnect) {
       await loginWallet();
@@ -63,19 +69,18 @@ export const useWallet = () => {
 
   const logoutWallet = async () => {
     dispatch({ type: actions.LOGOUT_WALLET });
-    toast.success("Wallet disconnected");
+    toast.success('Wallet disconnected');
   };
 
   const changeNetwork = async (networkName) => {
-    if (!window.ethereum) toast("No compatible wallet found.");
+    if (!window.ethereum) toast('No compatible wallet found.');
     try {
       await window.ethereum.request({
-        method: "wallet_addEthereumChain",
+        method: 'wallet_addEthereumChain',
         params: [{ ...networks[networkName] }],
       });
 
-      const { name: network_name, chainId: chain_id } =
-        await provider.getNetwork();
+      const { name: network_name, chainId: chain_id } = await provider.getNetwork();
       dispatch({
         type: actions.CHANGE_NETWORK,
         payload: { network_name, chain_id },

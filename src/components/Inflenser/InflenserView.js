@@ -9,8 +9,10 @@ import Campaigns from './Campaigns.js';
 
 export default function InflenserView() {
   const { loginWallet } = useWallet();
+  const [{ provider }, dispatch] = useSharedState();
 
   useEffect(() => {
+    console.log('PROVIDER');
     loginWallet();
   }, []);
 
