@@ -16,7 +16,7 @@ import { fetchPublication } from '../../hooks/usePublication';
 export default function PostCard({ publicationId }) {
   const { createPost } = useMirror();
   const { getDefaultProfile } = getPublicationURI();
-  const { getCampaigns } = useCampaignManager();
+  const { getCampaigns, getUserScore } = useCampaignManager();
   const { getAdvertiserPayouts, getNumberOfActions, getCampaignInfo } = useCampaign();
   const [{ provider }] = useSharedState();
 
@@ -68,7 +68,9 @@ export default function PostCard({ publicationId }) {
     setNumberOfClicks(numberOfClicksSum);
     setNumberOfPosts(numberOfAction.length);
 
-    setPostPayout(Number(advertiserData[0]).toFixed(2));
+    const userScore = await getUserScore(userProfileId);
+
+    setPostPayout(Number(advertiserData[0]).toFixed(2) * userScore);
     setClickPayout(Number(advertiserData[3]).toFixed(2));
     setActionPayout(Number(advertiserData[6]).toFixed(2));
 
@@ -114,9 +116,8 @@ export default function PostCard({ publicationId }) {
       content.substring(urlIndex + url[0].length - 1, content.length);
 
     let publicationMetaData = JSON.parse(JSON.stringify(publication));
-    publicationMetaData.metadata.content = newContent;
+    publicationMetaData.metadata.content = newContent + '\n\n #adv #lensbooster';
     const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
-
     await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path, campaignsAddress);
   };
 

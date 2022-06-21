@@ -94,12 +94,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "_publicationId",
+        "name": "_adProfileId",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_userId",
+        "name": "_publicationId",
         "type": "uint256"
       },
       {
@@ -164,7 +164,7 @@
         "type": "uint256"
       }
     ],
-    "name": "idBooster",
+    "name": "inflencerId",
     "outputs": [
       {
         "internalType": "uint256",
@@ -173,6 +173,13 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "removeExpiredCampaigns",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

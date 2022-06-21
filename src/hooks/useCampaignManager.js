@@ -59,6 +59,7 @@ export const useCampaignManager = () => {
     while (true) {
       try {
         const campaignAddresses = await CampaignManager.addressesCampaignAd(i);
+        const userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
         if (!campaignAddresses) break;
         const Campaign = new Contract(campaignAddresses, CampaignJson, signer);
         const inflenserProfile = await Campaign.getInflenserPayed(defaultProfile);
@@ -71,7 +72,8 @@ export const useCampaignManager = () => {
         campaignsPayed.push({
           name: pub.profile.name,
           picture: pub.profile.picture?.original?.url,
-          earned: payouts[0].toNumber() + payouts[3] * inflenserProfile[0] + payouts[6] * inflenserProfile[1],
+          earned:
+            payouts[0].toNumber() * userScore + payouts[3] * inflenserProfile[0] + payouts[6] * inflenserProfile[1],
           clicks: inflenserProfile[0],
           actions: inflenserProfile[1],
           mirrors: pub.stats.totalAmountOfMirrors,
@@ -87,5 +89,14 @@ export const useCampaignManager = () => {
     return campaignsPayed;
   };
 
-  return { getCampaigns, getUserStatsByCampaign, getCampaignsPublicationID };
+  const getUserScore = async (defaultProfile) => {
+    const signer = await provider.getSigner();
+    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+
+    const userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
+
+    return userScore;
+  };
+
+  return { getCampaigns, getUserStatsByCampaign, getCampaignsPublicationID, getUserScore };
 };
