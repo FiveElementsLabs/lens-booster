@@ -114,9 +114,8 @@ export default function PostCard({ publicationId }) {
       content.substring(urlIndex + url[0].length - 1, content.length);
 
     let publicationMetaData = JSON.parse(JSON.stringify(publication));
-    publicationMetaData.metadata.content = newContent;
+    publicationMetaData.metadata.content = newContent + '\n\n #adv #lensbooster';
     const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
-
     await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path, campaignsAddress);
   };
 
