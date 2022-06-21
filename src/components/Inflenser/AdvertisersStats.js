@@ -23,45 +23,46 @@ export default function AdvertisersStats() {
 
   return (
     <>
-      <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81">
-        <TableContainer>
-          <Table size="sm" variant="simple">
-            <Thead>
-              <Tr borderColor="gray.500">
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Advertiser
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Campaign title
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Earned
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Mirrors
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Clicks
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Events
-                </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
-                  Total earn
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {campaignsPayed.length != 0 &&
-                campaignsPayed.map((campaign, index) => (
+      {campaignsPayed.length != 0 && (
+        <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81">
+          <TableContainer>
+            <Table size="sm" variant="simple">
+              <Thead>
+                <Tr borderColor="gray.500">
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Advertiser
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Campaign title
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Earned
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Mirrors
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Clicks
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Events
+                  </Th>
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                    Total earn
+                  </Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {campaignsPayed.map((campaign, index) => (
                   <>
                     <CampaignsStatsTab key={index} campaign={campaign} />
                   </>
                 ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      </Box>
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Box>
+      )}
     </>
   );
 }
