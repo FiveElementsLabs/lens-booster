@@ -107,17 +107,14 @@ export default function PostCard({ publicationId }) {
     const redirectIpfs = await uploadIpfsRedirect(redirectObj);
 
     const urlIndex = content.indexOf(url[0]) || [];
-    const newContent =
-      content.substring(0, urlIndex) +
-      'https://lensbooster.xyz/redirect/' +
-      redirectIpfs.path +
-      content.substring(urlIndex + url[0].length - 1, content.length);
+    const newContent = `${content.substring(0, urlIndex)}https://lensbooster.xyz/redirect/${
+      redirectIpfs.path
+    }${content.substring(urlIndex + url[0].length - 1, content.length)}`;
 
     let publicationMetaData = JSON.parse(JSON.stringify(publication));
-    publicationMetaData.metadata.content = newContent;
+    publicationMetaData.metadata.content = `${newContent}\n\n #adv #lensbooster`;
     const ipfsContent = await uploadIpfs(publicationMetaData.metadata);
-
-    await createPost(userProfileId.toHexString(), 'https://ipfs.infura.io/ipfs/' + ipfsContent.path, campaignsAddress);
+    await createPost(userProfileId.toHexString(), `https://ipfs.infura.io/ipfs/${ipfsContent.path}`, campaignsAddress);
   };
 
   return (
