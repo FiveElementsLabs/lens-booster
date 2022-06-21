@@ -16,7 +16,7 @@ import { fetchPublication } from '../../hooks/usePublication';
 export default function PostCard({ publicationId }) {
   const { createPost } = useMirror();
   const { getDefaultProfile } = getPublicationURI();
-  const { getCampaigns } = useCampaignManager();
+  const { getCampaigns, getUserScore } = useCampaignManager();
   const { getAdvertiserPayouts, getNumberOfActions, getCampaignInfo } = useCampaign();
   const [{ provider }] = useSharedState();
 
@@ -68,16 +68,13 @@ export default function PostCard({ publicationId }) {
     setNumberOfClicks(numberOfClicksSum);
     setNumberOfPosts(numberOfAction.length);
 
-    setPostPayout(Number(advertiserData[0]).toFixed(2));
+    const userScore = await getUserScore(userProfileId);
+
+    setPostPayout(Number(advertiserData[0]).toFixed(2) * userScore);
     setClickPayout(Number(advertiserData[3]).toFixed(2));
     setActionPayout(Number(advertiserData[6]).toFixed(2));
 
-    setDuration(
-      moment
-        .duration(Number(campaignInfo[2]) * 1000)
-        .asDays()
-        .toFixed(2)
-    );
+    setDuration(moment().to(moment.unix(Number(campaignInfo[3]) + Number(campaignInfo[2]))));
     const budget =
       Number(Number(advertiserData[2]).toFixed(2)) +
       Number(Number(advertiserData[5]).toFixed(2)) +
@@ -242,10 +239,10 @@ export default function PostCard({ publicationId }) {
                     </Box>
                     <Box>
                       <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
-                        Duration
+                        Expiring
                       </Text>
                       <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        {duration} days
+                        {duration}
                       </Text>
                     </Box>
                   </Flex>
