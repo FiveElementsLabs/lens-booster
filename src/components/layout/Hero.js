@@ -28,7 +28,7 @@ export default function Hero() {
           fontFamily="'Prompt', sans-serif"
         >
           LensBooster
-          <Text fontSize="2xl" color="#5C6F81" fontWeight="300" fontFamily="'Roboto', sans-serif">
+          <Text fontSize="2xl" color="#5C6F81" fontWeight={400} fontFamily="'Roboto', sans-serif">
             <b>Boost</b> your content and <b>skyrocket your audience</b>
           </Text>
         </Heading>
@@ -46,6 +46,16 @@ export default function Hero() {
             display={{ base: 'block', md: 'initial' }}
             minW="inherit"
             w={{ base: '100%', md: 'auto' }}
+            fontFamily="'Prompt', sans-serif"
+            _hover={{
+              bg: '#FFA800',
+            }}
+            _focus={{
+              boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+            }}
+            _active={{
+              bg: '#FFA800',
+            }}
           >
             CREATE CAMPAIGN
           </Button>
@@ -56,6 +66,16 @@ export default function Hero() {
             minW="inherit"
             mt={{ base: 4, md: 0 }}
             w={{ base: '100%', md: 'auto' }}
+            fontFamily="'Prompt', sans-serif"
+            _hover={{
+              bg: '#FFA800',
+            }}
+            _focus={{
+              boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+            }}
+            _active={{
+              bg: '#FFA800',
+            }}
           >
             REPOST & EARN
           </Button>

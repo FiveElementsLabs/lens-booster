@@ -28,25 +28,25 @@ export default function AdvertisersStats() {
           <Table size="sm" variant="simple">
             <Thead>
               <Tr borderColor="gray.500">
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Advertiser
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Campaign title
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Earned
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Mirrors
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Clicks
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Events
                 </Th>
-                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
+                <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
                   Total earn
                 </Th>
               </Tr>
@@ -79,11 +79,11 @@ const CampaignsStatsTab = ({ ...props }) => {
         <Td fontSize={15} color="#00203F" fontWeight={600}>
           Fan Token summer special promotion
         </Td>
-        <Td fontWeight={300}>$ {campaign.earned / 1e6} </Td>
-        <Td fontWeight={300}>{campaign.mirrors}</Td>
-        <Td fontWeight={300}>{campaign.clicks.toNumber()}</Td>
-        <Td fontWeight={300}>{campaign.actions.toNumber()}</Td>
-        <Td fontWeight={300}>$ {campaign.earned / 1e6}</Td>
+        <Td fontWeight={400}>$ {campaign.earned / 1e6} </Td>
+        <Td fontWeight={400}>{campaign.mirrors}</Td>
+        <Td fontWeight={400}>{campaign.clicks.toNumber()}</Td>
+        <Td fontWeight={400}>{campaign.actions.toNumber()}</Td>
+        <Td fontWeight={400}>$ {campaign.earned / 1e6}</Td>
       </Tr>
     </>
   );

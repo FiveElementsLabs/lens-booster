@@ -37,11 +37,32 @@ export default function Connect(props) {
           color="white"
           fontFamily="'Prompt', sans-serif"
           height={{ base: '28px', md: '34px' }}
+          _hover={{
+            bg: '#FFA800',
+          }}
+          _focus={{
+            boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+          }}
+          _active={{
+            bg: '#FFA800',
+          }}
         >
           {window.innerWidth <= 640 ? 'LENS LOGIN' : 'LOGIN WITH LENS'}
         </Button>
       ) : (
-        <Button bg="#FF6827" color="white" fontFamily="'Prompt', sans-serif" height={{ base: '28px', md: '34px' }}>
+        <Button
+          bg="#FF6827"
+          color="white"
+          fontFamily="'Prompt', sans-serif"
+          height={{ base: '28px', md: '34px' }}
+          _hover={{ bg: '#FFA800' }}
+          _focus={{
+            boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+          }}
+          _active={{
+            bg: '#FFA800',
+          }}
+        >
           {shortenAddress(account)}
         </Button>
       )}
@@ -57,20 +78,57 @@ export default function Connect(props) {
                 {account}
               </Text>
               <Flex>
-                <Button variant="link" mr={6} size="sm" rightIcon={<CopyIcon />} onClick={onCopy}>
+                <Button
+                  variant="link"
+                  mr={6}
+                  size="sm"
+                  rightIcon={<CopyIcon />}
+                  onClick={onCopy}
+                  _hover={{
+                    bg: '#FFA800',
+                  }}
+                  _focus={{
+                    boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+                  }}
+                  _active={{
+                    bg: '#FFA800',
+                  }}
+                >
                   {hasCopied ? 'Copied' : 'Copy'}
                 </Button>
               </Flex>
             </Box>
 
             <Flex mb={3} id="modal-buttons">
-              <Button mr={3} onClick={onClose} colorScheme="blue">
+              <Button
+                mr={3}
+                onClick={onClose}
+                colorScheme="blue"
+                _hover={{
+                  bg: '#FFA800',
+                }}
+                _focus={{
+                  boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+                }}
+                _active={{
+                  bg: '#FFA800',
+                }}
+              >
                 Close
               </Button>
               <Button
                 variant="outline"
                 onClick={() => {
                   onClose();
+                }}
+                _hover={{
+                  bg: '#FFA800',
+                }}
+                _focus={{
+                  boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+                }}
+                _active={{
+                  bg: '#FFA800',
                 }}
               >
                 Disconnect wallet

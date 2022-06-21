@@ -39,6 +39,8 @@ export const fetchPublication = async (publicationId) => {
         );
         arrayJsxPost.push(
           <Link
+            fontWeight={600}
+            _hover={{ textDecoration: 'none' }}
             color="#1988F7"
             href={fetchedPublication.data.publication.metadata.content.substring(
               urlIndex[lastUrlIndex],
@@ -78,6 +80,8 @@ export const fetchPublication = async (publicationId) => {
 
         arrayJsxPost.push(
           <Link
+            fontWeight={600}
+            _hover={{ textDecoration: 'none' }}
             color="#1988F7"
             href={fetchedPublication.data.publication.metadata.content.substring(
               urlIndex[lastUrlIndex],
@@ -108,6 +112,8 @@ export const fetchPublication = async (publicationId) => {
       if (index == appIndex) {
         arrayJsxPost.push(
           <Link
+            fontWeight={600}
+            _hover={{ textDecoration: 'none' }}
             color="#1988F7"
             href={`https://lenster.xyz/u/${fetchedPublication.data.publication.metadata.content
               .substring(index, spaceIndex)
@@ -121,6 +127,8 @@ export const fetchPublication = async (publicationId) => {
         arrayJsxPost.push(
           <Box display="inline-flex">
             <Link
+              fontWeight={600}
+              _hover={{ textDecoration: 'none' }}
               color="#1988F7"
               href={`https://lenster.xyz/search?q=${fetchedPublication.data.publication.metadata.content
                 .substring(index, spaceIndex)

@@ -29,6 +29,15 @@ export default function DiscordAd() {
           borderRadius={8}
           padding={6}
           fontFamily="'Prompt', sans-serif"
+          _hover={{
+            bg: '#FFA800',
+          }}
+          _focus={{
+            boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+          }}
+          _active={{
+            bg: '#FFA800',
+          }}
         >
           <a href="https://discord.gg/bxfTM37Xyk">JOIN OUR DISCORD</a>
         </Button>

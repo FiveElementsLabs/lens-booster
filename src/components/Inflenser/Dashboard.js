@@ -61,7 +61,16 @@ export default function Dashboard() {
   }, [provider]);
   return (
     <>
-      <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="white" fontFamily="'Prompt', sans-serif" width="auto">
+      <Box
+        mt={8}
+        p={5}
+        borderRadius="20px"
+        boxShadow="lg"
+        bg="white"
+        fontFamily="'Prompt', sans-serif"
+        width="auto"
+        fontWeight={400}
+      >
         <Flex alignItems="center" display={{ base: 'block', md: 'flex' }}>
           <Text color="#FF6827" fontSize={26} textAlign="left" mb={{ base: '10px', md: '0' }}>
             Total earned

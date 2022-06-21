@@ -8,7 +8,7 @@ export default function HowItWorks() {
           How it works
         </Text>
       </Box>
-      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg" fontWeight="300">
+      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
         <Heading as="h5" mb={4} fontSize={30} color="#1A202C" fontFamily="'Prompt', sans-serif">
           What is Lens Booster
         </Heading>
@@ -16,7 +16,7 @@ export default function HowItWorks() {
           Lens Booster is a web3 advertising protocol built on Lens. The idea behind Lens Booster is to disintermediate{' '}
           <b>advertising</b> by creating a market between advertisers that want to promote contents and creators / users
           of Lens (inflensers) that can host the contents in their Lens profiles, visibile in various frontends (see{' '}
-          <Link color="#1988F7" href="https://lenster.xyz/">
+          <Link textDecoration="underline" color="#1988F7" href="https://lenster.xyz/" fontWeight={500}>
             Lenster.xyz
           </Link>
           ).
@@ -28,7 +28,7 @@ export default function HowItWorks() {
           Lens Booster is for users of Lens protocol and Lens applications such as Lenster.xyz
         </Text>
       </Box>
-      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg" fontWeight="300">
+      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
         <Box display={{ base: 'block', md: 'flex' }}>
           <Heading
             as="h5"
@@ -61,7 +61,7 @@ export default function HowItWorks() {
           the budget is distributed among Lens users.
         </Text>
       </Box>
-      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg" fontWeight="300">
+      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
         <Box display={{ base: 'block', md: 'flex' }}>
           <Heading
             as="h5"
@@ -94,7 +94,7 @@ export default function HowItWorks() {
           social media page.
         </Text>
       </Box>
-      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg" fontWeight="300">
+      <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
         <Heading as="h5" mb={4} fontSize={30} color="#1A202C" fontFamily="'Prompt', sans-serif">
           How the payoff is calculated
         </Heading>
@@ -133,7 +133,7 @@ export default function HowItWorks() {
           This is the equivalent of a referral fee for computing off chain actions.
         </Text>
 
-        <Link textDecoration="underline" color="#1988F7" fontSize={24}>
+        <Link textDecoration="underline" color="#1988F7" fontSize={24} fontWeight={500}>
           See an example
         </Link>
 

@@ -23,12 +23,15 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Link as LinkRouter } from 'react-router-dom';
 
+import LogoLight from '../icons/LogoLight';
 import LensBoosterIcon from '../icons/LensBoosterIcon';
 import Discord from '../icons/Discord';
 import Twitter from '../icons/Twitter';
 import Lens from '../icons/Lens';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const NAV_ITEMS = [
   {
@@ -60,14 +63,7 @@ export default function Navbar() {
             >
               <LinkRouter to={'/'}>
                 <Flex alignItems="center">
-                  <LensBoosterIcon width="60px" heigth="60px" />
-                  {isLargerThan640 ? (
-                    <Heading color="#00203F" fontSize={34}>
-                      Lens Booster
-                    </Heading>
-                  ) : (
-                    <></>
-                  )}
+                  {isLargerThan640 ? <LogoLight width="300px" /> : <LensBoosterIcon width="60px" heigth="60px" />}
                 </Flex>
               </LinkRouter>
               <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -82,16 +78,16 @@ export default function Navbar() {
             {isLargerThan640 && (
               <>
                 <Box mr={3}>
-                  <Link href="https://twitter.com/LensBooster">
+                  <Link href="https://twitter.com/LensBooster" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
                     <Twitter width="35px" heigth="24px" />
                   </Link>
                 </Box>
-                <Link href="https://www.lensfrens.xyz/lensbooster.lens">
+                <Link href="https://www.lensfrens.xyz/lensbooster.lens" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
                   <Box mr={3}>
                     <Lens width="35px" heigth="24px" />
                   </Box>
                 </Link>
-                <Link href="https://discord.gg/bxfTM37Xyk">
+                <Link href="https://discord.gg/bxfTM37Xyk" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
                   <Box mr={3}>
                     <Discord width="35px" heigth="24px" />
                   </Box>
@@ -130,8 +126,19 @@ const DesktopNav = () => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Link color="#5C6F81" fontSize="16px" fontFamily="'Prompt', sans-serif" fontWeight={500} href={navItem.href}>
+        <Box key={navItem.label} mt="5px">
+          <Link
+            _hover={{ textDecoration: 'none', color: '#FF6827' }}
+            color="#5C6F81"
+            fontSize="16px"
+            fontFamily="'Prompt', sans-serif"
+            fontWeight={600}
+            href={navItem.href}
+            {...(useLocation().pathname === navItem.href ? { color: '#FF6827' } : { color: '#5C6F81' })}
+            _focus={{
+              boxShadow: '0 0 0 0 #ffffff, 0 0 0 #ffffff',
+            }}
+          >
             {navItem.label.toUpperCase()}
           </Link>
         </Box>
@@ -157,16 +164,16 @@ const MobileNav = () => {
       ))}
       <Flex>
         <Box mx={3}>
-          <Link href="https://twitter.com/LensBooster">
+          <Link href="https://twitter.com/LensBooster" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
             <Twitter width="35px" heigth="24px" />
           </Link>
         </Box>
-        <Link href="https://www.lensfrens.xyz/lensbooster.lens">
+        <Link href="https://www.lensfrens.xyz/lensbooster.lens" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
           <Box mx={3}>
             <Lens width="35px" heigth="24px" />
           </Box>
         </Link>
-        <Link href="https://discord.gg/bxfTM37Xyk">
+        <Link href="https://discord.gg/bxfTM37Xyk" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
           <Box mx={3}>
             <Discord width="35px" heigth="24px" />
           </Box>

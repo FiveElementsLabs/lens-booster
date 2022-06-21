@@ -131,8 +131,9 @@ export default function PostCard({ publicationId }) {
             borderRadius="20px"
             textAlign="left"
             color="black"
-            minHeight="630px"
+            minHeight="642px"
             display={{ base: 'block', md: 'flex' }}
+            fontWeight={400}
           >
             <Box w={{ base: 'auto', md: '65%' }} fontSize="18px" mt={2}>
               <Flex marginBottom="1.5rem">
@@ -143,10 +144,15 @@ export default function PostCard({ publicationId }) {
                   }
                 />
                 <Box marginTop="auto" marginBottom="auto" marginLeft="1rem" fontSize="16px">
-                  <Text fontWeight={600} fontFamily="'Prompt', sans-serif">
+                  <Text fontWeight={500} fontFamily="'Prompt', sans-serif">
                     {publication.profile.name}
                   </Text>
-                  <Link color="#1988F7" href={`https://lenster.xyz/u/${publication.profile.handle}`}>
+                  <Link
+                    fontWeight={500}
+                    _hover={{ textDecoration: 'none' }}
+                    color="#1988F7"
+                    href={`https://lenster.xyz/u/${publication.profile.handle}`}
+                  >
                     @{publication.profile.handle}
                   </Link>
                 </Box>
@@ -248,7 +254,7 @@ export default function PostCard({ publicationId }) {
                         Duration
                       </Text>
                       <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        {duration} days
+                        {Number(duration).toFixed(0)} days
                       </Text>
                     </Box>
                   </Flex>
@@ -270,7 +276,7 @@ export default function PostCard({ publicationId }) {
                   </Flex>
                 </Box>
               </Box>
-              <Box marginTop={4} mb={{ base: 4, md: 0 }}>
+              <Box marginTop={4} mb={{ base: 4, md: 0 }} fontSize="20px">
                 <Flex gap={4} fontWeight={500}>
                   <Box marginLeft={{ base: 0, md: 5 }} flexBasis="100%">
                     <Button
@@ -295,6 +301,7 @@ export default function PostCard({ publicationId }) {
                       borderBottomRadius={settingState ? '0' : '8px'}
                       bg="#F0F3FA"
                       onClick={() => useSettingState(!settingState)}
+                      fontSize="20px"
                     >
                       Stats
                     </Button>
@@ -305,7 +312,8 @@ export default function PostCard({ publicationId }) {
                       pb={2}
                       lineHeight="20px"
                       display={settingState ? 'block' : 'none'}
-                      fontSize={17}
+                      borderBottomRadius="8px"
+                      paddingTop={2}
                     >
                       <Flex gap="2" mb={3}>
                         <Box>
@@ -370,6 +378,7 @@ export default function PostCard({ publicationId }) {
                       borderBottomRadius={statsState ? '0' : '8px'}
                       bg="#F0F3FA"
                       onClick={() => setStatsState(!statsState)}
+                      fontSize="20px"
                     >
                       Metrics
                     </Button>
@@ -380,7 +389,8 @@ export default function PostCard({ publicationId }) {
                       pb={2}
                       lineHeight="20px"
                       display={statsState ? 'block' : 'none'}
-                      fontSize={17}
+                      borderBottomRadius="8px"
+                      paddingTop={2}
                     >
                       <Flex gap="2" mb={3}>
                         <Box>
@@ -460,6 +470,16 @@ export default function PostCard({ publicationId }) {
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
                     onClick={() => handleCreatePost()}
+                    fontFamily="'Prompt', sans-serif"
+                    _hover={{
+                      bg: '#FFA800',
+                    }}
+                    _focus={{
+                      boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
+                    }}
+                    _active={{
+                      bg: '#FFA800',
+                    }}
                   >
                     POST
                   </Button>
