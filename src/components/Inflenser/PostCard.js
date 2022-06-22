@@ -68,12 +68,14 @@ export default function PostCard({ publicationId }) {
     setNumberOfClicks(numberOfClicksSum);
     setNumberOfPosts(numberOfAction.length);
 
-    console.log('userScore');
+    let userScore;
+    try {
+      userScore = await getUserScore(userProfileId);
+    } catch (error) {
+      console.log(error);
+    }
 
-    const userScore = await getUserScore(userProfileId);
-    console.log('userscore', userScore);
-
-    setPostPayout(Number(advertiserData[0]).toFixed(2) * userScore);
+    setPostPayout(Number(advertiserData[0]).toFixed(2) * (userScore || 1000));
     setClickPayout(Number(advertiserData[3]).toFixed(2));
     setActionPayout(Number(advertiserData[6]).toFixed(2));
 

@@ -19,7 +19,7 @@ const CREATE_PROFILE = `
  }
 `;
 
-const createProfileRequest = createProfileRequest => {
+const createProfileRequest = (createProfileRequest) => {
   return ApolloClient.mutate({
     mutation: gql(CREATE_PROFILE),
     variables: {
@@ -31,7 +31,6 @@ const createProfileRequest = createProfileRequest => {
 export const createProfile = async (address, handle, signer) => {
   console.log('create profile: address', address);
   console.log('create profile: signer', signer);
-  await login(address, signer);
 
   const createProfileResult = await createProfileRequest({ handle });
   prettyJSON('create profile: result', createProfileResult.data);
@@ -46,7 +45,7 @@ export const createProfile = async (address, handle, signer) => {
   const topicId = utils.id('ProfileCreated(uint256,address,address,string,string,address,bytes,string,uint256)');
   console.log('topicid we care about', topicId);
 
-  const profileCreatedLog = logs.find(l => l.topics[0] === topicId);
+  const profileCreatedLog = logs.find((l) => l.topics[0] === topicId);
   console.log('profile created log', profileCreatedLog);
 
   let profileCreatedEventLog = profileCreatedLog.topics;

@@ -84,7 +84,7 @@ const GET_PROFILES = `
   }
 `;
 
-const getProfilesRequest = request => {
+const getProfilesRequest = (request) => {
   return ApolloClient.query({
     query: gql(GET_PROFILES),
     variables: {
@@ -94,10 +94,6 @@ const getProfilesRequest = request => {
 };
 
 export const getProfiles = async (address, signer) => {
-  // console.log('profiles of: address', address);
-
-  await login(address, signer);
-
   const request = { ownedBy: address };
 
   const profilesFromProfileIds = await getProfilesRequest(request);

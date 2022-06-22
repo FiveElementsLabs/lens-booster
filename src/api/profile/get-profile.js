@@ -3,7 +3,6 @@ import ApolloClient from '../../lib/ApolloClient';
 import { login } from '../authentication/login';
 import { prettyJSON } from '../../lib/Helpers';
 
-
 const GET_PROFILE = `
 query Profiles {
     profiles(request: { handles: ["luduvigo.lens"], limit: 1 }) {
@@ -95,23 +94,20 @@ query Profiles {
   }
 `;
 
-const getProfileRequest = request => {
-    return ApolloClient.query({
-        query: gql(GET_PROFILE),
-        variables: {
-            request,
-        },
-    });
+const getProfileRequest = (request) => {
+  return ApolloClient.query({
+    query: gql(GET_PROFILE),
+    variables: {
+      request,
+    },
+  });
 };
 
-export const getProfile = async () => {
-    // console.log('profile of: address', address);
+export const getProfile = async (address, signer) => {
+  const request = { ownedBy: address };
+  const profileFromProfileIds = await getProfileRequest(request);
 
+  prettyJSON('profile: result', profileFromProfileIds.data);
 
-    const profileFromProfileIds = await getProfileRequest();
-
-    prettyJSON('profile: result', profileFromProfileIds.data);
-
-    return profileFromProfileIds.data;
+  return profileFromProfileIds.data;
 };
-

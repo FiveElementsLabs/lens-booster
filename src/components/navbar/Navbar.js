@@ -131,9 +131,11 @@ const DesktopNav = () => {
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Link color="#5C6F81" fontSize="16px" fontFamily="'Prompt', sans-serif" fontWeight={500} href={navItem.href}>
-            {navItem.label.toUpperCase()}
-          </Link>
+          <LinkRouter to={navItem.href}>
+            <Text color="#5C6F81" fontSize="16px" fontFamily="'Prompt', sans-serif" fontWeight={500}>
+              {navItem.label.toUpperCase()}
+            </Text>
+          </LinkRouter>
         </Box>
       ))}
     </Stack>

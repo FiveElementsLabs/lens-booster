@@ -26,18 +26,24 @@ export const useCampaignManager = () => {
 
   const getCampaignsPublicationID = async () => {
     const signer = await provider?.getSigner();
+    console.log('GETCAMPAIGN SIGNER', signer);
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+    console.log('GETCAMPAIGN CAMPAIGNMANAGER', CampaignManager);
     let i = 0;
     let pub = [];
     while (true) {
       try {
+        //console.log('PRE CAMPAIGN ADDRESS', i);
+        //console.log('owner: ', await CampaignManager.governance());
+
         const campaignAddress = await CampaignManager.addressesCampaignAd(i);
+        //console.log('GETCAMPAIGN CAMPAIGNADDRESS', campaignAddress);
+
         if (!campaignAddress) break;
         const Campaign = new Contract(campaignAddress, CampaignJson, signer);
 
         const campaignInfo = await Campaign.getCampaignInfo();
         pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
-
         i++;
       } catch (e) {
         console.log('Error fetching all pubids: ', e?.messagge);

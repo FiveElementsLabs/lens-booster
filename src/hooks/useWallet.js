@@ -9,24 +9,12 @@ export const useWallet = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const networkChanged = async () => {
-    if (!window.ethereum) {
-      const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-      const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
-      dispatch({
-        type: actions.CHANGE_NETWORK,
-        payload: { network_name, chain_id, provider: Web3Provider },
-      });
-    } else {
-      console.log('PROVIDER NO WALLET');
-
-      const Web3Provider = new ethers.getDefaultProvider('polygon');
-      console.log(Web3Provider);
-      const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
-      dispatch({
-        type: actions.CHANGE_NETWORK,
-        payload: { network_name, chain_id, provider: Web3Provider },
-      });
-    }
+    const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+    const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
+    dispatch({
+      type: actions.CHANGE_NETWORK,
+      payload: { network_name, chain_id, provider: Web3Provider },
+    });
   };
 
   useEffect(() => {
@@ -44,6 +32,8 @@ export const useWallet = () => {
     const account = (await Web3Provider.send('eth_requestAccounts', []))[0];
     const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
 
+    console.log('account', Web3Provider.getSigner());
+
     dispatch({
       type: actions.LOGIN_WALLET,
       payload: { account, provider: Web3Provider, network_name, chain_id },
@@ -54,6 +44,7 @@ export const useWallet = () => {
     try {
       await connectMetamask();
       toast.success('Wallet connected');
+      window.localStorage.setItem('walletConnected', true);
     } catch (err) {
       console.error(err);
     }
