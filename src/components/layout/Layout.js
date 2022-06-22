@@ -1,10 +1,31 @@
-import { Box, Container } from "@chakra-ui/react";
-import { Outlet } from "react-router-dom";
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Box, Container } from '@chakra-ui/react';
+import { useSharedState } from '../../context/store';
+import { useWallet } from '../../hooks/useWallet';
+import { checkJwtExpiration } from '../../lib/Helpers';
+import { login } from '../../api/authentication/login';
+import { getAuthenticationToken, removeAuthenticationToken } from '../../lib/State';
 
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
+import Navbar from '../navbar/Navbar';
+import Footer from '../footer/Footer';
 
 export default function Layout() {
+  const [{ account, provider }] = useSharedState();
+  const { autoLoginWallet } = useWallet();
+  useEffect(() => {
+    (async () => !account && window.localStorage.getItem('walletConnected') && (await autoLoginWallet()))();
+  }, []);
+
+  useEffect(() => {
+    account &&
+      !getAuthenticationToken() &&
+      (async () => {
+        const signer = await provider.getSigner();
+        if (signer) await login(account, signer);
+      })();
+  }, []);
+
   return (
     <>
       <Box position="relative" w="full" minH="100vh">

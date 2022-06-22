@@ -34,10 +34,8 @@ export const useCampaignManager = () => {
         const campaignAddress = await CampaignManager.addressesCampaignAd(i);
         if (!campaignAddress) break;
         const Campaign = new Contract(campaignAddress, CampaignJson, signer);
-
         const campaignInfo = await Campaign.getCampaignInfo();
         pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
-
         i++;
       } catch (e) {
         console.log('Error fetching all pubids: ', e?.messagge);

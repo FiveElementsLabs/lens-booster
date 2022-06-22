@@ -29,7 +29,7 @@ const Wrapper = ({ children }) => {
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter style={{ display: 'block' }}>
       <Wrapper>
         <Routes>
           <Route element={<Layout />}>

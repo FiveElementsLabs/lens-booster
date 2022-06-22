@@ -3,7 +3,7 @@
  *  via local storage.
  */
 
-export const setAuthenticationToken = token => {
+export const setAuthenticationToken = (token) => {
   localStorage.setItem('auth_token', token);
 };
 
@@ -13,4 +13,12 @@ export const getAuthenticationToken = () => {
 
 export const removeAuthenticationToken = () => {
   return localStorage.removeItem('auth_token');
+};
+
+export const setRefreshToken = (token) => {
+  localStorage.setItem('refresh_token', token);
+};
+
+export const getRefreshToken = () => {
+  return localStorage.getItem('refresh_token');
 };

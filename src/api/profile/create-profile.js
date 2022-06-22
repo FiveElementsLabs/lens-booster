@@ -19,7 +19,7 @@ const CREATE_PROFILE = `
  }
 `;
 
-const createProfileRequest = createProfileRequest => {
+const createProfileRequest = (createProfileRequest) => {
   return ApolloClient.mutate({
     mutation: gql(CREATE_PROFILE),
     variables: {
@@ -29,31 +29,20 @@ const createProfileRequest = createProfileRequest => {
 };
 
 export const createProfile = async (address, handle, signer) => {
-  console.log('create profile: address', address);
-  console.log('create profile: signer', signer);
-  await login(address, signer);
-
   const createProfileResult = await createProfileRequest({ handle });
   prettyJSON('create profile: result', createProfileResult.data);
 
-  console.log('create profile: poll until indexed');
   const result = await pollUntilIndexed(createProfileResult.data.createProfile.txHash);
-  console.log('create profile: profile has been indexed', result);
 
   const logs = result.txReceipt.logs;
-  console.log('create profile: logs', logs);
 
   const topicId = utils.id('ProfileCreated(uint256,address,address,string,string,address,bytes,string,uint256)');
-  console.log('topicid we care about', topicId);
 
-  const profileCreatedLog = logs.find(l => l.topics[0] === topicId);
-  console.log('profile created log', profileCreatedLog);
+  const profileCreatedLog = logs.find((l) => l.topics[0] === topicId);
 
   let profileCreatedEventLog = profileCreatedLog.topics;
-  console.log('profile created event logs', profileCreatedEventLog);
 
   const profileId = utils.defaultAbiCoder.decode(['uint256'], profileCreatedEventLog[1])[0];
-
   console.log('profile id', BigNumber.from(profileId).toHexString());
 
   return result.data;
