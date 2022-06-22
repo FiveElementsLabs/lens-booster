@@ -5,7 +5,7 @@ import { prettyJSON } from '../../lib/Helpers';
 
 const GET_PROFILE = `
 query Profiles {
-    profiles(request: { handles: ["luduvigo.lens"], limit: 1 }) {
+    profiles(request: { handles: , limit: 1 }) {
       items {
         id
         name
