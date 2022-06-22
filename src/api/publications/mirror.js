@@ -52,7 +52,6 @@ export const createMirror = async (signer, account, profileId, publicationId, po
   //     throw new Error("No Profile ID");
   //   }
 
-  console.log('createMirror signer: ', signer);
   const signedTypeData = async (domain, types, value) => {
     return await signer._signTypedData(
       omit(domain, '__typename'),
@@ -61,8 +60,6 @@ export const createMirror = async (signer, account, profileId, publicationId, po
     );
   };
 
-  console.log('create mirror: address', account);
-
   // For more info about the complete IPFS upload object:
   // See lib/ipfs on this repo,
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
@@ -70,11 +67,6 @@ export const createMirror = async (signer, account, profileId, publicationId, po
 
   //const ipfsResult = await uploadIpfs(mirrorMetaData);
   //console.log("create post: ipfs result", ipfsResult);
-
-  // hard coded to make the code example clear
-  console.log(profileId);
-  console.log(publicationId);
-  console.log('0x05e0-0x01');
 
   const createMirrorRequest = {
     profileId: profileId,
@@ -88,13 +80,10 @@ export const createMirror = async (signer, account, profileId, publicationId, po
   console.log(createMirrorRequest);
 
   const result = await createMirrorTypedData(createMirrorRequest);
-  console.log('create mirror: createMirrorTypedData', result);
 
   const typedData = result.data.createMirrorTypedData.typedData;
-  console.log('create mirror: typedData', typedData);
 
   const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);
-  console.log('create mirror: signature', signature);
 
   const splitSignature = (signature) => {
     return utils.splitSignature(signature);
@@ -102,13 +91,7 @@ export const createMirror = async (signer, account, profileId, publicationId, po
 
   const { v, r, s } = splitSignature(signature);
 
-  console.log('signer is: ', signer);
-
   const lensHub = new ethers.Contract(LENS_HUB_CONTRACT, LENS_HUB_ABI, signer);
-
-  console.log('before tx');
-
-  console.log('typedData: ', typedData);
 
   const tx = await lensHub.mirrorWithSig({
     profileId: '0x05de',
@@ -126,6 +109,5 @@ export const createMirror = async (signer, account, profileId, publicationId, po
     },
   });
 
-  console.log('create mirror: tx hash', tx.hash);
   return tx.hash;
 };

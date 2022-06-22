@@ -63,16 +63,12 @@ export const createPost = async (signer, account, postMetaData) => {
     );
   };
 
-  console.log('create post: address', account);
-
   // For more info about the complete IPFS upload object:
   // See lib/ipfs on this repo,
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
   // And see the docs: https://docs.lens.dev/docs/create-post-typed-data
 
-  console.log(postMetaData);
   const ipfsResult = await uploadIpfs(postMetaData);
-  console.log('create post: ipfs result', ipfsResult);
 
   // hard coded to make the code example clear
   const createPostRequest = {
@@ -102,16 +98,11 @@ export const createPost = async (signer, account, postMetaData) => {
     },
   };
 
-  console.log(createPostRequest);
-
   const result = await createPostTypedData(createPostRequest);
-  console.log('create post: createPostTypedData', result);
 
   const typedData = result.data.createPostTypedData.typedData;
-  console.log('create post: typedData', typedData);
 
   const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);
-  console.log('create post: signature', signature);
 
   const splitSignature = (signature) => {
     return utils.splitSignature(signature);
@@ -119,11 +110,7 @@ export const createPost = async (signer, account, postMetaData) => {
 
   const { v, r, s } = splitSignature(signature);
 
-  console.log('signer is: ', signer);
-
   const lensHub = new ethers.Contract(LENS_HUB_CONTRACT, LENS_HUB_ABI, signer);
-
-  console.log('before tx');
 
   const tx = await lensHub.postWithSig({
     profileId: typedData.value.profileId,

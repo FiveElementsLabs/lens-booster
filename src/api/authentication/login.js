@@ -42,10 +42,6 @@ const authenticate = (address, signature) => {
 };
 
 export const login = async (address, signer) => {
-  console.log('check expiration: ', await checkJwtExpiration());
-  console.log('auth token: ', getAuthenticationToken());
-  console.log('already logged in?: ', await checkJwtExpiration());
-
   if (await checkJwtExpiration()) {
     return {
       message: 'Already logged in',
@@ -55,16 +51,12 @@ export const login = async (address, signer) => {
 
   try {
     // We request a challenge from the server.
-    console.log('address', address);
     const challengeResponse = await generateChallenge(address);
-    console.log('challengeResponse', challengeResponse);
 
     // We sign the text with the wallet.
     const signature = await signer.signMessage(challengeResponse.data.challenge.text);
-    console.log('signature', signature);
 
     const accessTokens = await authenticate(address, signature);
-    console.log('accessTokens', accessTokens);
 
     prettyJSON('login result: ', accessTokens.data);
 

@@ -98,7 +98,5 @@ export const getProfiles = async (address, signer) => {
 
   const profilesFromProfileIds = await getProfilesRequest(request);
 
-  // prettyJSON('profiles: result', profilesFromProfileIds.data);
-
   return profilesFromProfileIds.data;
 };

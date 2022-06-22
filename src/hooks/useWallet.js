@@ -32,8 +32,6 @@ export const useWallet = () => {
     const account = (await Web3Provider.send('eth_requestAccounts', []))[0];
     const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
 
-    console.log('account', Web3Provider.getSigner());
-
     dispatch({
       type: actions.LOGIN_WALLET,
       payload: { account, provider: Web3Provider, network_name, chain_id },

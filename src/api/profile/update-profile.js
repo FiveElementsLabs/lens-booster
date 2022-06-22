@@ -24,8 +24,6 @@ export const updateProfile = async (address, profileMetaData) => {
     throw new Error('No profile ID found');
   }
 
-  console.log('update profile: address', address);
-
   const { profileId, name, bio, location, website, twitter } = profileMetaData;
 
   // Profile Metadata possible types
