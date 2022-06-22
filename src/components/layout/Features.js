@@ -7,10 +7,10 @@ const Feature = ({ title, text, icon }) => {
   return (
     <Box boxShadow="lg" borderRadius="20px" p={6} backgroundColor="#ffffff" h="95%">
       {icon}
-      <Text textAlign={'left'} fontWeight={600} mt={2} color="#00203F" fontSize={24} fontFamily="'Prompt', sans-serif">
+      <Text textAlign={'left'} mt={2} color="#00203F" fontSize={24} variant="title">
         {title}
       </Text>
-      <Text textAlign={'left'} color="#5C6F81" fontWeight={400}>
+      <Text textAlign={'left'} color="#5C6F81" fontSize="20px" mt={3}>
         {text}
       </Text>
     </Box>
@@ -27,9 +27,7 @@ export default function Features() {
             title={'Promote your campaign'}
             text={
               <>
-                <Text>
-                  <b>ADVERTISERS</b> launch Advertising campaigns to promote their content
-                </Text>
+                <b>ADVERTISERS</b> launch Advertising campaigns to promote their content
               </>
             }
           />
@@ -40,9 +38,7 @@ export default function Features() {
             title={'Share and Earn'}
             text={
               <>
-                <Text>
-                  <b>LENS USERS</b> repost advertised content to earn based on the size of their audience
-                </Text>
+                <b>LENS USERS</b> repost advertised content to earn based on the size of their audience
               </>
             }
           />
@@ -53,9 +49,7 @@ export default function Features() {
             title={'No middleman'}
             text={
               <>
-                <Text>
-                  Pay out <b>LENS USERS</b> who have boosted your content according to actions
-                </Text>
+                Pay out <b>LENS USERS</b> who have boosted your content according to actions
               </>
             }
           />

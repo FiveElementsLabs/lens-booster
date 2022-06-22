@@ -24,30 +24,30 @@ export default function AdvertisersStats() {
   return (
     <>
       {campaignsPayed.length != 0 && (
-        <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81">
-          <TableContainer>
-            <Table size="sm" variant="simple">
+        <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81"  >
+          <TableContainer >
+            <Table size="sm" variant="simple" >
               <Thead>
-                <Tr borderColor="gray.500">
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                <Tr borderColor="gray.500" >
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif " textTransform="none">
                     Advertiser
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif " textTransform="none">
                     Campaign title
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587"  fontFamily="'Prompt', sans-serif " textTransform="none">
                     Earned
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587"  fontFamily="'Prompt', sans-serif " textTransform="none">
                     Mirrors
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587"  fontFamily="'Prompt', sans-serif " textTransform="none">
                     Clicks
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587"  fontFamily="'Prompt', sans-serif " textTransform="none">
                     Events
                   </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif" textTransform="none">
+                  <Th fontSize={16} color="#1A4587"  fontFamily="'Prompt', sans-serif" textTransform="none">
                     Total earn
                   </Th>
                 </Tr>
@@ -71,7 +71,7 @@ const CampaignsStatsTab = ({ ...props }) => {
   const campaign = props.campaign;
   return (
     <>
-      <Tr>
+      <Tr fontWeight={400}>
         <Td fontSize={20} color="#00203F" fontFamily="'Prompt', sans-serif">
           <Avatar name={campaign.name} src={campaign.picture} size="xs" mr={2} fontWeight={600} />
           {campaign.name}

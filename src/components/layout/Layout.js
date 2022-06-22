@@ -7,7 +7,7 @@ import Footer from '../footer/Footer';
 export default function Layout() {
   return (
     <>
-      <Box position="absolute" w="full" minH="100vh" fontWeight={400}>
+      <Box position="absolute" w="full" minH="100vh">
         <Navbar />
 
         <Container maxW="container.xl" pb={{ base: 16, md: 28 }}>

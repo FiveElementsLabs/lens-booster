@@ -138,9 +138,7 @@ export default function PostCard({ publicationId }) {
                   }
                 />
                 <Box marginTop="auto" marginBottom="auto" marginLeft="1rem" fontSize="16px">
-                  <Text fontWeight={500} fontFamily="'Prompt', sans-serif">
-                    {publication.profile.name}
-                  </Text>
+                  <Text variant="inflenserPageTitles">{publication.profile.name}</Text>
                   <Link
                     fontWeight={500}
                     _hover={{ textDecoration: 'none' }}
@@ -150,11 +148,15 @@ export default function PostCard({ publicationId }) {
                     @{publication.profile.handle}
                   </Link>
                 </Box>
-                <Box marginLeft="auto" color="#5C6F81" fontSize={15}>
-                  {publication.createdAt && <Text whiteSpace="nowrap">{moment(publication.createdAt).fromNow()}</Text>}
+                <Box marginLeft="auto" color="#5C6F81">
+                  {publication.createdAt && (
+                    <Text fontSize={15} whiteSpace="nowrap">
+                      {moment(publication.createdAt).fromNow()}
+                    </Text>
+                  )}
                 </Box>
               </Flex>
-              <Text whiteSpace="pre-line" color="#00203F" w="90%" noOfLines={[numberOfLines, 1000]}>
+              <Text whiteSpace="pre-line" color="#00203F" w="90%" fontSize="20px" noOfLines={[numberOfLines, 1000]}>
                 {arrayJsxPost2.map((e) => e)}
               </Text>
               {!isLargerThan640 && (
@@ -212,11 +214,11 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Estimated payoff for inflenser
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        10 $
+                      <Text variant="inflenserPageTitles" color={'black'}>
+                        10
                       </Text>
                     </Box>
                   </Flex>
@@ -228,10 +230,10 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Remaining Budget
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {remainingBudget / 1e6} $
                       </Text>
                     </Box>
@@ -244,10 +246,10 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Expiring
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {duration}
                       </Text>
                     </Box>
@@ -260,10 +262,10 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         # of posts by inflensers
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {numberOfPosts}
                       </Text>
                     </Box>
@@ -314,10 +316,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Clicks
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfClicks}
                           </Text>
                         </Box>
@@ -327,10 +329,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Actions
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfEvents}
                           </Text>
                         </Box>
@@ -340,10 +342,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Re-Posts
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfPosts}
                           </Text>
                         </Box>
@@ -391,10 +393,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpC
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {clickPayout / 1e6} $
                           </Text>
                         </Box>
@@ -404,10 +406,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpA
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {actionPayout / 1e6} $
                           </Text>
                         </Box>
@@ -417,10 +419,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpP
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {postPayout / 1e6} $
                           </Text>
                         </Box>
@@ -451,29 +453,16 @@ export default function PostCard({ publicationId }) {
                     mb={{ base: 4, md: 0 }}
                   >
                     Sponsored content with&nbsp;
-                    <Text color="#1988F7" textDecorationLine="underline">
+                    <Text fontSize="15px" fontStyle="italic" color="#1988F7" textDecorationLine="underline">
                       Booster
                     </Text>
                   </Box>
 
                   <Button
-                    bg="#FF6827"
-                    color="white"
-                    fontSize="16px"
                     padding="15px 14px"
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
                     onClick={() => handleCreatePost()}
-                    fontFamily="'Prompt', sans-serif"
-                    _hover={{
-                      bg: '#FFA800',
-                    }}
-                    _focus={{
-                      boxShadow: '0 0 0 0 #FFA800, 0 0 0 #FFA800',
-                    }}
-                    _active={{
-                      bg: '#FFA800',
-                    }}
                   >
                     POST
                   </Button>

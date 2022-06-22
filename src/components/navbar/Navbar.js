@@ -20,6 +20,7 @@ import {
   Spacer,
 } from '@chakra-ui/react';
 
+import { useLocation } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Link as LinkRouter } from 'react-router-dom';
 
@@ -27,13 +28,17 @@ import LogoLight from '../icons/LogoLight';
 import LensBoosterIcon from '../icons/LensBoosterIcon';
 import Discord from '../icons/Discord';
 import Twitter from '../icons/Twitter';
+import Medium from '../icons/Medium';
 import Lens from '../icons/Lens';
+import Docs from '../icons/Docs';
 import Connect from './Connect.js';
 import SelectProfile from './SelectProfile.js';
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 const NAV_ITEMS = [
+  {
+    label: 'HOW IT WORKS',
+    href: '/#howitworks',
+  },
   {
     label: 'INFLENSER',
     href: '/inflenser',
@@ -92,6 +97,20 @@ export default function Navbar() {
                     <Discord width="35px" heigth="24px" />
                   </Box>
                 </Link>
+                <Box marginRight={3}>
+                  <Link href="https://medium.com/@LensBooster" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
+                    <Medium width="35px" heigth="24px" />
+                  </Link>
+                </Box>
+                <Box marginRight={3}>
+                  <Link
+                    href="https://fiveelementslabs.gitbook.io/lensbooster/introduction/lensbooster"
+                    fill="#5C6F81"
+                    _hover={{ fill: '#FF6827' }}
+                  >
+                    <Docs width="35px" heigth="24px" />
+                  </Link>
+                </Box>
               </>
             )}
             <Spacer display={{ base: 'initial', md: 'none' }} />
@@ -126,7 +145,7 @@ const DesktopNav = () => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label} mt="5px">
+        <Box key={navItem.label}>
           <Link
             _hover={{ textDecoration: 'none', color: '#FF6827' }}
             color="#5C6F81"
@@ -178,6 +197,20 @@ const MobileNav = () => {
             <Discord width="35px" heigth="24px" />
           </Box>
         </Link>
+        <Box mx={3}>
+          <Link href="https://medium.com/@LensBooster" fill="#5C6F81" _hover={{ fill: '#FF6827' }}>
+            <Medium width="35px" heigth="24px" />
+          </Link>
+        </Box>
+        <Box mx={3}>
+          <Link
+            href="https://fiveelementslabs.gitbook.io/lensbooster/introduction/lensbooster"
+            fill="#5C6F81"
+            _hover={{ fill: '#FF6827' }}
+          >
+            <Docs width="35px" heigth="24px" />
+          </Link>
+        </Box>
       </Flex>
     </Stack>
   );

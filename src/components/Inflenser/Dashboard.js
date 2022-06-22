@@ -1,20 +1,4 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Spacer,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Td,
-  Tbody,
-  Avatar,
-  Heading,
-  Divider,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Text, Flex, Spacer, Button, useMediaQuery } from '@chakra-ui/react';
 
 import AdvertisersStats from './AdvertisersStats';
 import AdvertisersStatsMobile from './AdvertisersStatsMobile';
@@ -62,16 +46,7 @@ export default function Dashboard() {
   return (
     <>
       {totalEarn != 0 && (
-        <Box
-          mt={8}
-          p={5}
-          borderRadius="20px"
-          boxShadow="lg"
-          bg="white"
-          fontFamily="'Prompt', sans-serif"
-          width="auto"
-          fontWeight={400}
-        >
+        <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="white" fontFamily="'Prompt', sans-serif" width="auto">
           <Flex alignItems="center" display={{ base: 'block', md: 'flex' }}>
             <Text color="#FF6827" fontSize={26} textAlign="left" mb={{ base: '10px', md: '0' }}>
               Total earned
@@ -89,7 +64,7 @@ export default function Dashboard() {
             <Spacer />
             <Text color="#1A4587" fontSize={24} textAlign="left" mb={{ base: '10px', md: '0' }}>
               Total mirrors
-              <Text color="#00203F" fontSize={24} verticalAlign="center " textAlign="left" fontWeight={600}>
+              <Text color="#00203F" fontSize={24} verticalAlign="center" textAlign="left" fontWeight={600}>
                 {totalMirror}
               </Text>
             </Text>
