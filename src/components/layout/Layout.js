@@ -19,12 +19,13 @@ export default function Layout() {
 
   useEffect(() => {
     account &&
-      !getAuthenticationToken() &&
       (async () => {
         const signer = await provider.getSigner();
-        if (signer) await login(account, signer);
+        console.log(getAuthenticationToken());
+        console.log(await checkJwtExpiration());
+        if (!getAuthenticationToken() && !(await checkJwtExpiration())) if (signer) await login(account, signer);
       })();
-  }, []);
+  }, [provider]);
 
   return (
     <>
