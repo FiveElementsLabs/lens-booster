@@ -34,9 +34,19 @@ export default function PostCard({ publicationId }) {
   const [clickPayout, setClickPayout] = useState(0);
   const [actionPayout, setActionPayout] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [expired, setExpired] = useState(false);
   const [remainingBudget, setRemainingBudget] = useState(0);
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
   let profileIdPostId = publicationId.split('-');
+
+  const getExpiration = async () => {
+    const campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
+    const campaignInfo = await getCampaignInfo(campaigns);
+
+    setExpired(Number(campaignInfo[3]) + Number(campaignInfo[2]) > Date.now() / 1000);
+    return true;
+  };
 
   const getUserProfileId = async () => {
     const userProfile = await getDefaultProfile();
@@ -44,6 +54,7 @@ export default function PostCard({ publicationId }) {
   };
 
   const getPub = async () => {
+    if (!(await getExpiration())) return;
     const fetchedData = await fetchPublication(publicationId);
 
     setArrayJsxPost2(fetchedData.arrayJsxPost);
@@ -57,6 +68,7 @@ export default function PostCard({ publicationId }) {
     const numberOfAction = await getNumberOfActions(campaigns);
     const advertiserData = await getAdvertiserPayouts(campaigns);
     const campaignInfo = await getCampaignInfo(campaigns);
+
     let numberOfEventsSum = 0;
     let numberOfClicksSum = 0;
 
@@ -88,6 +100,7 @@ export default function PostCard({ publicationId }) {
   };
 
   useEffect(() => {
+    getExpiration();
     getPub();
     getUserProfileId();
   }, [provider]);
@@ -121,7 +134,7 @@ export default function PostCard({ publicationId }) {
 
   return (
     <>
-      {publication?.metadata && (
+      {publication?.metadata && expired && (
         <>
           <Flex
             bg="white"

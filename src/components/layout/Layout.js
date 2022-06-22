@@ -25,7 +25,7 @@ export default function Layout() {
         console.log(await checkJwtExpiration());
         if (!getAuthenticationToken() && !(await checkJwtExpiration())) if (signer) await login(account, signer);
       })();
-  }, [provider]);
+  }, [provider, account]);
 
   return (
     <>
