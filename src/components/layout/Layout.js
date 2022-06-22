@@ -24,7 +24,7 @@ export default function Layout() {
         const signer = await provider.getSigner();
         if (signer) await login(account, signer);
       })();
-  }, []);
+  }, [account]);
 
   return (
     <>
