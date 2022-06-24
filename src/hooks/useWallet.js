@@ -27,7 +27,6 @@ export const useWallet = () => {
 
   const connectMetamask = async () => {
     if (!window.ethereum) toast.error('No compatible wallet found.');
-
     const Web3Provider = new ethers.providers.Web3Provider(window.ethereum);
     const account = (await Web3Provider.send('eth_requestAccounts', []))[0];
     const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
@@ -35,6 +34,20 @@ export const useWallet = () => {
     dispatch({
       type: actions.LOGIN_WALLET,
       payload: { account, provider: Web3Provider, network_name, chain_id },
+    });
+  };
+
+  const getDefaultProvider = async () => {
+    const Web3Provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com');
+    console.log('DEFAULT PROVIDER');
+    const { name: network_name, chainId: chain_id } = await Web3Provider.getNetwork();
+    dispatch({
+      type: actions.LOGIN_WALLET,
+      payload: {
+        provider: Web3Provider,
+        network_name,
+        chain_id,
+      },
     });
   };
 
@@ -58,6 +71,8 @@ export const useWallet = () => {
 
   const logoutWallet = async () => {
     dispatch({ type: actions.LOGOUT_WALLET });
+    window.localStorage.removeItem('walletConnected');
+
     toast.success('Wallet disconnected');
   };
 
@@ -79,5 +94,5 @@ export const useWallet = () => {
     }
   };
 
-  return { loginWallet, autoLoginWallet, logoutWallet, changeNetwork };
+  return { loginWallet, autoLoginWallet, logoutWallet, changeNetwork, getDefaultProvider };
 };

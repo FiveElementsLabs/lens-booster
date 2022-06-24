@@ -28,7 +28,7 @@ export const getPublicationURI = () => {
       const signer = await provider.getSigner();
 
       const LensHub = new Contract('0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d', LensHubAbi, signer);
-      profileId = await LensHub.defaultProfile(account);
+      if (account) profileId = await LensHub.defaultProfile(account);
     } catch (e) {
       console.log('Failed with error: ', e?.message);
     }
