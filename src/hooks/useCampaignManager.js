@@ -90,8 +90,8 @@ export const useCampaignManager = () => {
   const getUserScore = async (defaultProfile) => {
     const signer = await provider.getSigner();
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
-
-    const userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
+    let userScore = 0;
+    if (defaultProfile) userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
 
     return userScore;
   };
