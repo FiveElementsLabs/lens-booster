@@ -36,12 +36,12 @@ export default function Router() {
             <Route path="/" index element={<Home />} />
             <Route path="/:profileId" element={<Profile />} />
             <Route path="/profile/:profileHandle" element={<ProfileView />} />
-            <Route path="redirect/:ipfshash" element={<RedirectView />} />
             <Route path="/inflenser" element={<Inflenser />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/track" element={<Track />} />
             <Route path="*" element={<NotFound />} /> {/* 404 like page*/}
           </Route>
+          <Route path="redirect/:ipfshash" element={<RedirectView />} />
         </Routes>
       </Wrapper>
     </BrowserRouter>
