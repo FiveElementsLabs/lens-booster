@@ -44,15 +44,12 @@ export const checkJwtExpiration = async () => {
 
   if (expiration.getTime() - now.getTime() < fiveMinute) {
     removeAuthenticationToken();
-
     if (getRefreshToken() && expirationRefreash.getTime() - now.getTime() > 0) {
-      console.log('REFRESH TOKEN EXPIRED');
       const newToken = await refreshJwt(getRefreshToken());
       setRefreshToken(newToken.data.refresh.refreshToken);
       setAuthenticationToken(newToken.data.refresh.accessToken);
       return true;
     }
-
     return false;
   }
   return true;
