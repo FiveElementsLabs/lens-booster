@@ -31,19 +31,11 @@ export default function Connect(props) {
   return (
     <>
       {!account ? (
-        <Button
-          onClick={loginWallet}
-          bg="#FF6827"
-          color="white"
-          fontFamily="'Prompt', sans-serif"
-          height={{ base: '28px', md: '34px' }}
-        >
+        <Button onClick={loginWallet} height={{ base: '28px', md: '34px' }}>
           {window.innerWidth <= 640 ? 'LENS LOGIN' : 'LOGIN WITH LENS'}
         </Button>
       ) : (
-        <Button bg="#FF6827" color="white" fontFamily="'Prompt', sans-serif" height={{ base: '28px', md: '34px' }}>
-          {shortenAddress(account)}
-        </Button>
+        <Button height={{ base: '28px', md: '34px' }}>{shortenAddress(account)}</Button>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -57,18 +49,17 @@ export default function Connect(props) {
                 {account}
               </Text>
               <Flex>
-                <Button variant="link" mr={6} size="sm" rightIcon={<CopyIcon />} onClick={onCopy}>
+                <Button mr={6} size="sm" rightIcon={<CopyIcon />} onClick={onCopy}>
                   {hasCopied ? 'Copied' : 'Copy'}
                 </Button>
               </Flex>
             </Box>
 
             <Flex mb={3} id="modal-buttons">
-              <Button mr={3} onClick={onClose} colorScheme="blue">
+              <Button mr={3} onClick={onClose}>
                 Close
               </Button>
               <Button
-                variant="outline"
                 onClick={() => {
                   onClose();
                 }}

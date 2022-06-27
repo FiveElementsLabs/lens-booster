@@ -22,7 +22,7 @@ export default function PostCard({ publicationId }) {
 
   const [publication, setPublication] = useState(<></>);
   const [linkExternal, setLinkExternal] = useState('');
-  const [arrayJsxPost2, setArrayJsxPost2] = useState(<></>);
+  const [arrayJsxPost, setArrayJsxPost] = useState(<></>);
   const [settingState, useSettingState] = useState(false);
   const [statsState, setStatsState] = useState(false);
   const [userProfileId, setUserProfileId] = useState('');
@@ -53,7 +53,7 @@ export default function PostCard({ publicationId }) {
     if (!(await getExpiration())) return;
     const fetchedData = await fetchPublication(publicationId);
 
-    setArrayJsxPost2(fetchedData.arrayJsxPost);
+    setArrayJsxPost(fetchedData.arrayJsxPost);
     setPublication(fetchedData.fetchedPublication);
     setLinkExternal(fetchedData.linkExternal);
   };
@@ -142,8 +142,9 @@ export default function PostCard({ publicationId }) {
             borderRadius="20px"
             textAlign="left"
             color="black"
-            minHeight="630px"
+            minHeight="642px"
             display={{ base: 'block', md: 'flex' }}
+            fontWeight={400}
           >
             <Box w={{ base: 'auto', md: '65%' }} fontSize="18px" mt={2}>
               <Flex marginBottom="1.5rem">
@@ -154,41 +155,32 @@ export default function PostCard({ publicationId }) {
                   }
                 />
                 <Box marginTop="auto" marginBottom="auto" marginLeft="1rem" fontSize="16px">
-                  <Text fontWeight={600} fontFamily="'Prompt', sans-serif">
-                    {publication.profile.name}
-                  </Text>
-                  <Link color="#1988F7" href={`https://lenster.xyz/u/${publication.profile.handle}`}>
+                  <Text variant="inflenserPageTitles">{publication.profile.name}</Text>
+                  <Link
+                    fontWeight={500}
+                    _hover={{ textDecoration: 'none' }}
+                    color="#1988F7"
+                    href={`https://lenster.xyz/u/${publication.profile.handle}`}
+                  >
                     @{publication.profile.handle}
                   </Link>
                 </Box>
-                <Box marginLeft="auto" color="#5C6F81" fontSize={15}>
-                  {publication.createdAt && <Text whiteSpace="nowrap">{moment(publication.createdAt).fromNow()}</Text>}
+                <Box marginLeft="auto" color="#5C6F81">
+                  {publication.createdAt && (
+                    <Text fontSize={15} whiteSpace="nowrap">
+                      {moment(publication.createdAt).fromNow()}
+                    </Text>
+                  )}
                 </Box>
               </Flex>
-              <Text whiteSpace="pre-line" color="#00203F" w="90%" noOfLines={[numberOfLines, 1000]}>
-                {arrayJsxPost2.map((e) => e)}
+              <Text whiteSpace="pre-line" color="#00203F" w="90%" fontSize="20px" noOfLines={[numberOfLines, 1000]}>
+                {arrayJsxPost.map((e) => e)}
               </Text>
               {!isLargerThan640 && (
                 <Button
-                  mt="10px"
-                  fontStyle="italic"
-                  bg="white"
-                  fontSize="15px"
+                  variant="showLessMore"
                   onClick={() => (numberOfLines == 100 ? setNumberOfLines(3) : setNumberOfLines(100))}
-                  _focus={{
-                    boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                  }}
-                  _hover={{ bg: 'white' }}
-                  _active={{
-                    bg: 'white',
-                    transform: 'scale(1)',
-                    borderColor: 'white',
-                  }}
                   rightIcon={numberOfLines == 3 ? <ChevronDownIcon color="black" /> : <ChevronUpIcon color="black" />}
-                  justifyContent="center"
-                  marginLeft="auto"
-                  paddingInlineStart={0}
-                  paddingInlineEnd={0}
                 >
                   {numberOfLines == 100 ? 'Show Less' : 'Show More'}
                 </Button>
@@ -223,11 +215,11 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Estimated payoff for inflenser
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
-                        10 $
+                      <Text variant="inflenserPageTitles" color={'black'}>
+                        10
                       </Text>
                     </Box>
                   </Flex>
@@ -239,10 +231,10 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Remaining Budget
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {remainingBudget / 1e6} $
                       </Text>
                     </Box>
@@ -255,10 +247,10 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         Expiring
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {duration}
                       </Text>
                     </Box>
@@ -271,40 +263,26 @@ export default function PostCard({ publicationId }) {
                       <InfoOutlineIcon color="#5C6F81" />
                     </Box>
                     <Box>
-                      <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                      <Text variant="inflenserPageTitles" color="#1A4587">
                         # of posts by inflensers
                       </Text>
-                      <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                      <Text variant="inflenserPageTitles" color={'black'}>
                         {numberOfPosts}
                       </Text>
                     </Box>
                   </Flex>
                 </Box>
               </Box>
-              <Box marginTop={4} mb={{ base: 4, md: 0 }}>
+              <Box marginTop={4} mb={{ base: 4, md: 0 }} fontSize="20px">
                 <Flex gap={4} fontWeight={500}>
                   <Box marginLeft={{ base: 0, md: 5 }} flexBasis="100%">
                     <Button
-                      justifyContent="space-between"
+                      variant="postcardStats"
                       p={5}
-                      fontFamily="'Prompt', sans-serif"
-                      color="#1A4587"
-                      w="100%"
-                      align="left"
                       rightIcon={
                         !settingState ? <TriangleDownIcon color="#FF6827" /> : <TriangleUpIcon color="#FF6827" />
                       }
-                      _focus={{
-                        boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                      }}
-                      _hover={{ bg: '#F0F3FA' }}
-                      _active={{
-                        bg: '#F0F3FA',
-                        transform: 'scale(1)',
-                        borderColor: '#F0F3FA',
-                      }}
                       borderBottomRadius={settingState ? '0' : '8px'}
-                      bg="#F0F3FA"
                       onClick={() => useSettingState(!settingState)}
                     >
                       Stats
@@ -316,17 +294,18 @@ export default function PostCard({ publicationId }) {
                       pb={2}
                       lineHeight="20px"
                       display={settingState ? 'block' : 'none'}
-                      fontSize={17}
+                      borderBottomRadius="8px"
+                      paddingTop={2}
                     >
                       <Flex gap="2" mb={3}>
                         <Box>
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Clicks
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfClicks}
                           </Text>
                         </Box>
@@ -336,10 +315,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Actions
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfEvents}
                           </Text>
                         </Box>
@@ -349,10 +328,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             Re-Posts
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {numberOfPosts}
                           </Text>
                         </Box>
@@ -361,25 +340,12 @@ export default function PostCard({ publicationId }) {
                   </Box>
                   <Box flexBasis="100%">
                     <Button
-                      justifyContent="space-between"
+                      variant="postcardStats"
                       p={5}
-                      fontFamily="'Prompt', sans-serif"
-                      color="#1A4587"
-                      w="100%"
                       rightIcon={
                         !statsState ? <TriangleDownIcon color="#FF6827" /> : <TriangleUpIcon color="#FF6827" />
                       }
-                      _focus={{
-                        boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                      }}
-                      _active={{
-                        bg: '#F0F3FA',
-                        transform: 'scale(1)',
-                        borderColor: '#F0F3FA',
-                      }}
-                      _hover={{ bg: '#F0F3FA' }}
                       borderBottomRadius={statsState ? '0' : '8px'}
-                      bg="#F0F3FA"
                       onClick={() => setStatsState(!statsState)}
                     >
                       Metrics
@@ -391,17 +357,18 @@ export default function PostCard({ publicationId }) {
                       pb={2}
                       lineHeight="20px"
                       display={statsState ? 'block' : 'none'}
-                      fontSize={17}
+                      borderBottomRadius="8px"
+                      paddingTop={2}
                     >
                       <Flex gap="2" mb={3}>
                         <Box>
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpC
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {clickPayout / 1e6} $
                           </Text>
                         </Box>
@@ -411,10 +378,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpA
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {actionPayout / 1e6} $
                           </Text>
                         </Box>
@@ -424,10 +391,10 @@ export default function PostCard({ publicationId }) {
                           <InfoOutlineIcon color="#5C6F81" />
                         </Box>
                         <Box>
-                          <Text fontFamily="'Prompt', sans-serif" color="#1A4587">
+                          <Text variant="inflenserPageTitles" color="#1A4587">
                             CpP
                           </Text>
-                          <Text fontFamily="'Roboto', sans-serif" color={'black'} fontWeight={600}>
+                          <Text variant="inflenserPageTitles" color={'black'}>
                             {postPayout / 1e6} $
                           </Text>
                         </Box>
@@ -458,14 +425,11 @@ export default function PostCard({ publicationId }) {
                     mb={{ base: 4, md: 0 }}
                   >
                     Sponsored content with&nbsp;
-                    <Text color="#1988F7" textDecorationLine="underline">
+                    <Text fontSize="15px" fontStyle="italic" color="#1988F7" textDecorationLine="underline">
                       Booster
                     </Text>
                   </Box>
                   <Button
-                    bg="#FF6827"
-                    color="white"
-                    fontSize="16px"
                     padding="15px 14px"
                     w={{ base: '100%', md: '38%' }}
                     h="auto"

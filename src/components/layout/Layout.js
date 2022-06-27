@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
 import { Box, Container } from '@chakra-ui/react';
+import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useSharedState } from '../../context/store';
 import { useWallet } from '../../hooks/useWallet';
 import { checkJwtExpiration } from '../../lib/Helpers';
 import { login } from '../../api/authentication/login';
-import { getAuthenticationToken, removeAuthenticationToken } from '../../lib/State';
+import { getAuthenticationToken } from '../../lib/State';
 
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
@@ -29,10 +29,10 @@ export default function Layout() {
 
   return (
     <>
-      <Box position="relative" w="full" minH="100vh">
+      <Box position="absolute" w="full" minH="100vh">
         <Navbar />
 
-        <Container maxW="container.xl" pb={{ base: 16, md: 28 }}>
+        <Container w="90%" maxW="container.2xl" pb={{ base: 16, md: 28 }}>
           <Outlet />
         </Container>
 

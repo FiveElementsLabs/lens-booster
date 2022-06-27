@@ -1,4 +1,4 @@
-const FiveElementsFooter = (props) => (
+const FiveElements = (props) => (
   <svg width={19} height={19} fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M10.975 3.638h-.012a7.53 7.53 0 0 0-1.116.289l-.07.023c3.608 2.123 4.957 4.907 4.957 4.907a1.234 1.234 0 0 0 2.287-.915l-.007-.022v-.013a4.039 4.039 0 0 0-.323-.604 7.66 7.66 0 0 0-.989-1.21 22.041 22.041 0 0 0-.56-.557C14.792 2 13.076 0 13.076 0c.357 1.39.56 2.815.605 4.25a17.263 17.263 0 0 0-1.05-.766 14.75 14.75 0 0 0-1.655.154Z"
@@ -15,4 +15,4 @@ const FiveElementsFooter = (props) => (
   </svg>
 );
 
-export default FiveElementsFooter;
+export default FiveElements;

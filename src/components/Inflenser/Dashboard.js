@@ -1,20 +1,4 @@
-import {
-  Box,
-  Text,
-  Flex,
-  Spacer,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Td,
-  Tbody,
-  Avatar,
-  Heading,
-  Divider,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Text, Flex, Spacer, Button, useMediaQuery } from '@chakra-ui/react';
 
 import AdvertisersStats from './AdvertisersStats';
 import AdvertisersStatsMobile from './AdvertisersStatsMobile';
@@ -77,7 +61,6 @@ export default function Dashboard() {
                 $ {totalEarn / 1e6}
               </Text>
             </Text>
-
             <Spacer />
             <Text color="#1A4587" fontSize={24} textAlign="left" mb={{ base: '10px', md: '0' }}>
               Total mirrors

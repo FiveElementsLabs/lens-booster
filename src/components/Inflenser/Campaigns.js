@@ -20,8 +20,10 @@ export default function Dashboard() {
   }, [provider]);
   return (
     <>
-      <Box bg="#1A4587" p={5} mt={8} borderRadius="20px">
-        <Heading color="white">Active Campaigns</Heading>
+      <Box bg="#1A4587" p={5} mt={8} borderRadius="20px" fontWeight={400}>
+        <Heading color="white" fontFamily="'Prompt', sans-serif">
+          Active Campaigns
+        </Heading>
       </Box>
 
       {/* Array of posts*/}

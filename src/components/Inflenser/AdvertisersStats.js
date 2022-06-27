@@ -26,30 +26,16 @@ export default function AdvertisersStats() {
       {campaignsPayed.length != 0 && (
         <Box mt={8} p={5} borderRadius="20px" boxShadow="lg" bg="#ffffff" color="#5C6F81">
           <TableContainer>
-            <Table size="sm" variant="simple">
+            <Table size="sm" variant="classic">
               <Thead>
                 <Tr borderColor="gray.500">
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Advertiser
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Campaign title
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Earned
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Mirrors
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Clicks
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Events
-                  </Th>
-                  <Th fontSize={16} color="#1A4587" fontFamily="'Prompt', sans-serif">
-                    Total earn
-                  </Th>
+                  <Th>Advertiser</Th>
+                  <Th>Campaign title</Th>
+                  <Th>Earned</Th>
+                  <Th>Mirrors</Th>
+                  <Th>Clicks</Th>
+                  <Th>Events</Th>
+                  <Th>Total earn</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -80,11 +66,11 @@ const CampaignsStatsTab = ({ ...props }) => {
         <Td fontSize={15} color="#00203F" fontWeight={600}>
           Fan Token summer special promotion
         </Td>
-        <Td fontWeight={300}>$ {campaign.earned / 1e6} </Td>
-        <Td fontWeight={300}>{campaign.mirrors}</Td>
-        <Td fontWeight={300}>{campaign.clicks.toNumber()}</Td>
-        <Td fontWeight={300}>{campaign.actions.toNumber()}</Td>
-        <Td fontWeight={300}>$ {campaign.earned / 1e6}</Td>
+        <Td>$ {campaign.earned / 1e6} </Td>
+        <Td>{campaign.mirrors}</Td>
+        <Td>{campaign.clicks.toNumber()}</Td>
+        <Td>{campaign.actions.toNumber()}</Td>
+        <Td>$ {campaign.earned / 1e6}</Td>
       </Tr>
     </>
   );
