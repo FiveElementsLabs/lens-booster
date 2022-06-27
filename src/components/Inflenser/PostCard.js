@@ -22,7 +22,7 @@ export default function PostCard({ publicationId }) {
 
   const [publication, setPublication] = useState(<></>);
   const [linkExternal, setLinkExternal] = useState('');
-  const [arrayJsxPost2, setArrayJsxPost2] = useState(<></>);
+  const [arrayJsxPost, setArrayJsxPost] = useState(<></>);
   const [settingState, useSettingState] = useState(false);
   const [statsState, setStatsState] = useState(false);
   const [userProfileId, setUserProfileId] = useState('');
@@ -53,7 +53,7 @@ export default function PostCard({ publicationId }) {
     if (!(await getExpiration())) return;
     const fetchedData = await fetchPublication(publicationId);
 
-    setArrayJsxPost2(fetchedData.arrayJsxPost);
+    setArrayJsxPost(fetchedData.arrayJsxPost);
     setPublication(fetchedData.fetchedPublication);
     setLinkExternal(fetchedData.linkExternal);
   };
@@ -174,7 +174,7 @@ export default function PostCard({ publicationId }) {
                 </Box>
               </Flex>
               <Text whiteSpace="pre-line" color="#00203F" w="90%" fontSize="20px" noOfLines={[numberOfLines, 1000]}>
-                {arrayJsxPost2.map((e) => e)}
+                {arrayJsxPost.map((e) => e)}
               </Text>
               {!isLargerThan640 && (
                 <Button

@@ -116,163 +116,75 @@ export default function Navbar() {
                     zIndex={1000}
                   >
                     <Box mb="10px">
-                      <Link
-                        href="https://twitter.com/LensBooster"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://twitter.com/LensBooster" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box w="fit-content" my="auto" mr={3} ml={1}>
                             <FiveElements />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            By Five Elements Labs
-                          </Text>
+                          <Text variant="navBarHambugerText">By Five Elements Labs</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box mb="10px">
-                      <Link
-                        href="https://discord.com/invite/bxfTM37Xyk"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://discord.com/invite/bxfTM37Xyk" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box w="fit-content" my="auto" mr={2} ml={1}>
                             <ContactFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Contact Us
-                          </Text>
+                          <Text variant="navBarHambugerText">Contact Us</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box mb="10px">
                       <Link
                         href="https://fiveelementslabs.gitbook.io/lensbooster/introduction/lensbooster"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
+                        variant="navbarHamburgerMenu"
                       >
                         <Flex>
                           <Box w="fit-content" my="auto" mr={3} ml={1}>
                             <DocsFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Docs
-                          </Text>
+                          <Text variant="navBarHambugerText">Docs</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box mb="10px">
-                      <Link
-                        href="https://medium.com/@LensBooster"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://medium.com/@LensBooster" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box w="fit-content" my="auto" mr={3} ml={1}>
                             <MediumFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Blog
-                          </Text>
+                          <Text variant="navBarHambugerText">Blog</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box mb="10px">
-                      <Link
-                        href="https://twitter.com/LensBooster"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://twitter.com/LensBooster" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box w="fit-content" my="auto" mr={2} ml={1}>
                             <TwitterFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Twitter
-                          </Text>
+                          <Text variant="navBarHambugerText">Twitter</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box mb="10px">
-                      <Link
-                        href="https://www.lensfrens.xyz/lensbooster.lens"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://www.lensfrens.xyz/lensbooster.lens" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box w="fit-content" my="auto" mr={2} ml={1}>
                             <LensFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Lens
-                          </Text>
+                          <Text variant="navBarHambugerText">Lens</Text>
                         </Flex>
                       </Link>
                     </Box>
                     <Box>
-                      <Link
-                        href="https://discord.com/invite/bxfTM37Xyk"
-                        fill="#1A4587"
-                        _hover={{ textDecoration: 'none', color: '#FF6827' }}
-                      >
+                      <Link href="https://discord.com/invite/bxfTM37Xyk" variant="navbarHamburgerMenu">
                         <Flex>
                           <Box color="#5C6F81" w="fit-content" my="auto" mr={2} ml={1}>
                             <DiscordFooter />
                           </Box>{' '}
-                          <Text
-                            color="#5C6F81"
-                            fontWeight={500}
-                            width="fit-content"
-                            display="inline"
-                            fontSize={15}
-                            variant="infleserPageTitles"
-                          >
-                            Discord
-                          </Text>
+                          <Text variant="navBarHambugerText">Discord</Text>
                         </Flex>
                       </Link>
                     </Box>
@@ -350,7 +262,7 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
 
-      <Box>
+      <Box mt="50px">
         <Link href="https://twitter.com/LensBooster" fill="#1A4587">
           <Flex>
             <Box color="#5C6F81" w="fit-content" my="auto" mr={4} ml={1}>

@@ -23,6 +23,7 @@ export default function Footer() {
           fontFamily="'Prompt', sans-serif"
           fontWeight={600}
           gap={{ base: '25px', md: 0 }}
+          variant="footerGridsm"
         >
           <GridItem colSpan={{ base: '4', md: '1' }} display={{ base: 'none', md: 'inherit' }} alignContent>
             {' '}
@@ -30,7 +31,7 @@ export default function Footer() {
           </GridItem>
           <GridItem colSpan={{ base: '6', md: '3' }}>
             {' '}
-            <Link href="https://fiveelementslabs.com/">
+            <Link href="https://fiveelementslabs.com/" variant="footer">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
                   <FiveElementsFooter />
@@ -43,7 +44,7 @@ export default function Footer() {
           </GridItem>
           <GridItem colSpan={{ base: '6', md: '2' }}>
             {' '}
-            <Link href="https://discord.gg/bxfTM37Xyk" textDecoration="none">
+            <Link href="https://discord.gg/bxfTM37Xyk" variant="footer">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
                   <ContactFooter />
@@ -56,7 +57,7 @@ export default function Footer() {
           </GridItem>
           <GridItem colSpan={{ base: '6', md: '2' }}>
             {' '}
-            <Link href="https://fiveelementslabs.gitbook.io/lensbooster/introduction/lensbooster">
+            <Link href="https://fiveelementslabs.gitbook.io/lensbooster/introduction/lensbooster" variant="footer">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
                   <DocsFooter />
@@ -69,7 +70,7 @@ export default function Footer() {
           </GridItem>
           <GridItem colSpan={{ base: '6', md: '2' }}>
             {' '}
-            <Link href="https://medium.com/@LensBooster">
+            <Link href="https://medium.com/@LensBooster" variant="footer">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
                   <MediumFooter />
@@ -84,13 +85,18 @@ export default function Footer() {
           <GridItem colSpan={{ base: '6', md: '2' }}>
             {' '}
             <Flex>
-              <Link px={2} color="#5C6F81" href="https://twitter.com/LensBooster">
+              <Link px={2} href="https://twitter.com/LensBooster" fill="#1A4587" _hover={{ fill: '#FF6827' }}>
                 <TwitterFooter />
               </Link>
-              <Link px={2} color="#5C6F81" href="https://discord.com/invite/bxfTM37Xyk">
+              <Link px={2} href="https://discord.com/invite/bxfTM37Xyk" fill="#1A4587" _hover={{ fill: '#FF6827' }}>
                 <DiscordFooter />
               </Link>
-              <Link px={2} color="#5C6F81" href="https://www.lensfrens.xyz/lensbooster.lens">
+              <Link
+                px={2}
+                href="https://www.lensfrens.xyz/lensbooster.lens"
+                fill="#1A4587"
+                _hover={{ fill: '#FF6827' }}
+              >
                 <LensFooter />
               </Link>
             </Flex>
@@ -115,7 +121,7 @@ export default function Footer() {
             <Link href="https://twitter.com/LensBooster">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
-                  <TwitterFooter />
+                  <TwitterFooter fill="#1A4587" />
                 </Box>{' '}
                 <Text color="#5C6F81" width="fit-content" display="inline" fontSize={15}>
                   Twitter
@@ -141,7 +147,7 @@ export default function Footer() {
             <Link href="https://www.lensfrens.xyz/lensbooster.lens">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
-                  <LensFooter />
+                  <LensFooter fill="#1A4587" />
                 </Box>{' '}
                 <Text color="#5C6F81" width="fit-content" display="inline" fontSize={15}>
                   Lens
@@ -167,7 +173,7 @@ export default function Footer() {
             <Link href="https://discord.com/invite/bxfTM37Xyk">
               <Flex>
                 <Box w="fit-content" my="auto" mr={2}>
-                  <DiscordFooter />
+                  <DiscordFooter fill="#1A4587" />
                 </Box>{' '}
                 <Text color="#5C6F81" width="fit-content" display="inline" fontSize={15}>
                   Discord

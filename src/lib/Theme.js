@@ -130,6 +130,15 @@ const Text = {
       fontFamily: "'Prompt', sans-serif",
       fontWeight: '500',
     },
+    navBarHambugerText: {
+      color: '#5C6F81',
+      fontWeight: '500',
+      width: 'fit-content',
+      display: 'inline',
+      fontSize: '15',
+      variant: 'infleserPageTitles',
+      _hover: { color: '#FF6827' },
+    },
   },
   defaultProps: {
     variant: 'classic',
@@ -193,6 +202,22 @@ const Td = {
   },
 };
 
-const Theme = extendTheme({ colors, styles, components: { Button, Text, Heading, Table }, config, fonts });
+const Link = {
+  variants: {
+    classic: {},
+    navbarHamburgerMenu: {
+      fill: '#1A4587',
+      _hover: { textDecoration: 'none' },
+    },
+    footer: {
+      _hover: { textDecoration: 'none' },
+    },
+  },
+  defaultProps: {
+    variant: 'classic',
+  },
+};
+
+const Theme = extendTheme({ colors, styles, components: { Button, Text, Heading, Table, Link }, config, fonts });
 
 export default Theme;
