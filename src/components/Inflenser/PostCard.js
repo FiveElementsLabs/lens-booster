@@ -161,25 +161,9 @@ export default function PostCard({ publicationId }) {
               </Text>
               {!isLargerThan640 && (
                 <Button
-                  mt="10px"
-                  fontStyle="italic"
-                  bg="white"
-                  fontSize="15px"
+                  variant="showLessMore"
                   onClick={() => (numberOfLines == 100 ? setNumberOfLines(3) : setNumberOfLines(100))}
-                  _focus={{
-                    boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                  }}
-                  _hover={{ bg: 'white' }}
-                  _active={{
-                    bg: 'white',
-                    transform: 'scale(1)',
-                    borderColor: 'white',
-                  }}
                   rightIcon={numberOfLines == 3 ? <ChevronDownIcon color="black" /> : <ChevronUpIcon color="black" />}
-                  justifyContent="center"
-                  marginLeft="auto"
-                  paddingInlineStart={0}
-                  paddingInlineEnd={0}
                 >
                   {numberOfLines == 100 ? 'Show Less' : 'Show More'}
                 </Button>
@@ -276,28 +260,13 @@ export default function PostCard({ publicationId }) {
                 <Flex gap={4} fontWeight={500}>
                   <Box marginLeft={{ base: 0, md: 5 }} flexBasis="100%">
                     <Button
-                      justifyContent="space-between"
+                      variant="postcardStats"
                       p={5}
-                      fontFamily="'Prompt', sans-serif"
-                      color="#1A4587"
-                      w="100%"
-                      align="left"
                       rightIcon={
                         !settingState ? <TriangleDownIcon color="#FF6827" /> : <TriangleUpIcon color="#FF6827" />
                       }
-                      _focus={{
-                        boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                      }}
-                      _hover={{ bg: '#F0F3FA' }}
-                      _active={{
-                        bg: '#F0F3FA',
-                        transform: 'scale(1)',
-                        borderColor: '#F0F3FA',
-                      }}
                       borderBottomRadius={settingState ? '0' : '8px'}
-                      bg="#F0F3FA"
                       onClick={() => useSettingState(!settingState)}
-                      fontSize="20px"
                     >
                       Stats
                     </Button>
@@ -354,27 +323,13 @@ export default function PostCard({ publicationId }) {
                   </Box>
                   <Box flexBasis="100%">
                     <Button
-                      justifyContent="space-between"
+                      variant="postcardStats"
                       p={5}
-                      fontFamily="'Prompt', sans-serif"
-                      color="#1A4587"
-                      w="100%"
                       rightIcon={
                         !statsState ? <TriangleDownIcon color="#FF6827" /> : <TriangleUpIcon color="#FF6827" />
                       }
-                      _focus={{
-                        boxShadow: '0 0 0 0 rgba(88, 144, 255, .75), 0 0 0 rgba(0, 0, 0, .15)',
-                      }}
-                      _active={{
-                        bg: '#F0F3FA',
-                        transform: 'scale(1)',
-                        borderColor: '#F0F3FA',
-                      }}
-                      _hover={{ bg: '#F0F3FA' }}
                       borderBottomRadius={statsState ? '0' : '8px'}
-                      bg="#F0F3FA"
                       onClick={() => setStatsState(!statsState)}
-                      fontSize="20px"
                     >
                       Metrics
                     </Button>
