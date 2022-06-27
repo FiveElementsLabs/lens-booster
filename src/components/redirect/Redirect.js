@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { utils } from 'ethers';
 import { getIpfs } from '../../lib/ipfs';
@@ -27,16 +27,29 @@ export default function Redirect({ ...props }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(req),
-      }).then((res) => {
-        window.location.href = dataIpfs.urlToRedirect;
-      });
+      })
+        .then((res) => {
+          window.location.href = dataIpfs.urlToRedirect;
+        })
+        .catch((e) => {
+          window.location.href = dataIpfs.urlToRedirect;
+        });
       setIpfsData(dataIpfs);
-
-      //;
     };
 
     getIpfsData();
   }, []);
 
-  return <>{ipfsData?.urlToRedirect && <Box>Redirect...</Box>}</>;
+  return (
+    <>
+      {
+        <Box>
+          <Text color="#5C6F81" fontSize={24} fontWeight={400} w="24%" m="auto" position="relative" top="30%">
+            <Image src="/images/Lens_Gif_Light.gif" boxSize="120px" m="auto" />
+            You’re being redirected to the selected link.
+          </Text>
+        </Box>
+      }
+    </>
+  );
 }

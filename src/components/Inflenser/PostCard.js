@@ -18,7 +18,7 @@ export default function PostCard({ publicationId }) {
   const { getDefaultProfile } = getPublicationURI();
   const { getCampaigns, getUserScore } = useCampaignManager();
   const { getAdvertiserPayouts, getNumberOfActions, getCampaignInfo } = useCampaign();
-  const [{ provider }] = useSharedState();
+  const [{ provider, account }] = useSharedState();
 
   const [publication, setPublication] = useState(<></>);
   const [linkExternal, setLinkExternal] = useState('');
@@ -26,6 +26,7 @@ export default function PostCard({ publicationId }) {
   const [settingState, useSettingState] = useState(false);
   const [statsState, setStatsState] = useState(false);
   const [userProfileId, setUserProfileId] = useState('');
+  const [userProfileScore, setUserProfileScore] = useState(-1);
   const [numberOfLines, setNumberOfLines] = useState(3);
   const [numberOfEvents, setNumberOfEvents] = useState(0);
   const [numberOfPosts, setNumberOfPosts] = useState(0);
@@ -34,16 +35,22 @@ export default function PostCard({ publicationId }) {
   const [clickPayout, setClickPayout] = useState(0);
   const [actionPayout, setActionPayout] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [expired, setExpired] = useState(false);
   const [remainingBudget, setRemainingBudget] = useState(0);
   const [isLargerThan640] = useMediaQuery('(min-width: 640px)');
   let profileIdPostId = publicationId.split('-');
 
-  const getUserProfileId = async () => {
-    const userProfile = await getDefaultProfile();
-    setUserProfileId(userProfile);
+  const getExpiration = async () => {
+    const campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
+    const campaignInfo = await getCampaignInfo(campaigns);
+
+    setExpired(Number(campaignInfo[3]) + Number(campaignInfo[2]) > Date.now() / 1000);
+    return true;
   };
 
   const getPub = async () => {
+    if (!(await getExpiration())) return;
     const fetchedData = await fetchPublication(publicationId);
 
     setArrayJsxPost2(fetchedData.arrayJsxPost);
@@ -52,11 +59,14 @@ export default function PostCard({ publicationId }) {
   };
 
   const getData = async () => {
+    const userProfile = await getDefaultProfile();
+    setUserProfileId(userProfile);
     const campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
 
     const numberOfAction = await getNumberOfActions(campaigns);
     const advertiserData = await getAdvertiserPayouts(campaigns);
     const campaignInfo = await getCampaignInfo(campaigns);
+
     let numberOfEventsSum = 0;
     let numberOfClicksSum = 0;
 
@@ -68,9 +78,15 @@ export default function PostCard({ publicationId }) {
     setNumberOfClicks(numberOfClicksSum);
     setNumberOfPosts(numberOfAction.length);
 
-    const userScore = await getUserScore(userProfileId);
+    let userScore;
+    try {
+      userScore = await getUserScore(userProfile);
+    } catch (error) {
+      console.log(error);
+    }
+    setUserProfileScore(userScore);
 
-    setPostPayout(Number(advertiserData[0]).toFixed(2) * userScore);
+    setPostPayout(Number(advertiserData[0]).toFixed(2) * (userScore || 1000));
     setClickPayout(Number(advertiserData[3]).toFixed(2));
     setActionPayout(Number(advertiserData[6]).toFixed(2));
 
@@ -83,15 +99,16 @@ export default function PostCard({ publicationId }) {
   };
 
   useEffect(() => {
+    getExpiration();
     getPub();
-    getUserProfileId();
-  }, []);
+  }, [provider]);
 
   useEffect(() => {
     getData();
   }, [provider]);
 
   const handleCreatePost = async () => {
+    if (userProfileScore.toString() === '0') window.location = 'https://discord.gg/bxfTM37Xyk';
     const content = publication.metadata.content;
     const campaignsAddress = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
 
@@ -116,7 +133,7 @@ export default function PostCard({ publicationId }) {
 
   return (
     <>
-      {publication?.metadata && (
+      {publication?.metadata && expired && userProfileScore != -1 && (
         <>
           <Flex
             bg="white"
@@ -412,14 +429,14 @@ export default function PostCard({ publicationId }) {
                       Booster
                     </Text>
                   </Box>
-
                   <Button
                     padding="15px 14px"
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
                     onClick={() => handleCreatePost()}
+                    disabled={userProfileId.toString() == '0'}
                   >
-                    POST
+                    {userProfileScore.toString() == '0' && userProfileId.toString() != '0' ? 'BE WHITELISTED' : 'POST'}
                   </Button>
                 </Flex>
               </Box>

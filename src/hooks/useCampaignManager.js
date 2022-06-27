@@ -34,10 +34,8 @@ export const useCampaignManager = () => {
         const campaignAddress = await CampaignManager.addressesCampaignAd(i);
         if (!campaignAddress) break;
         const Campaign = new Contract(campaignAddress, CampaignJson, signer);
-
         const campaignInfo = await Campaign.getCampaignInfo();
         pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
-
         i++;
       } catch (e) {
         console.log('Error fetching all pubids: ', e?.messagge);
@@ -92,8 +90,8 @@ export const useCampaignManager = () => {
   const getUserScore = async (defaultProfile) => {
     const signer = await provider.getSigner();
     const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
-
-    const userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
+    let userScore = 0;
+    if (defaultProfile) userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
 
     return userScore;
   };

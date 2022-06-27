@@ -10,7 +10,7 @@ const UPDATE_PROFILE = `
  }
 `;
 
-const updateProfileRequest = profileInfo => {
+const updateProfileRequest = (profileInfo) => {
   return ApolloClient.mutate({
     mutation: gql(UPDATE_PROFILE),
     variables: {
@@ -24,12 +24,7 @@ export const updateProfile = async (address, profileMetaData) => {
     throw new Error('No profile ID found');
   }
 
-  console.log('update profile: address', address);
-
-  await login(address);
-
-  const { profileId, name, bio, location, website, twitter } =
-    profileMetaData;
+  const { profileId, name, bio, location, website, twitter } = profileMetaData;
 
   // Profile Metadata possible types
   // DOCS: https://docs.lens.dev/docs/update-profile

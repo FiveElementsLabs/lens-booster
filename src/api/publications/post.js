@@ -1,11 +1,11 @@
-import { utils, ethers } from "ethers";
-import { gql } from "@apollo/client/core";
-import { login } from "../authentication/login";
-import ApolloClient from "../../lib/ApolloClient";
-import { omit } from "../../lib/Helpers";
-import { uploadIpfs } from "../../lib/ipfs";
-import { LENS_HUB_CONTRACT } from "../../lib/ConfigVars";
-import { LENS_HUB_ABI } from "../../lib/ABIs";
+import { utils, ethers } from 'ethers';
+import { gql } from '@apollo/client/core';
+import { login } from '../authentication/login';
+import ApolloClient from '../../lib/ApolloClient';
+import { omit } from '../../lib/Helpers';
+import { uploadIpfs } from '../../lib/ipfs';
+import { LENS_HUB_CONTRACT } from '../../lib/ConfigVars';
+import { LENS_HUB_ABI } from '../../lib/ABIs';
 
 const CREATE_POST_TYPED_DATA = `
   mutation($request: CreatePublicPostRequest!) { 
@@ -50,37 +50,30 @@ const createPostTypedData = (createPostTypedDataRequest) => {
 };
 
 export const createPost = async (signer, account, postMetaData) => {
-
   if (!postMetaData.profileId) {
-    throw new Error("No Profile ID");
+    throw new Error('No Profile ID');
   }
 
-  console.log("createPost signer: ", signer);
+  console.log('createPost signer: ', signer);
   const signedTypeData = async (domain, types, value) => {
     return await signer._signTypedData(
-      omit(domain, "__typename"),
-      omit(types, "__typename"),
-      omit(value, "__typename")
+      omit(domain, '__typename'),
+      omit(types, '__typename'),
+      omit(value, '__typename')
     );
   };
-
-  console.log("create post: address", account);
-
-  await login(account, signer);
 
   // For more info about the complete IPFS upload object:
   // See lib/ipfs on this repo,
   // See this example: https://github.com/aave/lens-api-examples/blob/master/src/ipfs.ts
   // And see the docs: https://docs.lens.dev/docs/create-post-typed-data
 
-  console.log(postMetaData);
   const ipfsResult = await uploadIpfs(postMetaData);
-  console.log("create post: ipfs result", ipfsResult);
 
   // hard coded to make the code example clear
   const createPostRequest = {
     profileId: postMetaData.profileId,
-    contentURI: "ipfs://" + ipfsResult.path,
+    contentURI: 'ipfs://' + ipfsResult.path,
     collectModule: {
       // For more info about post modules:
       // https://docs.lens.dev/docs/create-post-typed-data
@@ -105,20 +98,11 @@ export const createPost = async (signer, account, postMetaData) => {
     },
   };
 
-  console.log(createPostRequest);
-
   const result = await createPostTypedData(createPostRequest);
-  console.log("create post: createPostTypedData", result);
 
   const typedData = result.data.createPostTypedData.typedData;
-  console.log("create post: typedData", typedData);
 
-  const signature = await signedTypeData(
-    typedData.domain,
-    typedData.types,
-    typedData.value
-  );
-  console.log("create post: signature", signature);
+  const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);
 
   const splitSignature = (signature) => {
     return utils.splitSignature(signature);
@@ -126,15 +110,7 @@ export const createPost = async (signer, account, postMetaData) => {
 
   const { v, r, s } = splitSignature(signature);
 
-  console.log("signer is: ", signer);
-
-  const lensHub = new ethers.Contract(
-    LENS_HUB_CONTRACT,
-    LENS_HUB_ABI,
-    signer
-  );
-
-  console.log("before tx")
+  const lensHub = new ethers.Contract(LENS_HUB_CONTRACT, LENS_HUB_ABI, signer);
 
   const tx = await lensHub.postWithSig({
     profileId: typedData.value.profileId,
@@ -150,6 +126,6 @@ export const createPost = async (signer, account, postMetaData) => {
       deadline: typedData.value.deadline,
     },
   });
-  console.log("create post: tx hash", tx.hash);
+  console.log('create post: tx hash', tx.hash);
   return tx.hash;
 };
