@@ -133,7 +133,7 @@ export default function PostCard({ publicationId }) {
 
   return (
     <>
-      {publication?.metadata && expired && userProfileScore != -1 && (
+      {publication?.metadata && userProfileScore != -1 && (
         <>
           <Flex
             bg="white"

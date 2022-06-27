@@ -21,8 +21,7 @@ export default function Layout() {
     account &&
       (async () => {
         const signer = await provider.getSigner();
-        console.log(getAuthenticationToken());
-        console.log(await checkJwtExpiration());
+
         if (!getAuthenticationToken() && !(await checkJwtExpiration())) if (signer) await login(account, signer);
       })();
   }, [provider, account]);
