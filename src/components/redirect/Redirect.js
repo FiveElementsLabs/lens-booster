@@ -45,7 +45,7 @@ export default function Redirect({ ...props }) {
       {
         <Box>
           <Text color="#5C6F81" fontSize={24} fontWeight={400} w="24%" m="auto" position="relative" top="30%">
-            <Image src="/images/Lens_Gif_Light.gif" boxSize="120px" m="auto" />
+            <Image src="/images/Lens_Loader_Light.gif" boxSize="120px" m="auto" />
             You’re being redirected to the selected link.
           </Text>
         </Box>

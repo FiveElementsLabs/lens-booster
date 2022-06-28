@@ -5,7 +5,6 @@ import { useCampaign } from '../../hooks/useCampaign';
 import { useSharedState } from '../../context/store';
 
 import PostCard from './PostCard';
-import { KovanDai } from '@usedapp/core';
 
 export default function Dashboard() {
   const { getCampaignInfo } = useCampaign();
@@ -13,7 +12,7 @@ export default function Dashboard() {
   const [{ provider }] = useSharedState();
   const [publicationIds, setPublicationIds] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [areExpired, setAreExpired] = useState(false);
+  const [allCampaignExpired, setAllCampaignExpired] = useState(false);
 
   useEffect(() => {
     const getPubIdsData = async () => {
@@ -26,7 +25,7 @@ export default function Dashboard() {
 
         if (Number(campaignInfo[3]) + Number(campaignInfo[2]) < Date.now() / 1000) pubs.splice(i, 1);
       }
-      if (pubs == []) setAreExpired(true);
+      if (pubs == []) setAllCampaignExpired(true);
       setPublicationIds(pubs);
     };
     getPubIdsData();
@@ -45,13 +44,13 @@ export default function Dashboard() {
       </Box>
       {loading && (
         <>
-          <Image src="/images/Lens_Gif_Light.gif" boxSize="120px" m="auto" />
+          <Image src="/images/Lens_Loader_Light.gif" boxSize="120px" m="auto" />
         </>
       )}
 
-      {areExpired && (
+      {allCampaignExpired && (
         <>
-          <Box>Finish charge</Box>
+          <Box>No Active Campaign</Box>
         </>
       )}
       {/* Array of posts*/}
