@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [{ provider }] = useSharedState();
   const [publicationIds, setPublicationIds] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [allCampaignExpired, setAllCampaignExpired] = useState(false);
+  const [allCampaignsExpired, setAllCampaignsExpired] = useState(false);
 
   useEffect(() => {
     const getPubIdsData = async () => {
@@ -25,7 +25,7 @@ export default function Dashboard() {
 
         if (Number(campaignInfo[3]) + Number(campaignInfo[2]) < Date.now() / 1000) pubs.splice(i, 1);
       }
-      if (pubs == []) setAllCampaignExpired(true);
+      if (pubs == []) setAllCampaignsExpired(true);
       setPublicationIds(pubs);
     };
     getPubIdsData();
@@ -48,7 +48,7 @@ export default function Dashboard() {
         </>
       )}
 
-      {allCampaignExpired && (
+      {allCampaignsExpired && (
         <>
           <Box>No Active Campaign</Box>
         </>
