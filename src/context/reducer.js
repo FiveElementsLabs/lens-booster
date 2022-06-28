@@ -1,19 +1,19 @@
-import actions from "./actions.js";
+import actions from './actions.js';
 
 export const initialState = {
   is_connected: false,
-  account: "",
+  account: '',
   provider: null,
   network_name: null,
   chain_id: null,
   loading: false,
-  currentProfile: {}
+  currentProfile: {},
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
     case actions.LOGIN_WALLET:
-      window.localStorage.setItem("shouldConnectMetamask", "true");
+      window.localStorage.setItem('shouldConnectMetamask', 'true');
       return {
         ...state,
         is_connected: true,
@@ -24,11 +24,11 @@ export const reducer = (state, action) => {
       };
 
     case actions.LOGOUT_WALLET:
-      window.localStorage.removeItem("shouldConnectMetamask");
+      window.localStorage.removeItem('shouldConnectMetamask');
       return {
         ...state,
         is_connected: false,
-        account: "",
+        account: '',
         provider: null,
         network_name: null,
         chain_id: null,

@@ -4,6 +4,9 @@ import { gql } from '@apollo/client/core';
 import ApolloClient from '../lib/ApolloClient';
 import { omit } from '../lib/Helpers';
 import Lens from '../components/icons/Lens';
+import { removeAuthenticationToken } from '../lib/State';
+import { login } from '../api/authentication/login';
+
 const LensCampaignABI = require('../abis/LensCampaign.json');
 
 const CREATE_POST_TYPED_DATA = `
@@ -49,7 +52,7 @@ const createPostTypedData = (createPostTypedDataRequest) => {
 };
 
 export const useMirror = () => {
-  const [{ provider }, dispatch] = useSharedState();
+  const [{ provider, account }, dispatch] = useSharedState();
 
   const createPost = async (profileId, contentURI, campaignsAddress) => {
     const signer = await provider.getSigner();
@@ -78,7 +81,16 @@ export const useMirror = () => {
         followerOnlyReferenceModule: false,
       },
     };
-    const result = await createPostTypedData(createPostRequest);
+    let result;
+    try {
+      const result = await createPostTypedData(createPostRequest);
+    } catch (error) {
+      if (error.message == 'User does not own profile') {
+        removeAuthenticationToken();
+        await login(account, signer);
+      }
+      result = await createPostTypedData(createPostRequest);
+    }
     const typedData = result.data.createPostTypedData.typedData;
 
     const signature = await signedTypeData(typedData.domain, typedData.types, typedData.value);

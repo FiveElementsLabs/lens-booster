@@ -63,13 +63,15 @@ export const useCampaignManager = () => {
         const inflenserProfile = await Campaign.getInflenserPayed(defaultProfile);
         const inflenserInfo = await Campaign.getInflenserInfo(defaultProfile);
         const payouts = await Campaign.getPayouts();
+        const campaignInfo = await Campaign.getCampaignInfo();
         const publicationId = defaultProfile.toHexString() + '-' + inflenserInfo[2].toHexString();
 
         const pub = (await getPublication(publicationId)).data.publication;
+        const pubCampaign = await getPublication(campaignInfo[0].toHexString() + '-' + campaignInfo[1].toHexString());
 
         campaignsPayed.push({
-          name: pub.profile.name,
-          picture: pub.profile.picture?.original?.url,
+          name: pubCampaign?.profile?.name || pub.profile.name,
+          picture: pubCampaign?.profile?.picture?.original?.url || pub.profile.picture?.original?.url,
           earned:
             payouts[0].toNumber() * userScore + payouts[3] * inflenserProfile[0] + payouts[6] * inflenserProfile[1],
           clicks: inflenserProfile[0],
