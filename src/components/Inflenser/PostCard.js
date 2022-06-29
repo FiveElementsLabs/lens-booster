@@ -1,4 +1,4 @@
-import { Box, Text, Link, Image, Flex, Avatar, Button, Select, option, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text, Link, Image, Flex, Avatar, Button, useMediaQuery } from '@chakra-ui/react';
 import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 
 import { useEffect, useState } from 'react';
@@ -52,7 +52,6 @@ export default function PostCard({ publicationId }) {
   const getPub = async () => {
     if (!(await getExpiration())) return;
     const fetchedData = await fetchPublication(publicationId);
-
     setArrayJsxPost(fetchedData.arrayJsxPost);
     setPublication(fetchedData.fetchedPublication);
     setLinkExternal(fetchedData.linkExternal);
@@ -174,7 +173,9 @@ export default function PostCard({ publicationId }) {
                 </Box>
               </Flex>
               <Text whiteSpace="pre-line" color="#00203F" w="90%" fontSize="20px" noOfLines={[numberOfLines, 1000]}>
-                {arrayJsxPost.map((e) => e)}
+                {arrayJsxPost.map((e) => (
+                  <>{e}</>
+                ))}
               </Text>
               {!isLargerThan640 && (
                 <Button
@@ -189,7 +190,12 @@ export default function PostCard({ publicationId }) {
                 publication.metadata.media?.map((e) => {
                   return (
                     e?.original?.url && (
-                      <Image marginTop="15px" w={{ base: '100%', md: '50%' }} src={e?.original?.url} />
+                      <Image
+                        key={e?.original?.url}
+                        marginTop="15px"
+                        w={{ base: '100%', md: '50%' }}
+                        src={e?.original?.url}
+                      />
                     )
                   );
                 })}
@@ -434,9 +440,9 @@ export default function PostCard({ publicationId }) {
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
                     onClick={() => handleCreatePost()}
-                    disabled={userProfileId.toString() == '0'}
+                    disabled={userProfileId?.toString() == '0' || !userProfileId}
                   >
-                    {userProfileScore.toString() == '0' && userProfileId.toString() != '0' ? 'BE WHITELISTED' : 'POST'}
+                    {userProfileScore.toString() == '0' && userProfileId?.toString() != '0' ? 'BE WHITELISTED' : 'POST'}
                   </Button>
                 </Flex>
               </Box>

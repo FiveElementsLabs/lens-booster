@@ -1,4 +1,4 @@
-import { Box, Text, Flex, Heading, Image, useFocusOnPointerDown } from '@chakra-ui/react';
+import { Box, Text, Heading, Image } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useCampaignManager } from '../../hooks/useCampaignManager';
 import { useCampaign } from '../../hooks/useCampaign';
@@ -16,24 +16,27 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getPubIdsData = async () => {
-      const pubs = await getCampaignsPublicationID();
+      setLoading(true);
+
+      let pubs = await getCampaignsPublicationID();
       for (let i = 0; i < pubs.length; i++) {
         let profileIdPostId = pubs[i][0].split('-');
 
         let campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
         let campaignInfo = await getCampaignInfo(campaigns);
 
         if (Number(campaignInfo[3]) + Number(campaignInfo[2]) < Date.now() / 1000) pubs.splice(i, 1);
       }
-      if (pubs == []) setAllCampaignsExpired(true);
+
+      if (pubs.length == 0) {
+        setAllCampaignsExpired(true);
+      }
       setPublicationIds(pubs);
+      setLoading(false);
     };
     getPubIdsData();
   }, [provider]);
-
-  useEffect(() => {
-    if (publicationIds != null && publicationIds?.length != 0) setLoading(false);
-  }, [publicationIds]);
 
   return (
     <>
@@ -48,9 +51,16 @@ export default function Dashboard() {
         </>
       )}
 
-      {allCampaignsExpired && (
+      {allCampaignsExpired && publicationIds?.length == 0 && !loading && (
         <>
-          <Box>No Active Campaign</Box>
+          <Box>
+            <Text variant="title" fontSize={32} opacity={0.8}>
+              No Active Campaigns Found
+            </Text>
+            <Text variant="title" fontSize={24} opacity={0.6}>
+              Come back later...
+            </Text>
+          </Box>
         </>
       )}
       {/* Array of posts*/}

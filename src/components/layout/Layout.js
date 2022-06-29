@@ -12,9 +12,15 @@ import Footer from '../footer/Footer';
 
 export default function Layout() {
   const [{ account, provider }] = useSharedState();
-  const { autoLoginWallet } = useWallet();
+  const { autoLoginWallet, getDefaultProvider } = useWallet();
   useEffect(() => {
-    (async () => !account && window.localStorage.getItem('walletConnected') && (await autoLoginWallet()))();
+    const checkWalletConnection = async () => {
+      if (!account)
+        if (window.localStorage.getItem('walletConnected')) await autoLoginWallet();
+        else await getDefaultProvider();
+    };
+
+    checkWalletConnection();
   }, []);
 
   useEffect(() => {

@@ -1,15 +1,17 @@
-import { ethers, utils, Contract } from 'ethers';
+import { Contract } from 'ethers';
 import { useSharedState } from '../context/store';
 
 const CampaignJson = require('../abis/LensCampaign.json');
 
 export const useCampaign = () => {
-  const [{ provider }, dispatch] = useSharedState();
+  const [{ provider }] = useSharedState();
 
+  const getCampaignContract = async (campaignAddress) => {
+    const signer = await provider?.getSigner();
+    return new Contract(campaignAddress, CampaignJson, signer.addresses ? signer : provider);
+  };
   const getAdvertiserPayouts = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
-
+    const Campaign = await getCampaignContract(campaignAddress);
     try {
       const payouts = await Campaign.getPayouts();
 
@@ -20,8 +22,8 @@ export const useCampaign = () => {
   };
 
   const getNumberOfActions = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+    const Campaign = await getCampaignContract(campaignAddress);
+
     try {
       let i = 0;
       let numberOfActions = [];
@@ -49,8 +51,8 @@ export const useCampaign = () => {
   };
 
   const getCampaignInfo = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+    const Campaign = await getCampaignContract(campaignAddress);
+
     try {
       const campaignInfo = await Campaign.getCampaignInfo();
       return campaignInfo;
