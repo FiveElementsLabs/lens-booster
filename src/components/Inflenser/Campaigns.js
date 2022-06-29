@@ -1,12 +1,10 @@
-import { Box, Text, Flex, Heading, Image, useFocusOnPointerDown } from '@chakra-ui/react';
+import { Box, Text, Heading, Image } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useCampaignManager } from '../../hooks/useCampaignManager';
 import { useCampaign } from '../../hooks/useCampaign';
 import { useSharedState } from '../../context/store';
-const CampaignJson = require('../../abis/LensCampaign.json');
 
 import PostCard from './PostCard';
-import { ethers, utils, Contract } from 'ethers';
 
 export default function Dashboard() {
   const { getCampaignInfo } = useCampaign();

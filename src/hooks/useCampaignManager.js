@@ -1,5 +1,4 @@
-import { withDefaultSize } from '@chakra-ui/react';
-import { ethers, utils, Contract } from 'ethers';
+import { Contract } from 'ethers';
 import { addresses } from '../context/addresses';
 import { useSharedState } from '../context/store';
 import { getPublication } from './getPublication';

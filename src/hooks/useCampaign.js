@@ -1,4 +1,4 @@
-import { ethers, utils, Contract } from 'ethers';
+import { Contract } from 'ethers';
 import { useSharedState } from '../context/store';
 
 const CampaignJson = require('../abis/LensCampaign.json');

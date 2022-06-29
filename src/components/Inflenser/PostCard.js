@@ -1,4 +1,4 @@
-import { Box, Text, Link, Image, Flex, Avatar, Button, Select, option, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text, Link, Image, Flex, Avatar, Button, useMediaQuery } from '@chakra-ui/react';
 import { InfoOutlineIcon, TriangleDownIcon, TriangleUpIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 
 import { useEffect, useState } from 'react';
@@ -12,7 +12,6 @@ import { useCampaignManager } from '../../hooks/useCampaignManager';
 import { useCampaign } from '../../hooks/useCampaign';
 import { useSharedState } from '../../context/store';
 import { fetchPublication } from '../../hooks/usePublication';
-import { Container } from 'react-bootstrap';
 
 export default function PostCard({ publicationId }) {
   const { createPost } = useMirror();
