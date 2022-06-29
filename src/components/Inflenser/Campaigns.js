@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { useCampaignManager } from '../../hooks/useCampaignManager';
 import { useCampaign } from '../../hooks/useCampaign';
 import { useSharedState } from '../../context/store';
+const CampaignJson = require('../../abis/LensCampaign.json');
 
 import PostCard from './PostCard';
+import { ethers, utils, Contract } from 'ethers';
 
 export default function Dashboard() {
   const { getCampaignInfo } = useCampaign();
@@ -17,11 +19,13 @@ export default function Dashboard() {
   useEffect(() => {
     const getPubIdsData = async () => {
       setLoading(true);
+
       let pubs = await getCampaignsPublicationID();
       for (let i = 0; i < pubs.length; i++) {
         let profileIdPostId = pubs[i][0].split('-');
 
         let campaigns = await getCampaigns(profileIdPostId[0], profileIdPostId[1]);
+
         let campaignInfo = await getCampaignInfo(campaigns);
 
         if (Number(campaignInfo[3]) + Number(campaignInfo[2]) < Date.now() / 1000) pubs.splice(i, 1);

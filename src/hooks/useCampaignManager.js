@@ -13,7 +13,11 @@ export const useCampaignManager = () => {
 
   const getCampaigns = async (userId, postId) => {
     const signer = await provider?.getSigner();
-    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+    const CampaignManager = new Contract(
+      addresses.CampaignManager,
+      CampaignManagerJson,
+      signer.addresses ? signer : provider
+    );
 
     try {
       const campaignAddress = await CampaignManager.addressesCampaign(userId, postId);
@@ -26,14 +30,20 @@ export const useCampaignManager = () => {
 
   const getCampaignsPublicationID = async () => {
     const signer = await provider?.getSigner();
-    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+
+    const CampaignManager = new Contract(
+      addresses?.CampaignManager,
+      CampaignManagerJson,
+      signer.addresses ? signer : provider
+    );
+
     let i = 0;
     let pub = [];
     while (true) {
       try {
         const campaignAddress = await CampaignManager.addressesCampaignAd(i);
         if (!campaignAddress) break;
-        const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+        const Campaign = new Contract(campaignAddress, CampaignJson, signer.addresses ? signer : provider);
         const campaignInfo = await Campaign.getCampaignInfo();
         pub.push([campaignInfo[1].toHexString() + '-' + campaignInfo[0].toHexString()]);
         i++;
@@ -47,9 +57,13 @@ export const useCampaignManager = () => {
   };
 
   const getUserStatsByCampaign = async (defaultProfile) => {
-    const signer = await provider.getSigner();
-    const LensHub = new Contract(addresses.LensHub, LensHubJson, signer);
-    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+    const signer = await provider?.getSigner();
+    const LensHub = new Contract(addresses.LensHub, LensHubJson, signer.addresses ? signer : provider);
+    const CampaignManager = new Contract(
+      addresses.CampaignManager,
+      CampaignManagerJson,
+      signer.addresses ? signer : provider
+    );
     let i = 0;
 
     let campaignsPayed = [];
@@ -59,7 +73,7 @@ export const useCampaignManager = () => {
         const campaignAddresses = await CampaignManager.addressesCampaignAd(i);
         const userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
         if (!campaignAddresses) break;
-        const Campaign = new Contract(campaignAddresses, CampaignJson, signer);
+        const Campaign = new Contract(campaignAddresses, CampaignJson, signer.addresses ? signer : provider);
         const inflenserProfile = await Campaign.getInflenserPayed(defaultProfile);
         const inflenserInfo = await Campaign.getInflenserInfo(defaultProfile);
         const payouts = await Campaign.getPayouts();
@@ -90,8 +104,12 @@ export const useCampaignManager = () => {
   };
 
   const getUserScore = async (defaultProfile) => {
-    const signer = await provider.getSigner();
-    const CampaignManager = new Contract(addresses.CampaignManager, CampaignManagerJson, signer);
+    const signer = await provider?.getSigner();
+    const CampaignManager = new Contract(
+      addresses.CampaignManager,
+      CampaignManagerJson,
+      signer.addresses ? signer : provider
+    );
     let userScore = 0;
     if (defaultProfile) userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
 

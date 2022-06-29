@@ -7,8 +7,8 @@ export const useCampaign = () => {
   const [{ provider }, dispatch] = useSharedState();
 
   const getAdvertiserPayouts = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+    const signer = await provider?.getSigner();
+    const Campaign = new Contract(campaignAddress, CampaignJson, signer.addresses ? signer : provider);
 
     try {
       const payouts = await Campaign.getPayouts();
@@ -20,8 +20,8 @@ export const useCampaign = () => {
   };
 
   const getNumberOfActions = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+    const signer = await provider?.getSigner();
+    const Campaign = new Contract(campaignAddress, CampaignJson, signer.addresses ? signer : provider);
     try {
       let i = 0;
       let numberOfActions = [];
@@ -49,8 +49,8 @@ export const useCampaign = () => {
   };
 
   const getCampaignInfo = async (campaignAddress) => {
-    const signer = await provider.getSigner();
-    const Campaign = new Contract(campaignAddress, CampaignJson, signer);
+    const signer = await provider?.getSigner();
+    const Campaign = new Contract(campaignAddress, CampaignJson, signer.addresses ? signer : provider);
     try {
       const campaignInfo = await Campaign.getCampaignInfo();
       return campaignInfo;
