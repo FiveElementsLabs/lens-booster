@@ -1,5 +1,7 @@
 import { Contract } from 'ethers';
 import { useSharedState } from '../context/store';
+import { addresses } from '../context/addresses';
+
 const LensHubAbi = require('../abis/LensHub.json');
 
 import { useProfile } from './useProfile';
@@ -13,11 +15,7 @@ export const getPublicationURI = () => {
     try {
       const signer = await provider?.getSigner();
 
-      const LensHub = new Contract(
-        '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d',
-        LensHubAbi,
-        signer.addresses ? signer : provider
-      );
+      const LensHub = new Contract(addresses?.LensHub, LensHubAbi, signer.addresses ? signer : provider);
 
       URI = await LensHub.getContentURI(profileId, postId);
     } catch (e) {
@@ -31,11 +29,7 @@ export const getPublicationURI = () => {
     let profileId;
     try {
       const signer = await provider?.getSigner();
-      const LensHub = new Contract(
-        '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d',
-        LensHubAbi,
-        signer.addresses ? signer : provider
-      );
+      const LensHub = new Contract(addresses?.LensHub, LensHubAbi, signer.addresses ? signer : provider);
       if (account) profileId = await LensHub.defaultProfile(account);
     } catch (e) {
       console.log('Failed with error: ', e?.message);

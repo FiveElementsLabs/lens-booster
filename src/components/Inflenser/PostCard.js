@@ -440,7 +440,7 @@ export default function PostCard({ publicationId }) {
                     w={{ base: '100%', md: '38%' }}
                     h="auto"
                     onClick={() => handleCreatePost()}
-                    disabled={userProfileId?.toString() == '0'}
+                    disabled={userProfileId?.toString() == '0' || !userProfileId}
                   >
                     {userProfileScore.toString() == '0' && userProfileId?.toString() != '0' ? 'BE WHITELISTED' : 'POST'}
                   </Button>

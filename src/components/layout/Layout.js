@@ -14,8 +14,13 @@ export default function Layout() {
   const [{ account, provider }] = useSharedState();
   const { autoLoginWallet, getDefaultProvider } = useWallet();
   useEffect(() => {
-    (async () => !account && window.localStorage.getItem('walletConnected') && (await autoLoginWallet()))();
-    (async () => !account && !window.localStorage.getItem('walletConnected') && (await getDefaultProvider()))();
+    const checkWalletConnection = async () => {
+      if (!account)
+        if (window.localStorage.getItem('walletConnected')) await autoLoginWallet();
+        else await getDefaultProvider();
+    };
+
+    checkWalletConnection();
   }, []);
 
   useEffect(() => {

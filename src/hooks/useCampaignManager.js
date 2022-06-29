@@ -10,13 +10,13 @@ const LensHubJson = require('../abis/LensHub.json');
 export const useCampaignManager = () => {
   const [{ provider }, dispatch] = useSharedState();
 
-  const getCampaigns = async (userId, postId) => {
+  const getCampaignManagerContract = async () => {
     const signer = await provider?.getSigner();
-    const CampaignManager = new Contract(
-      addresses.CampaignManager,
-      CampaignManagerJson,
-      signer.addresses ? signer : provider
-    );
+    return new Contract(addresses.CampaignManager, CampaignManagerJson, signer.addresses ? signer : provider);
+  };
+
+  const getCampaigns = async (userId, postId) => {
+    const CampaignManager = await getCampaignManagerContract();
 
     try {
       const campaignAddress = await CampaignManager.addressesCampaign(userId, postId);
@@ -29,12 +29,7 @@ export const useCampaignManager = () => {
 
   const getCampaignsPublicationID = async () => {
     const signer = await provider?.getSigner();
-
-    const CampaignManager = new Contract(
-      addresses?.CampaignManager,
-      CampaignManagerJson,
-      signer.addresses ? signer : provider
-    );
+    const CampaignManager = await getCampaignManagerContract();
 
     let i = 0;
     let pub = [];
@@ -58,13 +53,9 @@ export const useCampaignManager = () => {
   const getUserStatsByCampaign = async (defaultProfile) => {
     const signer = await provider?.getSigner();
     const LensHub = new Contract(addresses.LensHub, LensHubJson, signer.addresses ? signer : provider);
-    const CampaignManager = new Contract(
-      addresses.CampaignManager,
-      CampaignManagerJson,
-      signer.addresses ? signer : provider
-    );
-    let i = 0;
+    const CampaignManager = await getCampaignManagerContract();
 
+    let i = 0;
     let campaignsPayed = [];
 
     while (true) {
@@ -103,12 +94,8 @@ export const useCampaignManager = () => {
   };
 
   const getUserScore = async (defaultProfile) => {
-    const signer = await provider?.getSigner();
-    const CampaignManager = new Contract(
-      addresses.CampaignManager,
-      CampaignManagerJson,
-      signer.addresses ? signer : provider
-    );
+    const CampaignManager = await getCampaignManagerContract();
+
     let userScore = 0;
     if (defaultProfile) userScore = await CampaignManager.inflencerId(defaultProfile.toHexString());
 

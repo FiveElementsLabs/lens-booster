@@ -34,18 +34,18 @@ export const useWallet = () => {
 
     dispatch({
       type: actions.LOGIN_WALLET,
-      payload: { account: account._address, provider: provider2, network_name, chain_id },
+      payload: { account: account, provider: Web3Provider, network_name, chain_id },
     });
   };
 
   const getDefaultProvider = async () => {
-    const provider2 = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ALCHEMY_POLYGON_RPC);
+    const provider = new ethers.providers.JsonRpcProvider(process.env.REACT_APP_ALCHEMY_POLYGON_RPC);
 
-    const account = await provider2.getSigner();
-    const { name: network_name, chainId: chain_id } = await provider2.getNetwork();
+    const account = await provider.getSigner();
+    const { name: network_name, chainId: chain_id } = await provider.getNetwork();
     dispatch({
       type: actions.LOGIN_WALLET,
-      payload: { account: account._address, provider: provider2, network_name, chain_id },
+      payload: { account: account._address, provider: provider, network_name, chain_id },
     });
   };
 
