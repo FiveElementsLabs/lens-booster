@@ -9,14 +9,15 @@ import PostCard from './PostCard';
 export default function Dashboard() {
   const { getCampaignInfo } = useCampaign();
   const { getCampaignsPublicationID, getCampaigns } = useCampaignManager();
-  const [{ provider }] = useSharedState();
+  const [{ provider, account }] = useSharedState();
   const [publicationIds, setPublicationIds] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allCampaignsExpired, setAllCampaignsExpired] = useState(false);
 
   useEffect(() => {
     const getPubIdsData = async () => {
-      const pubs = await getCampaignsPublicationID();
+      setLoading(true);
+      let pubs = await getCampaignsPublicationID();
       for (let i = 0; i < pubs.length; i++) {
         let profileIdPostId = pubs[i][0].split('-');
 
@@ -25,15 +26,15 @@ export default function Dashboard() {
 
         if (Number(campaignInfo[3]) + Number(campaignInfo[2]) < Date.now() / 1000) pubs.splice(i, 1);
       }
-      if (pubs == []) setAllCampaignsExpired(true);
+
+      if (pubs.length == 0) {
+        setAllCampaignsExpired(true);
+      }
       setPublicationIds(pubs);
+      setLoading(false);
     };
     getPubIdsData();
   }, [provider]);
-
-  useEffect(() => {
-    if (publicationIds != null && publicationIds?.length != 0) setLoading(false);
-  }, [publicationIds]);
 
   return (
     <>
@@ -48,9 +49,16 @@ export default function Dashboard() {
         </>
       )}
 
-      {allCampaignsExpired && (
+      {allCampaignsExpired && publicationIds?.length == 0 && !loading && (
         <>
-          <Box>No Active Campaign</Box>
+          <Box>
+            <Text variant="title" fontSize={32} opacity={0.8}>
+              No Active Campaigns Found
+            </Text>
+            <Text variant="title" fontSize={24} opacity={0.6}>
+              Come back later...
+            </Text>
+          </Box>
         </>
       )}
       {/* Array of posts*/}
