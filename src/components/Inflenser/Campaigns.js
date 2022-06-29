@@ -9,7 +9,7 @@ import PostCard from './PostCard';
 export default function Dashboard() {
   const { getCampaignInfo } = useCampaign();
   const { getCampaignsPublicationID, getCampaigns } = useCampaignManager();
-  const [{ provider, account }] = useSharedState();
+  const [{ provider }] = useSharedState();
   const [publicationIds, setPublicationIds] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allCampaignsExpired, setAllCampaignsExpired] = useState(false);
