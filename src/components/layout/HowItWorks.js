@@ -9,7 +9,7 @@ export default function HowItWorks() {
         </Heading>
       </Box>
       <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
-        <Heading as="h5" mb={4}>
+        <Heading as="h3" mb={4}>
           What is Lens Booster
         </Heading>
         <Text w={{ base: '100%', md: '80%' }} mb={4}>
@@ -21,7 +21,7 @@ export default function HowItWorks() {
           </Link>
           ).
         </Text>
-        <Heading as="h5" mb={4}>
+        <Heading as="h3" mb={4}>
           Who is Lens Booster for
         </Heading>
         <Text w={{ base: '100%', md: '80%' }}>
@@ -31,7 +31,7 @@ export default function HowItWorks() {
       <Box bg="#ffffff" borderRadius="20px" p={6} textAlign="left" mt={6} boxShadow="lg">
         <Box display={{ base: 'block', md: 'flex' }}>
           <Heading
-            as="h5"
+            as="h3"
             mb={{ base: 1, md: 4 }}
             borderRight={{ base: '3px solid #BFC1C6', md: '0' }}
             w={{ base: 'fit-content', md: 'auto' }}
@@ -40,7 +40,7 @@ export default function HowItWorks() {
             How it works
           </Heading>
           <Heading
-            as="h5"
+            as="h3"
             mb={4}
             color="#FF6827"
             borderLeft={{ base: '0', md: '3px solid #BFC1C6' }}
