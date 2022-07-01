@@ -19,6 +19,7 @@ export default function Hero() {
         boxShadow="lg"
       >
         <Heading
+          as="h1"
           fontWeight={600}
           fontSize={{ base: '5xl', sm: '4xl', md: '6xl' }}
           maxW="sm"
