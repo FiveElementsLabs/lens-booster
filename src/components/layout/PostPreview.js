@@ -65,7 +65,7 @@ export default function PostPreview({
       <Text mt={4}>{desc}</Text>
       <Box my={3}>
         {image ? (
-          <img src={image} alt="post" width="auto" height="auto" />
+          <img src={image} alt="Post preview created by the user" width="auto" height="auto" />
         ) : (
           <></>
         )}
