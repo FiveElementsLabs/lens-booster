@@ -9,7 +9,7 @@ export default function DiscordAd() {
       <Box bg="#ffffff" borderRadius="20px" p={6} boxShadow="lg">
         <Flex justifyContent="space-between">
           <Box textAlign="left">
-            <Heading color="#00203F">Want to promote contens?</Heading>
+            <Heading color="#00203F">Want to promote contents?</Heading>
             <Heading color="#00203F">Let's talk</Heading>
           </Box>
           <Box> {!isTablet && <ChatIcon width="101px" heigth="101px" />}</Box>
