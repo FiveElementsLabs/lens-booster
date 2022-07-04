@@ -38,19 +38,7 @@ export default function Hero() {
           gap={{ base: 0, md: 4 }}
           mt={6}
           display={{ base: 'block', md: 'flex' }}
-        >
-          <Button
-            flexBasis="100%"
-            display={{ base: 'block', md: 'initial' }}
-            minW="inherit"
-            w={{ base: '100%', md: 'auto' }}
-          >
-            CREATE CAMPAIGN
-          </Button>
-          <Button flexBasis="100%" minW="inherit" mt={{ base: 4, md: 0 }} w={{ base: '100%', md: 'auto' }}>
-            REPOST & EARN
-          </Button>
-        </Box>
+        ></Box>
       </Box>
     </>
   );
