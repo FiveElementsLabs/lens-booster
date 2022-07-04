@@ -24,10 +24,10 @@ export default function Features() {
         <GridItem colSpan={{ base: '9', md: '3' }} m={{ base: 0, md: 3 }} ml={{ base: 0, md: 0 }}>
           <Feature
             icon={<Rocket width="64px" heigth="64px" />}
-            title={'Promote your campaign'}
+            title={'Find your target'}
             text={
               <>
-                <b>ADVERTISERS</b> launch Advertising campaigns to promote their content
+                Promote your contents targeting precise and identifiable communities
               </>
             }
           />
@@ -35,10 +35,10 @@ export default function Features() {
         <GridItem colSpan={{ base: '9', md: '3' }} m={{ base: 0, md: 3 }}>
           <Feature
             icon={<Share width="64px" heigth="64px" />}
-            title={'Share and Earn'}
+            title={'Engage to Earn'}
             text={
               <>
-                <b>LENS USERS</b> repost advertised content to earn based on the size of their audience
+              Your users can earn (NFTs or tokens) to engage with your contents
               </>
             }
           />
@@ -46,10 +46,10 @@ export default function Features() {
         <GridItem colSpan={{ base: '9', md: '3' }} m={{ base: 0, md: 3 }} mr={{ base: 0, md: 0 }}>
           <Feature
             icon={<Coin width="64px" heigth="64px" />}
-            title={'No middleman'}
+            title={'Endless possibilities'}
             text={
               <>
-                Pay out <b>LENS USERS</b> who have boosted your content according to actions
+                Giveaways, airdrops, loyalty programs and more from a single dapp
               </>
             }
           />
